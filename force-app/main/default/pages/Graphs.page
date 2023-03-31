@@ -1,0 +1,23 @@
+<apex:page controller="PRG_Graph" title="Indicateurs" lightningStylesheets="true" showHeader="false">
+<table>
+    <tr>
+        <td width="45%"> <h1>Requêtes en cours</h1>
+            <apex:chart height="350" width="300" data="{!CaseData}">
+                <apex:axis type="Numeric" position="left" fields="data" title="Requêtes ouvertes" grid="true" minimum="0" steps="1"/>
+                <apex:axis type="Category" position="bottom" fields="name" title="Priorité"/>  
+                <apex:barSeries title="" orientation="vertical" axis="bottom" xField="name" yField="data" >
+                <apex:chartTips height="20" width="120"/>
+                </apex:barSeries>
+            </apex:chart>
+        </td>
+        <td width="10%">
+        </td>
+        <td width="45%"><h1>Commandes en cours</h1>
+            <apex:chart height="350" width="300" data="{!OrdonnanceData}">
+                <apex:pieSeries dataField="data" labelField="name" donut="60"/>
+                <apex:legend position="right"/>
+            </apex:chart>  
+        </td>
+    </tr>
+</table>
+</apex:page>

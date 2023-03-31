@@ -1,0 +1,45 @@
+<apex:page controller="PRG_AnalyseRetour" lightningStylesheets="true">
+    <apex:form >
+        <apex:pageBlock title="{!Opp.Name} {!idx+1}/{!nbTotal} OK:{!nbOK}">
+            <apex:outputText rendered="{!nbOK>=nbTotal}">
+                Toutes les lignes ont été vérifiées ! <BR/>
+            </apex:outputText>
+                <table style="padding: 6px;font-size:18px;">
+  <tr>
+    <td colspan="3">{!str}</td>
+      <apex:repeat value="{!anl}" var="a" rows="1">
+        <apex:repeat value="{!a.Os}" var="o">
+            <td>{!o.Product2.Name}</td>
+        </apex:repeat>
+      </apex:repeat>
+  </tr>
+  <tr>
+    <td colspan="3">&nbsp;</td>
+      <apex:repeat value="{!anl}" var="a" rows="1">
+        <apex:repeat value="{!a.Os}" var="o">
+            <td>{!o.Quantity}</td>
+        </apex:repeat>
+      </apex:repeat>
+  </tr>
+        <apex:repeat value="{!anl}" var="a">
+            <tr bgcolor="{!a.c}">
+            <td>{!a.r.Ligne__c}</td>
+            <td>{!a.r.Code__c}</td>
+            <td>{!a.r.Quantite__c}</td>
+       <apex:repeat value="{!a.Cs}" var="c">
+            <td bgcolor="{!c}">&nbsp;</td>
+      </apex:repeat>        
+            </tr>
+        </apex:repeat>
+    </table>
+
+        <apex:pageBlockButtons location="bottom">
+            <apex:commandLink target="_blank" styleClass="btn" style="text-decoration:none;padding:4px;" 
+                              action="https://numerident.lightning.force.com/{!Opp.Id}" value="Accéder au dossier"/>
+            <apex:commandButton value="Précédent" action="{!Prev}"/>
+            <apex:commandButton value="Valider et suivant" action="{!SaveNext}"/> 
+            <apex:commandButton value="Suivant" action="{!Next}"/>
+        </apex:pageBlockButtons>
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>

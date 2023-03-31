@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Liste_des_dents_IC__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(INCLUDES( Dents__c, &quot;11&quot;), &quot;11 &quot;  +TEXT( Ordonnance__r.X11__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;12&quot;), &quot;12 &quot;  +TEXT( Ordonnance__r.X12__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;13&quot;), &quot;13 &quot;  +TEXT( Ordonnance__r.X13__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;14&quot;), &quot;14 &quot;  +TEXT( Ordonnance__r.X14__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;15&quot;), &quot;15 &quot;  +TEXT( Ordonnance__r.X15__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;16&quot;), &quot;16 &quot;  +TEXT( Ordonnance__r.X16__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;17&quot;), &quot;17 &quot;  +TEXT( Ordonnance__r.X17__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;18&quot;), &quot;18 &quot;  +TEXT( Ordonnance__r.X18__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;21&quot;), &quot;21 &quot;  +TEXT( Ordonnance__r.X21__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;22&quot;), &quot;22 &quot;  +TEXT( Ordonnance__r.X22__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;23&quot;), &quot;23 &quot;  +TEXT( Ordonnance__r.X23__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;24&quot;), &quot;24 &quot;  +TEXT( Ordonnance__r.X24__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;25&quot;), &quot;25 &quot;  +TEXT( Ordonnance__r.X25__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;26&quot;), &quot;26 &quot;  +TEXT( Ordonnance__r.X26__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;27&quot;), &quot;27 &quot;  +TEXT( Ordonnance__r.X27__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;28&quot;), &quot;28 &quot;  +TEXT( Ordonnance__r.X28__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;31&quot;), &quot;31 &quot;  +TEXT( Ordonnance__r.X31__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;32&quot;), &quot;32 &quot;  +TEXT( Ordonnance__r.X32__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;33&quot;), &quot;33 &quot;  +TEXT( Ordonnance__r.X33__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;34&quot;), &quot;34 &quot;  +TEXT( Ordonnance__r.X34__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;35&quot;), &quot;35 &quot;  +TEXT( Ordonnance__r.X35__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;36&quot;), &quot;36 &quot;  +TEXT( Ordonnance__r.X36__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;37&quot;), &quot;37 &quot;  +TEXT( Ordonnance__r.X37__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;38&quot;), &quot;38 &quot;  +TEXT( Ordonnance__r.X38__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;41&quot;), &quot;41 &quot;  +TEXT( Ordonnance__r.X41__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;42&quot;), &quot;42 &quot;  +TEXT( Ordonnance__r.X42__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;43&quot;), &quot;43 &quot;  +TEXT( Ordonnance__r.X43__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;44&quot;), &quot;44 &quot;  +TEXT( Ordonnance__r.X44__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;45&quot;), &quot;45 &quot;  +TEXT( Ordonnance__r.X45__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;46&quot;), &quot;46 &quot;  +TEXT( Ordonnance__r.X46__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;47&quot;), &quot;47 &quot;  +TEXT( Ordonnance__r.X47__c ) +&quot; &quot; , &quot;&quot;) +
+IF(INCLUDES( Dents__c, &quot;48&quot;), &quot;48 &quot;  +TEXT( Ordonnance__r.X48__c ) +&quot; &quot; , &quot;&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Liste des dents IC</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,28 @@
+<aura:component access="global" implements="flexipage:availableForAllPageTypes,force:lightningQuickAction,force:hasRecordId" controller="buttonNewLineController" >
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="recordTypes" type="List[]"/>
+    <aura:attribute name="value" type="String" />
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    
+    
+    <!-- <div aura:id="editDialog" role="dialog" tabindex="-1" aria-labelledby="header43" class="slds-modal slds-fade-in-open"> -->
+    		<div style="float: right;">
+                <lightning:button variant="brand" label="Créer la ligne" onclick="{!c.createRecord}" />
+       		</div>
+            <div style="font-size: 14px;" class="slds-modal__content slds-p-around--medium slds-grid slds-wrap ">
+                <lightning:radioGroup aura:id="selection"
+                                      name="listselection"
+                                      value="{!v.value}"
+                                      label="Choisissez un type de travail :"
+                                      options="{!v.recordTypes}">
+                </lightning:radioGroup>
+            </div>
+    		<div style="float: right;">
+                <lightning:button variant="brand" label="Créer la ligne" onclick="{!c.createRecord}" />
+       		</div>
+    
+</aura:component>
+
+
+
+<!-- <lightning:button class="button" onclick="{!c.createRecord}" name="{!rt.id}">{!rt.name}</lightning:button> -->

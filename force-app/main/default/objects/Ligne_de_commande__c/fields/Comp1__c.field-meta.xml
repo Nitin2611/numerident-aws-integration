@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Comp1__c</fullName>
+    <description>IF( OR(ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Résine&quot;),ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Stellite&quot;)),&quot; EXTRAIRE &quot;,&quot;&quot;) + 
+IF( OR(ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Résine&quot;),ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Stellite&quot;),ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Inlay onlay facette&quot;),ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Inlay core&quot;),ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Projet esthétique&quot;)),Ligne__r.Liste_des_dents__c ,&quot;&quot;)</description>
+    <externalId>false</externalId>
+    <formula>IF(  Ligne__r.RecordType.DeveloperName = &quot;Resine&quot;,&quot; EXTRAIRE &quot;,&quot;&quot;) + 
+IF( OR(Ligne__r.RecordType.DeveloperName = &quot;Resine&quot;,ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Inlay onlay facette&quot;),ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Inlay core&quot;),ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Projet esthétique&quot;)),Ligne__r.Liste_des_dents__c ,&quot;&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Comp1</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,209 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false" standardController="Ordonnance__c" renderAs="pdf"  
+ applyHtmlTag="false" applyBodyTag="false" >
+
+<html>
+<head>
+      <style type="text/css">
+                        
+       @page :first{
+            @top-left {
+            content: element(headerOne);
+            }        
+       }
+    
+    
+       @page{
+            size: 21.0cm 29.7cm;
+            margin-top: 120px;/*
+            margin-left: 0.4cm;
+            margin-right: 0.4cm;*/
+            margin-bottom: 1.8cm;
+            counter-increment:pages;
+            @bottom-center {
+            content: element(footer);
+            }
+            @top-left {
+            content: element(header);  
+            }
+            
+        }
+            
+            
+        @page :first{        
+        }
+
+        <!--@page{
+            size: 21.0cm 29.7cm;
+            margin-top: 2.8cm;
+            margin-left: 0.4cm;
+            margin-right: 0.4cm;
+            margin-bottom: 1.8cm;
+            counter-increment:pages;
+            @bottom-center {
+            content: element(footer);
+            }
+            @top-center {
+            content: element(header);
+            }
+            background: url({!URLFOR($Resource.Logo)});
+            background-size: 4px 3px;
+            background-position: 10% 3%;
+            background-repeat:no-repeat;
+        }-->
+        div.footer {
+        position:running(footer);
+        } 
+        div.headerOne{
+        position:running(headerOne);
+        text-align:left;
+        }   
+        div.header{
+        position:running(header);
+        text-align:left;
+        }     
+        #pageNum:before {
+        content: counter(page);
+        }   
+        #pageNums:before {
+        content: counter(pages);
+        }
+        body {
+        font-family:Arial, sans serif;
+        }
+        table {
+        table-layout:fixed;
+        }
+
+    </style>
+</head>
+<div class="footer"><table><tr><td style="width:100%; font-size:65%;text-align:center">
+<!-- Footer content -->
+</td></tr></table>
+</div>
+<div class="headerOne" style="display:inline-block;"> 
+    <table>
+    <col width="20%"/>
+    <col width="40%"/>
+    <col width="40%"/>
+    <tr>
+        <td><strong style="font-size:600%;">{!Ordonnance__c.CreatedBy.NumeroCompte__c}</strong></td>
+<!--        <td><apex:image value="https://www.barcodesinc.com/generator/image.php?code={!Opportunity.Name}&style=68&type=C128B&width=200&height=75&xres=1&font=3" /><BR/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong style="font-size:120%;">{!Opportunity.Name}</strong></td>
+        <td><apex:image value="http://barcodes4.me/barcode/c128b/{!Ordonnance__c.Name}.png?height=75&resolution=1&IsTextDrawn=0"/><BR/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong style="font-size:120%;">{!Ordonnance__c.Name}</strong></td>
+-->        <td><apex:image value="http://generator.barcodetools.com/barcode.png?gen=0&data={!Ordonnance__c.Name}&bcolor=FFFFFF&fcolor=000000&tcolor=000000&fh=14&bred=0&w2n=2.5&xdim=1&w=&h=75&debug=1&btype=7&angle=0&quiet=1&balign=2&talign=0&guarg=1&text=0&tdown=0&stst=1&schk=0&cchk=1&ntxt=1&c128=0"/><BR/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong style="font-size:120%;">{!Ordonnance__c.Name}</strong></td>
+        <td><strong>ORDER FORM</strong><BR/><strong style="font-size:300%;"><apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+    <apex:param value="{!Ordonnance__c.DateOrderForm__c}" /> 
+</apex:outputText></strong></td>
+    </tr>
+    </table>
+</div>
+
+<!--            <td><apex:image value="https://barcode.tec-it.com/barcode.ashx?data={!Ordonnance__c.Name}&code=Code128&multiplebarcodes=false&translate-esc=false&unit=Fit&dpi=96&imagetype=Gif&rotation=0&color=%23000000&bgcolor=%23ffffff&qunit=Mm&quiet=0' alt='Barcode Generator TEC-IT" /></td> -->
+
+
+<!--  
+<br/>-->
+<br/> 
+
+<table style="width:100%;">
+    <col width="55%"/>
+    <col width="45%"/>
+    <tr>
+        <td  style="font-size:125%;"><strong>{!Ordonnance__c.CreeePar__c}</strong></td>
+        <td><strong>Numerident</strong></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>23 bis rue Barthélemy Danjou</td>
+    </tr>
+    <tr>
+        <td><strong>{!Ordonnance__c.CreatedBy.Compte__c}</strong></td>
+        <td>92100 Boulogne-Billancourt</td>
+    </tr>
+    <tr>
+        <td>{!Ordonnance__c.CreatedBy.RueCompte__c}</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>{!Ordonnance__c.CreatedBy.CPVilleCompte__c}</td>
+        <td>01 58 57 96 32</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="font-size:125%;" colspan="2">Patient :&nbsp;<strong>{!Ordonnance__c.Patient__c}</strong></td>
+    </tr>
+    <tr>
+        <td style="font-family: Arial Unicode MS;">Age :&nbsp;{!Ordonnance__c.Age__c}&nbsp;&nbsp;&nbsp;&nbsp;Sex :&nbsp;{!Ordonnance__c.Sexe__c}&nbsp;<apex:outputText rendered="{!Ordonnance__c.Sexe__c=='M'}" value="男性"/><apex:outputText rendered="{!Ordonnance__c.Sexe__c=='F'}" value="女性"/></td>
+        <td></td>
+    </tr>   
+    <tr>
+        <td><strong></strong></td>
+        <td></td>
+    </tr>
+</table>
+
+
+<br/>
+
+<table style="width:100%; font-size:100%;border-style: solid;border-color:#3C3C3B;border-collapse: collapse;border-width:1px;">
+<tr style="background-color: #eb5424;text-align:center;color:white;font-family: Arial Unicode MS;">
+<th width="25%;border-style: solid;border-color:#3C3C3B;border-width:1px;">Product 产品</th>
+<th width="10%;border-style: solid;border-color:#3C3C3B;border-width:1px;">Qty 数量</th>
+<th width="25%;border-style: solid;border-color:#3C3C3B;border-width:1px;">Description 描述</th>
+<th width="40%;border-style: solid;border-color:#3C3C3B;border-width:1px;">Comments 备注</th>
+</tr>
+<apex:repeat var="ligne" value="{!Ordonnance__c.Lignes_de_commande__r}">
+<tr>
+<td style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style:solid;border-right-color:#3C3C3B;text-align: left;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#3C3C3B;font-family:Arial Unicode MS">{!ligne.Product_name_EN__c}<BR/><BR/>{!ligne.Product_name_CN__c}</td>
+<td style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style:solid;border-right-color:#3C3C3B;text-align: center;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#3C3C3B;">{!ligne.txtQuantite__c}</td>
+<td style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style:solid;border-right-color:#3C3C3B;text-align: left;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#3C3C3B;font-family:Arial Unicode MS">{!ligne.Complement0__c}&nbsp;{!ligne.Complement1__c}&nbsp;{!ligne.Complement2__c}&nbsp;{!ligne.Complement3__c}&nbsp;{!ligne.Complement4__c}&nbsp;{!ligne.Complement5__c}</td>
+<td style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style:solid;border-right-color:#3C3C3B;text-align: left;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#3C3C3B;">{!ligne.Prefs_EN__c}<apex:outputText escape="false" value="{!SUBSTITUTE(ligne.PreferencesEN__c,'- ','<BR/>')}"/></td>
+</tr>
+</apex:repeat>
+</table>
+<br/><br/>
+<apex:outputtext value="{!Ordonnance__c.CreatedBy.Contact.Dentist_Preferences__c}" escape="false"/>
+<br/><br/>
+COMMENTS : <br/><apex:outputText value="{!SUBSTITUTE(JSENCODE(Ordonnance__c.Dossier__r.Demande_sp_ciale__c),'\r\n','<br/>')}" escape="false"/>
+<br/><br/> 
+<table style="width:100%;background-image: url({!URLFOR($Resource.TeintesDent)});background-size: contain;background-repeat: no-repeat;">
+    <col width="8%"/>
+    <col width="12%"/>
+    <col width="80%"/>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="text-align:center;">&nbsp;{!Ordonnance__c.Teinte_haut__c}</td>
+        <td></td>
+        <td><strong></strong></td>
+    </tr>
+    <tr>
+        <td style="text-align:center;">&nbsp;<strong>{!Ordonnance__c.Teinte__c}</strong></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="text-align:center;">&nbsp;{!Ordonnance__c.Teinte_bas__c}</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>    
+<br/><br/>
+</html>
+
+</apex:page>

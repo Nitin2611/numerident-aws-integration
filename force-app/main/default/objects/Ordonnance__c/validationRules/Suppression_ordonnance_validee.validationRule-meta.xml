@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Suppression_ordonnance_validee</fullName>
+    <active>false</active>
+    <description>blocage de la suppression d&apos;ordonnance validée pour les user comunity</description>
+    <errorConditionFormula>not(ISNULL( Dossier__c ))</errorConditionFormula>
+    <errorMessage>Vous ne pouvez pas supprimer une ordonnance validée, merci de contacter le service client Dentego Lab</errorMessage>
+</ValidationRule>

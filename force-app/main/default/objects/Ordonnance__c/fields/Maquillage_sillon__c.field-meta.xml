@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Maquillage_sillon__c</fullName>
+    <externalId>false</externalId>
+    <label>Maquillage sillon</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Sillons maquillés</fullName>
+                <default>false</default>
+                <label>Sillons maquillés</label>
+            </value>
+            <value>
+                <fullName>Sillons non maquillés</fullName>
+                <default>false</default>
+                <label>Sillons non maquillés</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Comp2__c</fullName>
+    <description>IF( OR(ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Résine&quot;),ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Stellite&quot;)),&quot; REMPLACER &quot;,&quot;&quot;) + 
+IF( OR(ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Résine&quot;),ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Stellite&quot;),ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Couronne&quot;)), Ligne__r.Liste_des_dents_2__c ,&quot;&quot;)</description>
+    <externalId>false</externalId>
+    <formula>IF( Ligne__r.RecordType.DeveloperName = &quot;Resine&quot;,&quot; REMPLACER &quot;,&quot;&quot;) + 
+IF( OR(ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Résine&quot;),ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Stellite&quot;),ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Couronne&quot;)), Ligne__r.Liste_des_dents_2__c ,&quot;&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Comp2</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

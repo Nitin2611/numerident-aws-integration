@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Details__c</fullName>
+    <description>IF(ISBLANK(Ligne__c),&quot;Article ajouté par le laboratoire&quot;,If(ISBLANK( Business_case__c ), Ligne__r.RecordType.Name + &quot; - Ligne incomplète - &quot;,&quot;&quot;) + IF( CONTAINS(Travail__c ,&quot;Inlay-core&quot;),TEXT(Ligne__r.Type__c) + &quot; &quot; + TEXT(Ligne__r.Alliage_Inlay_core__c) + &quot; &quot; + (Ligne__r.txtInlayCore__c),&quot;&quot;)  
++ &quot; &quot; + 
+IF( CONTAINS(Travail__c ,&quot;CCM&quot;),TEXT(Ligne__r.Couronne__c) + &quot; &quot; + TEXT(Ligne__r.Alliage__c)  + &quot; &quot; + Ligne__r.txtDents__c,&quot;&quot;) 
+ + &quot; &quot; + TEXT(Ligne__r.Arcade__c ) + &quot; &quot; + TEXT(Ligne__r.Finition__c)
++ &quot; &quot; + IF( CONTAINS(Travail__c ,&quot;Stellite&quot;),&quot; Dents à extraire : &quot; +  Ligne__r.txtDents__c ,&quot;&quot;) 
+)</description>
+    <externalId>false</externalId>
+    <formula>IF(ISBLANK(Ligne__c),&quot;Article ajouté par le laboratoire&quot;,If(ISBLANK( Business_case__c ), Ligne__r.RecordType.Name + &quot; - Ligne incomplète - &quot;,&quot;&quot;) + IF( CONTAINS(Travail__c ,&quot;Inlay-core&quot;),TEXT(Ligne__r.Type__c) + &quot; &quot; + TEXT(Ligne__r.Alliage_Inlay_core__c) + &quot; &quot; + (Ligne__r.txtInlayCore__c),&quot;&quot;)  
++ &quot; &quot; + 
+IF( CONTAINS(Travail__c ,&quot;CCM&quot;),TEXT(Ligne__r.Couronne__c) + &quot; &quot; + TEXT(Ligne__r.Alliage__c)  + &quot; &quot; + Ligne__r.txtDents__c,&quot;&quot;) 
+ + &quot; &quot; + TEXT(Ligne__r.Arcade__c ) + &quot; &quot; + TEXT(Ligne__r.Finition__c)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Détails</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

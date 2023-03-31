@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>StarsRatingNew</masterLabel>
+    <description>This is a lightining star rating web component.</description>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage, lightning__AppPage, lightning__HomePage">
+            <property name="labelText" type="String" label="Message d'informations"/>
+            <property name="numberOfStars" type="Integer" label="Nombre d'étoiles" default="5"/>
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="labelText" type="String" label="Message d'informations" default="Notez la prestation du suivi de la requête"/>
+            <property name="numberOfStars" type="Integer" label="Nombre d'étoiles" default="5"/>
+            <property name="recordId" type="String" label="Record ID" description="Should be set to {!recordId}"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

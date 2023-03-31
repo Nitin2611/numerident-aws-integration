@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Urgent</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(Date_pr_visionnelle_de_livraison__c&gt;  Date__c ,  Je_valide_cette_commande_pour_envoi__c ,NOT( Travail_URGENT__c ), DATEVALUE(CreatedDate) &gt;DATE(2018,7,31),ISPICKVAL(Statut__c,&quot;Brouillon&quot;))</errorConditionFormula>
+    <errorDisplayField>Travail_URGENT__c</errorDisplayField>
+    <errorMessage>HORS DELAIS : La date de livraison souhaitée est inférieure à la date de livraison prévisionnelle. En cochant la case TRAVAIL URGENT, votre commande sera traitée de manière urgente par notre équipe mais la date de livraison ne pourra être garantie.</errorMessage>
+</ValidationRule>

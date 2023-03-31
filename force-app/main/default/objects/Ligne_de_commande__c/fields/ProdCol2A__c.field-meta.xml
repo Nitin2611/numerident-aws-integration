@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProdCol2A__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( OR(ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Gouttière&quot;),ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Ortho&quot;),ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;PEI, Cire&quot;),ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Réparations&quot;),ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Pilier&quot;),ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Barre&quot;)), SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( UPPER(TEXT(Ligne__r.Arcade__c )) , &quot;BAS&quot;, &quot;LOW 下&quot;),&quot;HAUT&quot;,&quot;UP 上&quot;),&quot;ET&quot;,&quot;+&quot;) ,&quot;&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>ProdCol2A</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

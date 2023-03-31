@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProdCol3__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(OR(ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Pilier&quot;),ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Barre&quot;)),TEXT(Ligne__r.Marque_d_implant__c) + &quot; &quot; + Ligne__r.R_f_rence_d_implant__c + &quot; &quot; + Ligne__r.Diam_tre__c ,&quot;&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Implant description</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

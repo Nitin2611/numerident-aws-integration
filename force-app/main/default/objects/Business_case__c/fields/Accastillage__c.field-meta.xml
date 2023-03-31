@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Accastillage__c</fullName>
+    <externalId>false</externalId>
+    <label>Accastillage</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Sous_cran__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>Accastillages</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>Appareil</controllingFieldValue>
+            <controllingFieldValue>Barre</controllingFieldValue>
+            <controllingFieldValue>Pilier</controllingFieldValue>
+            <controllingFieldValue>Couronne sur implant</controllingFieldValue>
+            <valueName>Pilier calcinable fourni par le dentiste</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Appareil</controllingFieldValue>
+            <controllingFieldValue>Barre</controllingFieldValue>
+            <controllingFieldValue>Pilier</controllingFieldValue>
+            <controllingFieldValue>Couronne sur implant</controllingFieldValue>
+            <valueName>Pilier à fournir par le laboratoire</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Appareil</controllingFieldValue>
+            <controllingFieldValue>Barre</controllingFieldValue>
+            <controllingFieldValue>Pilier</controllingFieldValue>
+            <controllingFieldValue>Couronne sur implant</controllingFieldValue>
+            <valueName>Pilier à commander par le laboratoire</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Appareil</controllingFieldValue>
+            <controllingFieldValue>Barre</controllingFieldValue>
+            <valueName>Barre titane usinée</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Appareil</controllingFieldValue>
+            <controllingFieldValue>Barre</controllingFieldValue>
+            <valueName>Barre titane usinée (CAD/CAM)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Appareil</controllingFieldValue>
+            <controllingFieldValue>Barre</controllingFieldValue>
+            <valueName>Aucun</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pilier</controllingFieldValue>
+            <controllingFieldValue>Couronne sur implant</controllingFieldValue>
+            <valueName>Pilier standard fourni par le dentiste</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

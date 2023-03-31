@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Materiau__c</fullName>
+    <externalId>false</externalId>
+    <label>Matériau</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Sous_cran__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>CoCr</fullName>
+                <default>false</default>
+                <label>CoCr</label>
+            </value>
+            <value>
+                <fullName>NiCr</fullName>
+                <default>false</default>
+                <label>NiCr</label>
+            </value>
+            <value>
+                <fullName>Alliage précieux</fullName>
+                <default>false</default>
+                <label>Alliage précieux</label>
+            </value>
+            <value>
+                <fullName>Alliage semi-précieux</fullName>
+                <default>false</default>
+                <label>Alliage semi-précieux</label>
+            </value>
+            <value>
+                <fullName>Composite</fullName>
+                <default>false</default>
+                <label>Composite</label>
+            </value>
+            <value>
+                <fullName>Emax</fullName>
+                <default>false</default>
+                <label>Emax</label>
+            </value>
+            <value>
+                <fullName>Full zircone</fullName>
+                <default>false</default>
+                <label>Full zircone</label>
+            </value>
+            <value>
+                <fullName>Metal</fullName>
+                <default>false</default>
+                <label>Metal</label>
+            </value>
+            <value>
+                <fullName>Céramo zircone</fullName>
+                <default>false</default>
+                <label>Céramo zircone</label>
+            </value>
+            <value>
+                <fullName>Wax-up</fullName>
+                <default>false</default>
+                <label>Wax-up</label>
+            </value>
+            <value>
+                <fullName>ENAMIC</fullName>
+                <default>false</default>
+                <label>ENAMIC</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Inlay onlay facette</controllingFieldValue>
+            <valueName>Composite</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Inlay onlay facette</controllingFieldValue>
+            <valueName>Emax</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Inlay onlay facette</controllingFieldValue>
+            <valueName>Full zircone</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Inlay onlay facette</controllingFieldValue>
+            <valueName>Metal</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Inlay onlay facette</controllingFieldValue>
+            <valueName>Céramo zircone</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Inlay onlay facette</controllingFieldValue>
+            <valueName>ENAMIC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Inlay core</controllingFieldValue>
+            <controllingFieldValue>Couronne</controllingFieldValue>
+            <controllingFieldValue>Couronne sur implant</controllingFieldValue>
+            <valueName>CoCr</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Inlay core</controllingFieldValue>
+            <controllingFieldValue>Couronne</controllingFieldValue>
+            <controllingFieldValue>Couronne sur implant</controllingFieldValue>
+            <valueName>NiCr</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Inlay core</controllingFieldValue>
+            <controllingFieldValue>Couronne</controllingFieldValue>
+            <controllingFieldValue>Couronne sur implant</controllingFieldValue>
+            <valueName>Alliage précieux</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Inlay core</controllingFieldValue>
+            <controllingFieldValue>Couronne</controllingFieldValue>
+            <controllingFieldValue>Couronne sur implant</controllingFieldValue>
+            <valueName>Alliage semi-précieux</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

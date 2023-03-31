@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type_de_commande__c</fullName>
+    <externalId>false</externalId>
+    <label>Type de commande</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Nouvelle commande</fullName>
+                <default>false</default>
+                <label>Nouvelle commande</label>
+            </value>
+            <value>
+                <fullName>Commande Redo</fullName>
+                <default>false</default>
+                <label>Commande Redo</label>
+            </value>
+            <value>
+                <fullName>Etape suivante ou finition</fullName>
+                <default>false</default>
+                <label>Etape suivante ou finition</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

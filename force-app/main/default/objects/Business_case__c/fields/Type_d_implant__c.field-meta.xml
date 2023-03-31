@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type_d_implant__c</fullName>
+    <externalId>false</externalId>
+    <label>Type d&apos;&apos;implant</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Sous_cran__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Scellée</fullName>
+                <default>false</default>
+                <label>Scellée</label>
+            </value>
+            <value>
+                <fullName>Transvissée</fullName>
+                <default>false</default>
+                <label>Transvissée</label>
+            </value>
+            <value>
+                <fullName>PROTHESE RESINE TRANSVISSEE SUR IMPLANT AVEC ARMATURE</fullName>
+                <default>false</default>
+                <label>PROTHESE RESINE TRANSVISSEE SUR IMPLANT AVEC ARMATURE</label>
+            </value>
+            <value>
+                <fullName>PROTHESE RESINE TRANSVISSEE SUR IMPLANT SANS ARMATURE</fullName>
+                <default>false</default>
+                <label>PROTHESE RESINE TRANSVISSEE SUR IMPLANT SANS ARMATURE</label>
+            </value>
+            <value>
+                <fullName>PROTHESE RESINE COMPLETE AMOVIBLE SUPRA-IMPLANTAIRE STABILISEE PAR ATTACHEMENTS AXIAUX</fullName>
+                <default>false</default>
+                <label>PROTHESE RESINE COMPLETE AMOVIBLE SUPRA-IMPLANTAIRE STABILISEE PAR ATTACHEMENTS AXIAUX</label>
+            </value>
+            <value>
+                <fullName>PROTHESE RESINE COMPLETE AMOVIBLE SUPRA-IMPLANTAIRE STABILISEE PAR ATTACHEMENTS CAVALIERS ET BARRE</fullName>
+                <default>false</default>
+                <label>PROTHESE RESINE COMPLETE AMOVIBLE SUPRA-IMPLANTAIRE STABILISEE PAR ATTACHEMENTS CAVALIERS ET BARRE</label>
+            </value>
+            <value>
+                <fullName>PROTHESE RESINE COMPLETE AMOVIBLE SUPRA-IMPLANTAIRE STABILISEE PAR ATTACHEMENTS AXIAUX ET BARRE</fullName>
+                <default>false</default>
+                <label>PROTHESE RESINE COMPLETE AMOVIBLE SUPRA-IMPLANTAIRE STABILISEE PAR ATTACHEMENTS AXIAUX ET BARRE</label>
+            </value>
+            <value>
+                <fullName>PROTHESE RESINE COMPLETE AMOVIBLE SUPRA-RADICULAIRE STABILISE PAR DES ATTACHEMENTS AXIAUX</fullName>
+                <default>false</default>
+                <label>PROTHESE RESINE COMPLETE AMOVIBLE SUPRA-RADICULAIRE STABILISE PAR DES ATTACHEMENTS AXIAUX</label>
+            </value>
+            <value>
+                <fullName>BRIDGE COMPLET CERAMO METALIQUE TRANSVISSE SUR IMPLANT</fullName>
+                <default>false</default>
+                <label>BRIDGE COMPLET CERAMO METALIQUE TRANSVISSE SUR IMPLANT</label>
+            </value>
+            <value>
+                <fullName>Essayage esthétique</fullName>
+                <default>false</default>
+                <label>Essayage esthétique</label>
+            </value>
+            <value>
+                <fullName>Avec clavette</fullName>
+                <default>false</default>
+                <label>Avec clavette</label>
+            </value>
+            <value>
+                <fullName>Sans clavette</fullName>
+                <default>false</default>
+                <label>Sans clavette</label>
+            </value>
+            <value>
+                <fullName>Scellé</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Scellé</label>
+            </value>
+            <value>
+                <fullName>Transvissé</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Transvissé</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Appareil</controllingFieldValue>
+            <controllingFieldValue>Barre</controllingFieldValue>
+            <valueName>PROTHESE RESINE TRANSVISSEE SUR IMPLANT AVEC ARMATURE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Appareil</controllingFieldValue>
+            <controllingFieldValue>Barre</controllingFieldValue>
+            <valueName>PROTHESE RESINE TRANSVISSEE SUR IMPLANT SANS ARMATURE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Appareil</controllingFieldValue>
+            <controllingFieldValue>Barre</controllingFieldValue>
+            <valueName>PROTHESE RESINE COMPLETE AMOVIBLE SUPRA-IMPLANTAIRE STABILISEE PAR ATTACHEMENTS AXIAUX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Appareil</controllingFieldValue>
+            <controllingFieldValue>Barre</controllingFieldValue>
+            <valueName>PROTHESE RESINE COMPLETE AMOVIBLE SUPRA-IMPLANTAIRE STABILISEE PAR ATTACHEMENTS CAVALIERS ET BARRE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Appareil</controllingFieldValue>
+            <controllingFieldValue>Barre</controllingFieldValue>
+            <valueName>PROTHESE RESINE COMPLETE AMOVIBLE SUPRA-IMPLANTAIRE STABILISEE PAR ATTACHEMENTS AXIAUX ET BARRE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Appareil</controllingFieldValue>
+            <controllingFieldValue>Barre</controllingFieldValue>
+            <valueName>PROTHESE RESINE COMPLETE AMOVIBLE SUPRA-RADICULAIRE STABILISE PAR DES ATTACHEMENTS AXIAUX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Appareil</controllingFieldValue>
+            <controllingFieldValue>Barre</controllingFieldValue>
+            <valueName>BRIDGE COMPLET CERAMO METALIQUE TRANSVISSE SUR IMPLANT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Appareil</controllingFieldValue>
+            <controllingFieldValue>Barre</controllingFieldValue>
+            <valueName>Essayage esthétique</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Planification implantaire</controllingFieldValue>
+            <valueName>Avec clavette</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Planification implantaire</controllingFieldValue>
+            <valueName>Sans clavette</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pilier</controllingFieldValue>
+            <controllingFieldValue>Couronne sur implant</controllingFieldValue>
+            <valueName>Scellée</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pilier</controllingFieldValue>
+            <controllingFieldValue>Couronne sur implant</controllingFieldValue>
+            <valueName>Transvissée</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

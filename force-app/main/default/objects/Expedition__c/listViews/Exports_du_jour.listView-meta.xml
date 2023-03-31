@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Exports_du_jour</fullName>
+    <columns>Date__c</columns>
+    <columns>AWB__c</columns>
+    <columns>Orders_list__c</columns>
+    <columns>NAME</columns>
+    <columns>Destinataire__c</columns>
+    <columns>Nombre_de_colis__c</columns>
+    <columns>Nombre_de_commandes__c</columns>
+    <columns>Statut__c</columns>
+    <columns>Poids__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Date__c</field>
+        <operation>equals</operation>
+        <value>TODAY</value>
+    </filters>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Expedition__c.Export</value>
+    </filters>
+    <label>Exports du jour</label>
+    <sharedTo>
+        <role>HQ</role>
+    </sharedTo>
+</ListView>

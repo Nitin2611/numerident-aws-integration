@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Etape_suivante__c</fullName>
+    <externalId>false</externalId>
+    <label>Créer l&apos;ordonnance pour</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>l&apos;étape suivante</fullName>
+                <default>false</default>
+                <label>l&apos;étape suivante</label>
+            </value>
+            <value>
+                <fullName>la finition</fullName>
+                <default>false</default>
+                <label>la finition</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

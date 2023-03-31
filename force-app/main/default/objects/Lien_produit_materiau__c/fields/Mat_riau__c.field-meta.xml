@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mat_riau__c</fullName>
+    <externalId>false</externalId>
+    <label>Matériau</label>
+    <referenceTo>Materiau__c</referenceTo>
+    <relationshipLabel>Liens produit-matériau</relationshipLabel>
+    <relationshipName>Liens_produit_mat_riau</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

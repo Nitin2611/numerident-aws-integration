@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Complement3__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(OR(ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Pilier&quot;),ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Barre&quot;),ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Planification implantaire&quot;)),Ligne__r.Liste_des_dents__c + &quot; &quot; + TEXT(Ligne__r.Marque_d_implant__c) + &quot; &quot; + Ligne__r.R_f_rence_d_implant__c + &quot; &quot; + Ligne__r.Diam_tre__c + &quot; &quot; + SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(Ligne__r.Type_d_empreinte_sur_implant__c,&quot;Direct implant&quot;,&quot;Type : WITH TRADITIONAL TRANSFERT 常规基台：常规转移杆托盘&quot;),&quot;Piliers coniques&quot;,&quot;Type: WITH MULTI UNIT TRANSFERT 复合基台：复合转移杆托盘&quot;),&quot;Iphisio&quot;,&quot;Type: WITH IPHYSIO Iphysio 托盘&quot;),&quot;&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Complement3</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

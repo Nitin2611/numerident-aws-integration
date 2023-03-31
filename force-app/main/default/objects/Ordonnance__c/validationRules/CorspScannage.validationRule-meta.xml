@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CorspScannage</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( $Profile.Name =&quot;Praticien&quot; ,Je_valide_cette_commande_pour_envoi__c, Empreinte_numerique__c ,
+OR(
+AND(ISBLANK(TEXT( X11__c )),CONTAINS( Dents_Inlay_core__c ,&quot;11&quot;)),
+AND(ISBLANK(TEXT( X12__c )),CONTAINS( Dents_Inlay_core__c ,&quot;12&quot;)),
+AND(ISBLANK(TEXT( X13__c )),CONTAINS( Dents_Inlay_core__c ,&quot;13&quot;)),
+AND(ISBLANK(TEXT( X14__c )),CONTAINS( Dents_Inlay_core__c ,&quot;14&quot;)),
+AND(ISBLANK(TEXT( X15__c )),CONTAINS( Dents_Inlay_core__c ,&quot;15&quot;)),
+AND(ISBLANK(TEXT( X16__c )),CONTAINS( Dents_Inlay_core__c ,&quot;16&quot;)),
+AND(ISBLANK(TEXT( X17__c )),CONTAINS( Dents_Inlay_core__c ,&quot;17&quot;)),
+AND(ISBLANK(TEXT( X18__c )),CONTAINS( Dents_Inlay_core__c ,&quot;18&quot;)),
+AND(ISBLANK(TEXT( X21__c )),CONTAINS( Dents_Inlay_core__c ,&quot;21&quot;)),
+AND(ISBLANK(TEXT( X22__c )),CONTAINS( Dents_Inlay_core__c ,&quot;22&quot;)),
+AND(ISBLANK(TEXT( X23__c )),CONTAINS( Dents_Inlay_core__c ,&quot;23&quot;)),
+AND(ISBLANK(TEXT( X24__c )),CONTAINS( Dents_Inlay_core__c ,&quot;24&quot;)),
+AND(ISBLANK(TEXT( X25__c )),CONTAINS( Dents_Inlay_core__c ,&quot;25&quot;)),
+AND(ISBLANK(TEXT( X26__c )),CONTAINS( Dents_Inlay_core__c ,&quot;26&quot;)),
+AND(ISBLANK(TEXT( X27__c )),CONTAINS( Dents_Inlay_core__c ,&quot;27&quot;)),
+AND(ISBLANK(TEXT( X28__c )),CONTAINS( Dents_Inlay_core__c ,&quot;28&quot;)),
+AND(ISBLANK(TEXT( X31__c )),CONTAINS( Dents_Inlay_core__c ,&quot;31&quot;)),
+AND(ISBLANK(TEXT( X32__c )),CONTAINS( Dents_Inlay_core__c ,&quot;32&quot;)),
+AND(ISBLANK(TEXT( X33__c )),CONTAINS( Dents_Inlay_core__c ,&quot;33&quot;)),
+AND(ISBLANK(TEXT( X34__c )),CONTAINS( Dents_Inlay_core__c ,&quot;34&quot;)),
+AND(ISBLANK(TEXT( X35__c )),CONTAINS( Dents_Inlay_core__c ,&quot;35&quot;)),
+AND(ISBLANK(TEXT( X36__c )),CONTAINS( Dents_Inlay_core__c ,&quot;36&quot;)),
+AND(ISBLANK(TEXT( X37__c )),CONTAINS( Dents_Inlay_core__c ,&quot;37&quot;)),
+AND(ISBLANK(TEXT( X38__c )),CONTAINS( Dents_Inlay_core__c ,&quot;38&quot;)),
+AND(ISBLANK(TEXT( X41__c )),CONTAINS( Dents_Inlay_core__c ,&quot;41&quot;)),
+AND(ISBLANK(TEXT( X42__c )),CONTAINS( Dents_Inlay_core__c ,&quot;42&quot;)),
+AND(ISBLANK(TEXT( X43__c )),CONTAINS( Dents_Inlay_core__c ,&quot;43&quot;)),
+AND(ISBLANK(TEXT( X44__c )),CONTAINS( Dents_Inlay_core__c ,&quot;44&quot;)),
+AND(ISBLANK(TEXT( X45__c )),CONTAINS( Dents_Inlay_core__c ,&quot;45&quot;)),
+AND(ISBLANK(TEXT( X46__c )),CONTAINS( Dents_Inlay_core__c ,&quot;46&quot;)),
+AND(ISBLANK(TEXT( X47__c )),CONTAINS( Dents_Inlay_core__c ,&quot;47&quot;)),
+AND(ISBLANK(TEXT( X48__c )),CONTAINS( Dents_Inlay_core__c ,&quot;48&quot;)))
+)</errorConditionFormula>
+    <errorMessage>Merci de renseigner les corps de scannage.</errorMessage>
+</ValidationRule>

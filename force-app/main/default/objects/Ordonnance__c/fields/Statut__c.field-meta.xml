@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Statut__c</fullName>
+    <externalId>false</externalId>
+    <label>Statut</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Brouillon</fullName>
+                <default>true</default>
+                <label>Brouillon</label>
+            </value>
+            <value>
+                <fullName>Validée</fullName>
+                <default>false</default>
+                <label>Validée</label>
+            </value>
+            <value>
+                <fullName>Envoyée au labo</fullName>
+                <default>false</default>
+                <label>Envoyée au labo</label>
+            </value>
+            <value>
+                <fullName>En cours de traitement</fullName>
+                <default>false</default>
+                <label>En cours de traitement</label>
+            </value>
+            <value>
+                <fullName>En cours de fabrication</fullName>
+                <default>false</default>
+                <label>En cours de fabrication</label>
+            </value>
+            <value>
+                <fullName>En cours de vérification</fullName>
+                <default>false</default>
+                <label>En cours de vérification</label>
+            </value>
+            <value>
+                <fullName>Expédiée</fullName>
+                <default>false</default>
+                <label>Expédiée</label>
+            </value>
+            <value>
+                <fullName>Reçue</fullName>
+                <default>false</default>
+                <label>Reçue</label>
+            </value>
+            <value>
+                <fullName>Rejetée</fullName>
+                <default>false</default>
+                <label>Rejetée</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

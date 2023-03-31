@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PreferencesCN__c</fullName>
+    <externalId>false</externalId>
+    <formula>SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE( PreferencesFR__c,&quot;Occlusion&quot;,&quot;咬颌&quot;),&quot;Maquillage&quot;,&quot;染色&quot;),&quot;Bandeau&quot;,&quot;舌侧金属边&quot;),&quot;Embrasure&quot;,&quot;三角隙&quot;),&quot;Point de contact&quot;,&quot;邻接&quot;),&quot;Profil d&apos;émergence&quot;,&quot;萌出外形&quot;),&quot;Tracé de stellite&quot;,&quot;钢托设计-模型画设计&quot;),&quot;Perforation&quot;,&quot;孔&quot;),&quot;Sous occlusion&quot;,&quot;咬颌空&quot;),&quot;Sans&quot;,&quot;不染色&quot;),&quot;Sans&quot;,&quot;具有，用，随附&quot;),&quot;Fermée&quot;,&quot;关闭&quot;),&quot;Leger&quot;,&quot;邻接轻&quot;),&quot;Juxta gingival&quot;,&quot;与牙龈平齐&quot;),&quot;Oui&quot;,&quot;具有，用，随附&quot;),&quot;Avec&quot;,&quot;具有，用，随附&quot;),&quot;Normale&quot;,&quot;咬颌轻&quot;),&quot;Léger&quot;,&quot;染色浅&quot;),&quot;Avec&quot;,&quot;不具有，不用，不随附&quot;),&quot;Ouverte&quot;,&quot;打开&quot;),&quot;Surface de contact&quot;,&quot;邻接适中&quot;),&quot;Sous gingival de 1 mm&quot;,&quot;龈下1MM&quot;),&quot;Sans&quot;,&quot;不具有，不用，不随附&quot;),&quot;Forte&quot;,&quot;咬颌紧&quot;),&quot;Foncé&quot;,&quot;染色深&quot;),&quot;Fort&quot;,&quot;邻接紧&quot;),&quot;Supra gingival&quot;,&quot;龈上&quot;),&quot;Non&quot;,&quot;不具有，不用，不随附&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>PreferencesCN</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,167 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false" standardController="Expedition__c" renderAs="pdf"  
+ applyHtmlTag="false" applyBodyTag="false" extensions="PRG_ProFormaController">
+
+<html>
+<head>
+      <style type="text/css">
+                        
+       @page :first{
+            @top-left {
+            content: element(headerOne);
+            }        
+       }
+    
+    
+       @page{
+            size: 21.0cm 29.7cm;
+            margin-top: 120px;/*
+            margin-left: 0.4cm;
+            margin-right: 0.4cm;*/
+            margin-bottom: 1.8cm;
+            counter-increment:pages;
+            @bottom-center {
+            content: element(footer);
+            }
+            @top-left {
+            content: element(header);  
+            }
+            
+        }
+            
+            
+        @page :first{        
+        }
+
+        <!--@page{
+            size: 21.0cm 29.7cm;
+            margin-top: 2.8cm;
+            margin-left: 0.4cm;
+            margin-right: 0.4cm;
+            margin-bottom: 1.8cm;
+            counter-increment:pages;
+            @bottom-center {
+            content: element(footer);
+            }
+            @top-center {
+            content: element(header);
+            }
+            background: url({!URLFOR($Resource.Logo)});
+            background-size: 4px 3px;
+            background-position: 10% 3%;
+            background-repeat:no-repeat;
+        }-->
+        div.footer {
+        position:running(footer);
+        } 
+        div.headerOne{
+        position:running(headerOne);
+        text-align:left;
+        }   
+        div.header{
+        position:running(header);
+        text-align:left;
+        }     
+        #pageNum:before {
+        content: counter(page);
+        }   
+        #pageNums:before {
+        content: counter(pages);
+        }
+        body {
+        font-family:Arial,sans-serif;
+        }
+        table {
+        table-layout:fixed;
+        }
+
+    </style>
+</head>
+
+<div class="headerOne" style="display:inline-block;"> 
+    <table> 
+        <tr>
+            <td width="200" style="vertical-align:top;font-family:Arial,sans-serif;font-size:8pt;color#808080"><img src="{!URLFOR($Resource.Logo)}" style="height:65px;"/></td>
+            <td width="10">&nbsp;</td>
+            <td style="vertical-align:bottom;"><p style="font-size:90%;"><strong style="font-size:200%;">PRO FORMA INVOICE / FACTURE</strong><br/></p></td>
+        </tr>
+    </table>
+</div>
+
+
+<table style="width:100%;">
+    <col width="55%"/>
+    <col width="45%"/>
+    <tr>
+        <td><strong>SHIPPER</strong>&nbsp;/ Expéditeur</td>
+        <td><strong>CONSIGNEE</strong>&nbsp;/ Destinataire</td>
+    </tr>
+    <tr>
+        <td><strong>Name</strong>&nbsp;/ Nom : NUMERIDENT</td>
+        <td><strong>Name</strong>&nbsp;/ Nom : {!Expedition__c.Destinataire__r.Nom_ou_raison_sociale__c}</td>
+    </tr>
+    <tr>
+        <td><strong>Address</strong>&nbsp;/ Adresse : 23 BIS RUE BARTHELEMY DANJOU<br/>92100 BOULOGNE BILLANCOURT<br/>FRANCE</td>
+        <td><strong>Address</strong>&nbsp;/ Adresse : {!Expedition__c.Destinataire__r.ShippingStreet}<br/>{!Expedition__c.Destinataire__r.ShippingCity}{!Expedition__c.Destinataire__r.ShippingPostalCode}<br/>{!Expedition__c.Destinataire__r.ShippingCountry}</td>
+    </tr>
+    <tr>
+        <td><strong>Phone</strong>&nbsp;/ Tel : +33 1 58 57 96 32</td>
+        <td><strong>Phone</strong>&nbsp;/ Tel : {!Expedition__c.Destinataire__r.Phone}</td>
+    </tr>
+    <tr>
+        <td colspan="2"><strong>AWB #</strong>&nbsp;/ N° de bordereau : <strong style="font-size:150%;">{!Expedition__c.AWB__c}</strong></td>
+    </tr>
+    <tr>
+        <td colspan="2"><strong>COUNTRY of ORIGIN</strong>&nbsp;/ Pays d'origine: France</td>
+    </tr>
+</table>
+
+<br/>
+DESCRIPTION OF GOODS / Description de la marchandise
+<table cellpadding="3" style="width:100%;min-height:250px;border-width:thin;border-collapse: collapse;">
+        <colgroup>
+            <col width="20%"/>
+            <col width="10%"/>
+            <col width="30%"/>
+            <col width="10%"/>
+            <col width="10%"/>      
+            <col width="10%"/>
+            <col width="10%"/>
+        </colgroup>    
+        <tr style="text-align:left; padding:5px;font-size:70%;">
+            <th style="border-style: solid;border-color:black;border-width:1px;text-align:center;"><strong>Ref</strong></th>
+            <th style="border-style: solid;border-color:black;border-width:1px;text-align:center;"><strong>Nber of Package</strong>&nbsp;/ Nbre de colis</th>
+            <th style="border-style: solid;border-color:black;border-width:1px;text-align:center;"><strong>Full description of goods</strong>&nbsp;/ Description complète de la marchandise</th>
+            <th style="border-style: solid;border-color:black;border-width:1px;text-align:center;"><strong>Quantity</strong>&nbsp;/ Quantité</th>
+            <th style="border-style: solid;border-color:black;border-width:1px;text-align:center;"><strong>Brut total weight</strong>&nbsp;/ Poids Brut Total</th>
+            <th style="border-style: solid;border-color:black;border-width:1px;text-align:center;"><strong>Unit Value</strong>&nbsp;/ Valeur Unitaire</th>
+            <th style="border-style: solid;border-color:black;border-width:1px;text-align:center;"><strong>Total value</strong>&nbsp;/ Valeur Totale</th>
+        </tr>
+        <apex:repeat value="{!ListeDossiers}" var="dossier">
+            <tr style="padding:5px;font-size:70%;vertical-align:top;page-break-inside: avoid;">
+                <td style="border-style: solid;border-color:black;border-width:1px;word-wrap:break-word;text-center;">{!dossier.Name}</td>
+                <td style="border-style: solid;border-color:black;border-width:1px;text-align:center; word-wrap:break-word;">1</td>
+                <td style="border-style: solid;border-color:black;border-width:1px;text-align:left;">silicon modling - {!Dossier.Patient__c}</td>
+                <td style="border-style: solid;border-color:black;border-width:1px;text-align:center; word-wrap:break-word;">1</td>
+                <td style="border-style: solid;border-color:black;border-width:1px;text-align:right; word-wrap:break-word;"><apex:outputText value="{0, number, ##0.00}"><apex:param value="{!PoidsMoyen}"/></apex:outputText></td>
+                <td style="border-style: solid;border-color:black;border-width:1px;text-align:right; word-wrap:break-word;">{!MontantUnitaire}.00 €</td>
+                <td style="border-style: solid;border-color:black;border-width:1px;text-align:right; word-wrap:break-word;">{!MontantUnitaire}.00 €</td>
+            </tr>       
+        </apex:repeat>
+            <tr style="padding:5px;font-size:100%;vertical-align:top;page-break-inside: avoid;">
+                <td style="text-align:right; word-wrap:break-word;">Total</td>
+                <td style="border-style: solid;border-color:black;border-width:1px;text-align:center; word-wrap:break-word;">{!nbDossiers}</td>
+                <td style="text-align:right; word-wrap:break-word;">Total</td>
+                <td style="border-style: solid;border-color:black;border-width:1px;text-align:center; word-wrap:break-word;">{!nbDossiers}</td>
+                <td style="border-style: solid;border-color:black;border-width:1px;text-align:right; word-wrap:break-word;">{!Expedition__c.Poids__c}</td>
+                <td style="border-style: solid;border-color:black;border-width:1px;text-align:right; word-wrap:break-word;">{!nbDossiers * MontantUnitaire}.00 €</td>
+                <td style="border-style: solid;border-color:black;border-width:1px;text-align:right; word-wrap:break-word;">{!nbDossiers * MontantUnitaire}.00 €</td>
+            </tr>       
+</table>
+<br/><br/>
+I DECLARE ALL THE INFORMATION CONTAINED IN THIS INVOICE TO BE TRUE AND CORRECT .<br/><br/>
+Date:&nbsp; <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+    <apex:param value="{!Today()}" /> 
+</apex:outputText>
+</html>
+
+</apex:page>

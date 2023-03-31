@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Comp5__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Réparations&quot;),Ligne__r.Liste_des_dents_2__c + &quot; &quot; + TEXT( Ligne__r.Liaison__c )  + &quot; &quot; + TEXT( Ligne__r.Arcade__c ) ,&quot;&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Comp5</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

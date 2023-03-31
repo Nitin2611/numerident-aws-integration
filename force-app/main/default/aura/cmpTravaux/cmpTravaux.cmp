@@ -1,0 +1,2253 @@
+<aura:component access="global" implements="flexipage:availableForAllPageTypes,force:hasRecordId,forceCommunity:availableForAllPageTypes" controller="cmpTravauxController">
+    <aura:attribute name="sObj" type="String" />
+	<aura:attribute name="field" type="String" default="Dents__c"/>
+    <aura:attribute name="Dents" type="String[]"/>
+    <aura:attribute name="Dents2" type="String[]"/>
+    <aura:attribute name="Ligne" type="Ligne__c"/>
+    <aura:attribute name="Title" type="String"/>
+    <aura:attribute name="actif" type="Boolean"/> 
+    
+    <aura:attribute name="alloptions" type="List" default="[ { BillingCity: 'Crochet acetal' }, { BillingCity: 'Crochet flexible' }]" />
+    <aura:attribute name="selectedOptions" type="List" default="[]" />
+    
+    <aura:attribute name="objInfo" type="string" default="Ligne__c" description="store object Info." />
+    <aura:attribute name="depnedentFieldMap" type="map" description="store controller(key)--> dependent(values) picklist value as a map." />
+    <aura:attribute name="isDependentDisable" type="boolean" default="false" description="use for, make disbale depandent field." />
+    
+	<aura:handler name="init" value="{!this}" action="{!c.init}"/>
+   <aura:handler event="aura:doneRendering" action="{!c.onRender}"/>    
+    <aura:attribute name="isDoneRendering" type="Boolean" default="false"/>
+
+	<!-- ENTETE -->
+	<div class="slds-page-header" style="background-color: #e5e5ee;border-style: solid;border-color:#e5e5ee;border-collapse: collapse;border-width:5px;">
+		<div class="slds-grid" >
+			<div class="slds-col slds-has-flexi-truncate">
+				<div class="slds-media slds-no-space slds-grow">
+    				<div class="slds-media__figure slds-icon forceEntityIcon" style="background-color: #FFFFFF">
+    					<span class="uiImage">
+    						  <!--  <apex:image id="Caducee" value="{!$Resource.Logo}" width="32" height="34"/>  --> 
+    						  <img src="{!$Resource.Logo}" width="32" height="34"/>
+    					</span> 
+    				</div>
+					<div class="slds-media__body">
+						<nav>
+							<ol class="slds-breadcrumb slds-line-height_reset">
+								<li class="slds-breadcrumb__item">
+									<span>Ligne</span>
+								</li>
+							</ol>
+						</nav>
+						<h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate" title="Prothèse fixe">{!v.Ligne.RecordType.Name}</h1>
+					</div>
+				</div>
+			</div>
+			<div class="slds-col slds-no-flex slds-grid slds-align-top">
+				<div class="slds-button-group" role="group">
+					<button class="slds-button slds-button_neutral" onclick="{!c.saveLigne}">Enregistrer</button>
+					<button class="slds-button slds-button_neutral" onclick="{!c.cancelLigne}">Annuler les modifications</button>
+					<button class="slds-button slds-button_neutral" onclick="{!c.deleteLigne}">Supprimer la ligne</button>
+				</div>
+			</div>
+		</div>
+		<ul class="slds-grid slds-page-header__detail-row">
+			<li class="slds-page-header__detail-block">
+				<p class="slds-text-title slds-truncate slds-m-bottom_xx-small" title="Field 1">Ordonnance</p>
+				<p class="slds-text-body_regular slds-truncate" title="Description that demonstrates truncation with a long text field">{!v.Ligne.Ordonnance__r.Name}</p>
+			</li>
+			<li class="slds-page-header__detail-block">
+				<p class="slds-text-title slds-truncate slds-m-bottom_xx-small" title="Field 4">Ligne</p>
+				<p title="Description (2-line truncation—must use JS to truncate).">{!v.Ligne.Name}</p>
+			</li>
+			<li class="slds-page-header__detail-block">
+                <aura:if isTrue="{!v.Ligne.RecordType.Description!=null}"> 
+                	<p class="slds-text-body_large" >
+                    	<span class="uiImage"><img src="{!$Resource.WarningOrange}" width="32" height="34"/></span>
+                    	<strong>&nbsp;&nbsp;{!v.Ligne.RecordType.Description}</strong>
+					</p>
+                </aura:if>
+			</li>
+		</ul>
+	</div>	
+
+<!--  DENTS 1 -->
+<aura:if isTrue="{!(v.Ligne.LibDents1__c!=null)}">  
+<div class="slds-tabs_card slds-tabs_default">
+	<ul class="slds-tabs_default__nav" role="tablist">
+		<li class="slds-tabs_default__item slds-is-active" title="Cocher les dents concernées" role="presentation"><a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" id="tab-default-1__item">{!v.Ligne.LibDents1__c}</a></li>
+	</ul>
+	<div id="tab-default-1" class="slds-tabs_default__content slds-show" role="tabpanel" aria-labelledby="tab-default-1__item">
+		<article class="slds-card">
+	<div class="tableau" style="width:100%; display:block;">
+    <table class="layout" style="width: 600px; height: 300px; margin:auto;">
+		<tbody>
+			<tr class="bline">
+                <td>
+                    <div aura:id="svg_18" class="dentTop" onclick="{!c.addTooth}" > 
+                    <![CDATA[
+                       <svg viewBox="-5 -10 25 25" height="80" width="50" id="18" >
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs> 
+                            <g id="18">
+                                <path id="18" stroke="black" fill="transparent" class="racine" d="M6.53,12.12a8,8,0,0,0,.78-2.25c-.2-3.4-.16-8.14-.7-8.28C6.23,1.5,5.51,3.51,5,5.21,5.44,8.4,5.87,12.05,6.53,12.12Z"/>
+                                <path id="18" stroke="black" fill="transparent" class="racine" d="M10.8,13.78,11.3.53S11-.38,10.13.53c-.59.65-1.94,6.16-2.82,9.34a8,8,0,0,1-.78,2.25C5.87,12.05,5.44,8.4,5,5.21,4.65,3,4.31,1,3.88.62,2.75-.18,1.3,10,2,14.2"/>
+                                <path id="18" stroke="black" fill="transparent" class="dent" d="M2,14.2a6.14,6.14,0,0,0-1.83,4C.05,20.62,1.55,21.62,2,21.7s1.17-1,2.09-1,.94.92,1.5,1,.66-.92,1.58-1,.67.92,1.67,1,3.22.14,3.87-.95c1-1.66.38-5.3-1.87-7"/>
+                                <line id="18" fill="transparent" class="line" x1="10.8" y1="13.78" x2="1.96" y2="14.2"/>
+							</g>
+                        </svg>
+                    ]]>
+                    </div>
+                    <div>18</div>
+                    
+                </td>
+                <td >
+                    <div aura:id="svg_17" class="dentTop" onclick="{!c.addTooth}">
+                        <![CDATA[
+                         <svg viewBox="-5 -8 25 25" height="80" width="50" id="17" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="17">
+                                    <path id="17" stroke="black" fill="transparent" class="racine" d="M6.69,13C8.25,13,8.3,8,8.46,4.25,7.88,2.64,7.23,1.59,7,1.82c.41,3.57-1,7.82-1.54,9.32C5.77,12.27,6.15,13,6.69,13Z"/>
+                                    <path id="17" stroke="black" fill="transparent" class="racine" d="M10.94,15.2S11.22,1.1,9.16.13c-.48.16-.61,1.94-.7,4.12C8.3,8,8.25,13,6.69,13c-.54,0-.92-.77-1.2-1.9C4.67,7.76,4.75,1,4.09,1,3.22,1,1.47,4.57,1.5,9.17S2.62,15.1,2.62,15.1"/>
+                                    <path id="17" stroke="black" fill="transparent" class="dent" d="M2.62,15.1S.12,17.35.12,20a3.05,3.05,0,0,0,2,3.21s2.64-.33,3.7.51c0,0,.41-1,1.19-1s.47.81,2.59.84,2.82-.69,3.16-2.34a7.87,7.87,0,0,0-1.81-6"/>
+                                    <line id="17" fill="transparent" class="line" x1="2.63" y1="15.1" x2="10.94" y2="15.2"/>
+                              </g>
+                        </svg>
+                      ]]>
+                    </div>
+                    <div>17</div>
+				</td>
+				<td >
+					<div aura:id="svg_16" class="dentTop" onclick="{!c.addTooth}">
+                        <![CDATA[
+                         <svg viewBox="-5 -4 25 25" height="80" width="50" id="16" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="16">
+                                    <path id="16" stroke="black" fill="transparent" class="racine" d="M8.32,12.56c-.49-3,.1-10-.94-9.94-.8,0-1.69,3-2.17,4.81.39,3.19.94,6.64,1.88,7.63C7.68,15.68,8.06,14.49,8.32,12.56Z"/>
+                                    <path id="16" stroke="black" fill="transparent" class="dent" d="M2.75,18.06A6.94,6.94,0,0,0,.13,23.75c0,2.16,1.31,3.47,2.21,3.46s.72-.62,2.1-.65,1.69,1.16,2.15,1.16.54-1.41.91-1.41.75.9.75.9,4.81,1.73,5.09-3-1.21-5.92-1.71-6.56"/>
+                                    <path id="16" stroke="black" fill="transparent" class="racine" d="M11.63,17.69c-.5-.65.06-5.47.21-10.13.22-4-2.18-7.81-2.65-7.4-.32.27-.31,8.15-.87,12.4-.26,1.93-.64,3.12-1.23,2.5-.94-1-1.49-4.44-1.88-7.63s-.62-6.07-.9-6.09c-.56,0-2.68,5.22-2.68,9.69a19,19,0,0,0,1.12,7"/>
+                                    <line id="16" fill="transparent" class="line" x1="2.75" y1="18.06" x2="11.63" y2="17.69"/>
+                              </g>
+                        </svg>
+                      ]]>
+                    </div>
+                    <div>16</div>
+				</td>
+				<td>
+					<div aura:id="svg_15" class="dentTop" onclick="{!c.addTooth}">
+                        <![CDATA[
+                         <svg viewBox="-5 -4 25 25" height="80" width="50" id="15" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="15">
+                                    <path id="15" stroke="black" fill="transparent" class="dent" d="M2.18,18.1a8.36,8.36,0,0,0-2,6.63s2,3.33,4.84,3.29,4.41-3.46,4.5-5-2.21-4.75-2.21-4.75"/>
+                                    <path id="15" stroke="black" fill="transparent" class="racine" d="M7.35,18.27,7.51,6.56S7.43.85,5.35.14s-3.17,18-3.17,18"/>
+                                    <line id="15" fill="transparent" class="line" x1="2.18" y1="18.1" x2="7.35" y2="18.27"/>
+                              </g>
+                        </svg>
+                      ]]>
+                    </div>
+                    <div>15</div>
+				</td>
+				<td>
+					<div aura:id="svg_14" class="dentTop" onclick="{!c.addTooth}">
+                        <![CDATA[
+                         <svg viewBox="-5 -3 25 25" height="80" width="50" id="14" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="14">
+                                    <path id="14" stroke="black" fill="transparent" class="racine" d="M7.49,18.68S5.51.4,3.69.14C.28-.36,1.53,13.22,1.82,18.51"/>
+                                    <path id="14" stroke="black" fill="transparent" class="dent" d="M1.82,18.51S-.39,20.43.24,24.76a1.24,1.24,0,0,1,1,.8c.34.75,2.21,2.7,3.71,2.66s4.79-2,4.75-5a5.94,5.94,0,0,0-2.16-4.54"/>
+                                    <line id="14" fill="transparent" class="line" x1="1.82" y1="18.51" x2="7.49" y2="18.68"/>
+                              </g>
+                        </svg>
+                      ]]>
+                    </div>
+                    <div>14</div>
+				</td>
+				<td>
+					<div aura:id="svg_13" class="dentTop" onclick="{!c.addTooth}">
+                        <![CDATA[
+                         <svg viewBox="-5 2 25 25" height="80" width="50" id="13" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="13">
+                                    <path id="13" stroke="black" fill="transparent" class="racine" d="M8.06,23.79S7.18,8.17,6.93,5.54,5.23.17,4.68.13s-.37,1.5-.54,2.41a31.16,31.16,0,0,1-2,4.34l-.5,16.41"/>
+                                    <path id="13" stroke="black" fill="transparent" class="dent" d="M1.64,23.29A7.79,7.79,0,0,0,.31,29.63C.81,29.71,1.86,33.26,5,33c3.91-.38,4.66-5.58,4-6.63a8.49,8.49,0,0,1-1-2.54"/>
+                                    <line id="13" fill="transparent" class="line" x1="1.64" y1="23.29" x2="8.06" y2="23.79"/>
+                              </g>
+                        </svg>
+                      ]]>
+                    </div>
+                    <div>13</div>
+				</td>
+				<td>
+					<div aura:id="svg_12" class="dentTop" onclick="{!c.addTooth}">
+                        <![CDATA[
+                         <svg viewBox="-5 -2 25 25" height="80" width="50" id="12" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="12">
+                                    <path id="12" stroke="black" fill="transparent" class="dent" d="M1.93,19.21c-.76,1-2.09,6.29-1.75,7.63A2.12,2.12,0,0,0,2.34,28.5c.92.13,5.92.13,6.34-.29s0-2.25,0-4-1.5-2.92-1.42-3.92"/>
+                                    <path id="12" stroke="black" fill="transparent" class="racine" d="M7.26,20.25c.08-1,.73-.59.79-1.5C8.24,16.17,5.84,7.79,5.72,6S5.34.17,4.72.13s-.79.69-.79.69V6.21c0,3.17-2.71,10.17-2.54,11.46s.91,1,.54,1.54"/>
+                                    <line id="12" fill="transparent" class="line" x1="1.93" y1="19.21" x2="7.26" y2="20.25"/>
+                              </g>
+                        </svg>
+                      ]]>
+                    </div>
+                    <div>12</div>
+				</td>
+				<td  class="rcol">
+					<div aura:id="svg_11" class="dentTop" onclick="{!c.addTooth}">
+                        <![CDATA[
+                         <svg viewBox="-5 -1 25 25" height="80" width="50" id="11" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="11">
+                                    <path id="11" stroke="black" fill="transparent" class="dent" d="M2.13,19C0,20.56-.12,25.31.33,27.35a2.47,2.47,0,0,0,2.34,2s5.66.43,6.91.34,1.42-2,1.42-2c.58-7.37-.62-8.12-.62-8.12"/>
+                                    <path id="11" stroke="black" fill="transparent" class="racine" d="M10.38,19.64c.41-8.88-5.27-20-6.59-19.5-.71.25.38,4.33.21,7.58S2.13,19,2.13,19"/>
+                                    <line id="11" fill="transparent" class="line" x1="2.13" y1="19.01" x2="10.38" y2="19.64"/>
+                              </g>
+                        </svg>
+                      ]]>
+                    </div>
+                    <div>11</div>
+				</td>
+				
+				
+				<td  class="lcol">
+					<div aura:id="svg_21" class="dentTop" onclick="{!c.addTooth}">
+                        <![CDATA[
+                         <svg viewBox="-5 -1 25 25" height="80" width="50" id="21" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="21">
+                                    <path id="21" stroke="black" fill="transparent" class="racine" d="M9.16,19A114,114,0,0,1,7.28,7.72C7.12,4.47,8.2.39,7.49.14,6.17-.33.49,10.76.91,19.64"/>
+                                    <path id="21" stroke="black" fill="transparent" class="dent" d="M.91,19.64s-1.21.75-.63,8.12c0,0,.17,1.88,1.42,2s6.92-.34,6.92-.34a2.46,2.46,0,0,0,2.33-2c.46-2,.29-6.79-1.79-8.34"/>
+                                    <line id="21" fill="transparent" class="line" x1="0.91" y1="19.64" x2="9.16" y2="19.01"/>
+                              </g>
+                        </svg>
+                      ]]>
+					</div>
+                    <div>21</div>
+                </td>
+				<td>
+					<div aura:id="svg_22" class="dentTop" onclick="{!c.addTooth}">
+                        <![CDATA[
+                         <svg viewBox="-5 -2 25 25" height="80" width="50" id="22" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="22">
+                                    <path id="22" stroke="black" fill="transparent" class="dent" d="M1.72,20.25c.08,1-1.46,2.13-1.42,3.92s-.42,3.62,0,4,5.42.42,6.34.29A2.12,2.12,0,0,0,8.8,26.84c.34-1.34-1-6.61-1.75-7.63"/>
+                                    <path id="22" stroke="black" fill="transparent" class="racine" d="M7.05,19.21c-.37-.5.38-.25.54-1.54S5.05,9.38,5.05,6.21V.82S4.89.09,4.26.13,3.39,4.29,3.26,6,.74,16.17.93,18.75c.06.91.71.5.79,1.5"/>
+                                    <line id="22" fill="transparent" class="line" x1="1.72" y1="20.25" x2="7.05" y2="19.21"/>
+                              </g>
+                        </svg>
+                      ]]>
+					</div>
+                    <div>22</div>
+                </td>
+				<td>
+					<div aura:id="svg_23" class="dentTop" onclick="{!c.addTooth}">
+                        <![CDATA[
+                         <svg viewBox="-5 2 25 25" height="80" width="50" id="23" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="23">
+                                    <path id="23" stroke="black" fill="transparent" class="racine" d="M7.72,23.29,7.22,6.88a31.16,31.16,0,0,1-2-4.34c-.17-.91,0-2.46-.55-2.41s-2,2.79-2.25,5.41S1.3,23.79,1.3,23.79"/>
+                                    <path id="23" stroke="black" fill="transparent" class="dent" d="M1.3,23.79a8.49,8.49,0,0,1-1,2.54c-.67,1.05.08,6.25,4,6.63,3.16.3,4.21-3.25,4.71-3.33a7.79,7.79,0,0,0-1.33-6.34"/>
+                                    <line id="23" fill="transparent" class="line" x1="1.3" y1="23.79" x2="7.72" y2="23.29"/>
+                              </g>
+                        </svg>
+                      ]]>
+					</div>
+                    <div>23</div>
+                </td>
+				<td>
+					<div aura:id="svg_24" class="dentTop" onclick="{!c.addTooth}">
+                        <![CDATA[
+                         <svg viewBox="-5 -2 25 25" height="80" width="50" id="24" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="24">
+                                    <path id="24" stroke="black" fill="transparent" class="racine" d="M8,18.51C8.25,13.22,9.5-.36,6.08.14,4.27.4,2.29,18.68,2.29,18.68"/>
+                                    <path id="24" stroke="black" fill="transparent" class="dent" d="M2.29,18.68A5.94,5.94,0,0,0,.13,23.22c0,3,3.25,5,4.75,5s3.37-1.91,3.7-2.66a1.26,1.26,0,0,1,1-.8C10.17,20.43,8,18.51,8,18.51"/>
+                                    <line id="24" fill="transparent" class="line" x1="2.29" y1="18.68" x2="7.96" y2="18.51"/>
+                              </g>
+                        </svg>
+                      ]]>
+					</div>
+                    <div>24</div>
+                </td>
+				<td>
+					<div aura:id="svg_25" class="dentTop" onclick="{!c.addTooth}">
+                        <![CDATA[
+                         <svg viewBox="-5 -2 25 25" height="80" width="50" id="25" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="25">
+                                    <path id="25" stroke="black" fill="transparent" class="dent" d="M2.34,18.27S0,21.48.13,23s1.71,5,4.5,5,4.83-3.29,4.83-3.29a8.32,8.32,0,0,0-2-6.63"/>
+                                    <path id="25" stroke="black" fill="transparent" class="racine" d="M7.5,18.1S6.42-.56,4.34.14,2.17,6.56,2.17,6.56l.17,11.71"/>
+                                    <line id="25" fill="transparent" class="line" x1="2.34" y1="18.27" x2="7.5" y2="18.1"/>
+                              </g>
+                        </svg>
+                      ]]>
+                    </div>
+                    <div>25</div>
+				</td>
+				<td>
+					<div aura:id="svg_26" class="dentTop" onclick="{!c.addTooth}">
+                        <![CDATA[
+                         <svg viewBox="-5 -3 25 25" height="80" width="50" id="26" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="26">
+                                    <path id="26" stroke="black" fill="transparent" class="racine" d="M6.41,15.06c.94-1,1.5-4.44,1.89-7.63C7.81,5.58,6.92,2.65,6.13,2.62c-1,0-.46,6.91-.94,9.94C5.45,14.49,5.82,15.68,6.41,15.06Z"/>
+                                    <path id="26" stroke="black" fill="transparent" class="dent" d="M1.88,17.69c-.5.64-2,1.87-1.72,6.56s5.09,3,5.09,3,.38-.9.76-.9.43,1.41.9,1.41.78-1.19,2.16-1.16,1.18.64,2.09.65,2.19-1.3,2.22-3.46a7,7,0,0,0-2.63-5.69"/>
+                                    <path id="26" stroke="black" fill="transparent" class="racine" d="M10.75,18.06a18.88,18.88,0,0,0,1.13-7c0-4.47-2.13-9.72-2.69-9.69-.28,0-.5,2.93-.89,6.09s-1,6.64-1.89,7.63c-.59.62-1-.57-1.22-2.5C4.62,8.31,4.64.43,4.32.16c-.47-.41-2.88,3.37-2.66,7.4.16,4.66.72,9.48.22,10.13"/>
+                                    <line id="26" fill="transparent" class="line" x1="1.88" y1="17.69" x2="10.75" y2="18.06"/>
+                              </g>
+                        </svg>
+                      ]]>
+                        </div>
+                    <div>26</div>
+				</td>
+				<td>
+					<div aura:id="svg_27" class="dentTop" onclick="{!c.addTooth}">
+                        <![CDATA[
+                         <svg viewBox="-5 -7 25 25" height="80" width="50" id="27" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="27">
+                                    <path id="27" stroke="black" fill="transparent" class="racine" d="M6.27,13c.54,0,.92-.77,1.19-1.9-.54-1.5-1.94-5.75-1.53-9.32-.2-.23-.85.82-1.43,2.43C4.66,8,4.71,13,6.27,13Z"/>
+                                    <path id="27" stroke="black" fill="transparent" class="racine" d="M10.33,15.1s1.1-1.34,1.13-5.93S9.74,1,8.86,1c-.65,0-.57,6.75-1.4,10.13C7.19,12.27,6.81,13,6.27,13,4.71,13,4.66,8,4.5,4.25c-.09-2.18-.22-4-.7-4.12C1.74,1.1,2,15.2,2,15.2"/>
+                                    <path id="27" stroke="black" fill="transparent" class="dent" d="M2,15.2a7.8,7.8,0,0,0-1.81,6c.34,1.65,1,2.37,3.15,2.34s1.82-.84,2.6-.84,1.19,1,1.19,1c1.06-.84,3.7-.51,3.7-.51a3,3,0,0,0,2-3.21c0-2.69-2.5-4.94-2.5-4.94"/>
+                                    <line id="27" fill="transparent" class="line" x1="2.02" y1="15.2" x2="10.33" y2="15.1"/>
+                              </g>
+                        </svg>
+                      ]]>
+                     </div>
+                    <div>27</div>
+				</td>
+				<td>
+					<div aura:id="svg_28" class="dentTop" onclick="{!c.addTooth}">
+                        <![CDATA[
+                         <svg viewBox="-5 -9 25 25" height="80" width="50" id="28" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="28">
+                                    <path id="28" stroke="black" fill="transparent" class="racine" d="M6.72,12.12c.67-.07,1.1-3.72,1.57-6.91C7.75,3.51,7,1.5,6.65,1.59c-.54.14-.5,4.88-.7,8.28A8.6,8.6,0,0,0,6.72,12.12Z"/>
+                                    <path id="28" stroke="black" fill="transparent" class="dent" d="M2.46,13.78c-2.25,1.67-2.87,5.31-1.87,7,.65,1.09,2.87,1,3.87.95s.75-1.08,1.67-1,1,1.08,1.58,1,.59-1,1.5-1,1.67,1.08,2.09,1,1.91-1.08,1.83-3.5a6.14,6.14,0,0,0-1.83-4"/>
+                                    <path id="28" stroke="black" fill="transparent" class="racine" d="M11.3,14.2C12,10,10.51-.18,9.38.62,8.94,1,8.61,3,8.29,5.21c-.47,3.19-.9,6.84-1.57,6.91A8.6,8.6,0,0,1,6,9.87C5.07,6.69,3.72,1.18,3.13.53,2.3-.38,2,.53,2,.53l.5,13.25"/>
+                                    <line id="28" fill="transparent" class="line" x1="2.46" y1="13.78" x2="11.3" y2="14.2"/>
+                              </g>
+                        </svg>
+                      ]]>
+                    </div>
+                    <div>28</div>
+				</td>
+
+			</tr>
+			
+			<tr class="tline">
+
+				<td>
+                    <div>48</div>
+                    <div aura:id="svg_48" class="dentBot" onclick="{!c.addTooth}">
+                    <![CDATA[
+                       <svg viewBox="-7 -9 25 25" height="80" width="50" id="48" transform="rotate(180)">
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="48">
+                                <path id="48" stroke="black" fill="transparent" class="racine" d="M6.53,12.12a8,8,0,0,0,.78-2.25c-.2-3.4-.16-8.14-.7-8.28C6.23,1.5,5.51,3.51,5,5.21,5.44,8.4,5.87,12.05,6.53,12.12Z"/>
+                                <path id="48" stroke="black" fill="transparent" class="racine" d="M10.8,13.78,11.3.53S11-.38,10.13.53c-.59.65-1.94,6.16-2.82,9.34a8,8,0,0,1-.78,2.25C5.87,12.05,5.44,8.4,5,5.21,4.65,3,4.31,1,3.88.62,2.75-.18,1.3,10,2,14.2"/>
+                                <path id="48" stroke="black" fill="transparent" class="dent" d="M2,14.2a6.14,6.14,0,0,0-1.83,4C.05,20.62,1.55,21.62,2,21.7s1.17-1,2.09-1,.94.92,1.5,1,.66-.92,1.58-1,.67.92,1.67,1,3.22.14,3.87-.95c1-1.66.38-5.3-1.87-7"/>
+                                <line id="48" fill="transparent"class="line" x1="10.8" y1="13.78" x2="1.96" y2="14.2"/>
+							</g>
+                        </svg>
+                    ]]>
+                    </div>
+				</td>
+				<td>
+					<div>47</div>
+                    <div aura:id="svg_47" class="dentBot" onclick="{!c.addTooth}">
+                    <![CDATA[
+                       <svg viewBox="-7 6 25 25" height="80" width="50" id="47" >
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="47">
+                                <path id="47" stroke="black" fill="transparent" class="racine" d="M6,12.81a20.82,20.82,0,0,1,1.06,8.94,6.29,6.29,0,0,0,1.66-1.43c-.05-3-.41-7.13-1.83-9.38A4.53,4.53,0,0,0,6,12.81Z"/>
+                                <path id="47" stroke="black" fill="transparent" class="dent" d="M10.55,8.69a27.31,27.31,0,0,0,1.58-5.5A2.64,2.64,0,0,0,9.47.13C7.8,0,7.38,1.61,6.88,1.61S6,.36,5.42.44s-.54.75-1.62.75A1.5,1.5,0,0,1,2.38.44S.3.28.13,3.19A7.14,7.14,0,0,0,2.38,8.28"/>
+                                <path id="47" stroke="black" fill="transparent" class="racine" d="M2.38,8.28C.13,18.28,4.22,23,4.22,23A51.37,51.37,0,0,1,6,12.81a4.53,4.53,0,0,1,.89-1.87c1.42,2.25,1.78,6.36,1.83,9.38,0,2.12-.08,3.71-.08,3.71,2.84-1.25,2.17-7.92,1.84-9.42a31.34,31.34,0,0,1,.08-5.92"/>
+                                <line id="47" fill="transparent"class="line" x1="2.38" y1="8.28" x2="10.55" y2="8.69"/></g>
+                        </svg>
+                    ]]>
+                    </div>
+                </td>
+				<td>
+					<div>46</div>
+                    <div aura:id="svg_46" class="dentBot" onclick="{!c.addTooth}">
+                    <![CDATA[
+                       <svg viewBox="-7 6 25 25" height="80" width="50" id="46" >
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="46">                           
+                                <path id="46" stroke="black" fill="transparent" class="racine" d="M6.67,13c-.4,0-.7.63-.93,1.55C6.11,18,7,24.92,7.94,24.85c.54-1.55-.46-4.76.49-7.15C8,15.07,7.41,13,6.67,13Z"/>
+                                <path id="46" stroke="black" fill="transparent" class="dent" d="M11.29,9.75C12.54,8.57,13.21,5,13.21,2.94S11.46.19,9.54.13,7,1.94,6.71,1.94,6.88.19,5.91.13,5,1.19,4.29,1.44,2.71.77,2.71.77.12-.31.12,3.85a7.09,7.09,0,0,0,2.59,5.9"/>
+                                <path id="46" stroke="black" fill="transparent" class="racine" d="M2.71,9.75C0,20.15,4,26.69,4.54,26.69s.3-8.55,1.2-12.12c.23-.92.53-1.52.93-1.55C7.41,13,8,15.07,8.43,17.7c.71,4.26,1,9.9,1,9.9,2.66-1.83,1.92-10.41,1.66-12.25a33.37,33.37,0,0,1,.17-5.6"/>
+                                <line id="46" fill="transparent" class="line" x1="11.29" y1="9.75" x2="2.71" y2="9.75"/></g>
+                        </svg>
+                    ]]>
+                    </div>
+                </td>
+				<td>
+					<div>45</div>
+                    <div aura:id="svg_45" class="dentBot" onclick="{!c.addTooth}">
+                    <![CDATA[
+                       <svg viewBox="-7 6 25 25" height="80" width="50" id="45" >
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="45">
+                                <path id="45" stroke="black" fill="transparent" class="dent" d="M7.62,10.72A13.18,13.18,0,0,0,9.38,7.3a11.32,11.32,0,0,0,0-3.5S7-.11,4.38.14.12,2.89.12,5.55s2.34,3.67,2.26,5"/>
+								<path id="45" stroke="black" fill="transparent" class="racine" d="M2.38,10.55c-.09,1.34-.67,14.59,2,17.42l1.41-1.08s.33-12.25,1.83-16.17"/>
+								<line id="45" fill="transparent" class="line" x1="7.63" y1="10.72" x2="2.38" y2="10.55"/></g>
+                        </svg>
+                    ]]>
+                    </div>
+                </td>
+				<td>
+                    <div>44</div>
+                    <div aura:id="svg_44" class="dentBot" onclick="{!c.addTooth}">
+                    <![CDATA[
+                       <svg viewBox="-7 5 25 25" height="80" width="50" id="44">
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="44">
+                                <path id="44" stroke="black" fill="transparent" class="dent" d="M7.12,10.37c.59-.66,2.42-6.66,1.17-7S6.87.12,3.73.12A4.62,4.62,0,0,0,.17,5.17,12.42,12.42,0,0,0,2,10.37"/>
+                                <path id="44" stroke="black" fill="transparent" class="racine" d="M2,10.37C.54,21.21,3,28.21,3,28.21s1.91.25,1.83-.75S7.12,10.37,7.12,10.37"/>
+                                <line id="44" fill="transparent" class="line" x1="2.04" y1="10.37" x2="7.12" y2="10.37"/>
+							</g>
+                        </svg>
+                    ]]>
+                    </div>
+				</td>
+				<td>
+                    <div>43</div>
+                    <div aura:id="svg_43" class="dentBot" onclick="{!c.addTooth}">
+                    <![CDATA[
+                       <svg viewBox="-7 6 25 25" height="80" width="50" id="43" >
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="43">
+                                <path id="43" stroke="black" fill="transparent" class="dent" d="M7.65,11.79c1.09-3.75.75-8.5.86-9.33S6.74.12,5.65.12.49,3.88.24,4.88A5.53,5.53,0,0,0,.24,7l1.88,4.75"/>
+                                <path id="43" stroke="black" fill="transparent" class="racine" d="M2.12,11.79s-.47,13.59,0,17A6.5,6.5,0,0,0,5,33.54c2.25-2.25,2.66-21.75,2.66-21.75"/>
+                                <line id="43" fill="transparent" class="line" x1="2.12" y1="11.79" x2="7.65" y2="11.79"/></g>
+                        </svg>
+                    ]]>
+                    </div>
+                </td>
+				<td>
+                    <div>42</div>
+                    <div aura:id="svg_42" class="dentBot" onclick="{!c.addTooth}">
+                    <![CDATA[
+                       <svg viewBox="-7 5 25 25" height="80" width="50" id="42" >
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="42">
+                                <path id="42" stroke="black" fill="transparent" class="dent" d="M5.6,9.65,6.69,5.83s.8-4.19,0-4.91C5.69,0,1.73-.14,1,.58S-.15,2.42.35,4.25s1.34,4.21,1.09,5.4"/>
+                                <path id="42" stroke="black" fill="transparent" class="racine" d="M1.44,9.65C1.19,10.83.19,24.33,2.69,29.75c0,0,3.25-12.37,2.91-20.1"/>
+                                <line id="42" fill="transparent" class="line" x1="5.6" y1="9.65" x2="1.44" y2="9.65"/></g>
+                        </svg>
+                    ]]>
+                    </div>
+                </td>
+				<td class="rcol">
+                    <div>41</div>
+                    <div aura:id="svg_41" class="dentBot" onclick="{!c.addTooth}">
+                    <![CDATA[
+                       <svg viewBox="-7 5 25 25" height="80" width="50" id="41" >
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="41">
+                                <path id="41" stroke="black" fill="transparent" class="racine" d="M1.13,7.79A11.93,11.93,0,0,1,1.17,9c-.06,2.34-.11,6.39,0,7.32S3,23.84,2.53,26.59c0,0,3.25-1.42,3.25-17.42a9.49,9.49,0,0,1,.09-1.38"/>
+                                <path id="41" stroke="black" fill="transparent" class="dent" d="M5.87,7.79c.17-1.28.56-2.16.82-3.62C7,2.25,7.36.92,6,.67S2.11-.08,1.45.21A3.06,3.06,0,0,0,.2,3.42a29.62,29.62,0,0,1,.93,4.37"/>
+                                <line id="41" fill="transparent" class="line" x1="5.87" y1="7.79" x2="1.13" y2="7.79"/></g>
+                        </svg>
+                    ]]>
+                    </div>
+				</td>
+
+				
+				
+				<td class="lcol">
+                    <div>31</div>
+                    <div aura:id="svg_31" class="dentBot" onclick="{!c.addTooth}">
+                    <![CDATA[
+                       <svg viewBox="-7 5 25 25" height="80" width="50" id="31" >
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="31">
+                                <path id="31" stroke="black" fill="transparent" class="racine" d="M6,7.79A11.93,11.93,0,0,0,5.94,9c.06,2.34.11,6.39,0,7.32S4.16,23.84,4.58,26.59c0,0-3.25-1.42-3.25-17.42a9.49,9.49,0,0,0-.09-1.38"/>
+                                <path id="31" stroke="black" fill="transparent" class="dent" d="M1.24,7.79C1.07,6.51.68,5.63.42,4.17.08,2.25-.25.92,1.16.67S5-.08,5.66.21A3.06,3.06,0,0,1,6.91,3.42,29.62,29.62,0,0,0,6,7.79"/>
+                                <line id="31" fill="transparent" class="line" x1="5.87" y1="7.72" x2="1.24" y2="7.87"/></g>
+                        </svg>
+                    ]]>
+                    </div>
+                </td>
+				<td>
+                    <div>32</div>
+                    <div aura:id="svg_32" class="dentBot" onclick="{!c.addTooth}">
+                    <![CDATA[
+                       <svg viewBox="-7 5 25 25" height="80" width="50" id="32" >
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="32">
+								<path id="32" stroke="black" fill="transparent" class="racine" d="M1.57,9.65c-.34,7.73,2.91,20.1,2.91,20.1C7,24.33,6,10.83,5.73,9.65"/>
+                                <path id="32" stroke="black" fill="transparent" class="dent" d="M5.73,9.65c-.25-1.19.59-3.57,1.09-5.4S6.94,1.31,6.19.58,1.48,0,.48.92c-.8.72,0,4.91,0,4.91L1.57,9.65"/>
+                                <line id="32" fill="transparent" class="line" x1="1.57" y1="9.65" x2="5.73" y2="9.65"/>
+                            </g>
+                        </svg>
+                    ]]>
+                    </div>
+                </td>
+				<td>
+                    <div>33</div>
+                    <div aura:id="svg_33" class="dentBot" onclick="{!c.addTooth}">
+                    <![CDATA[
+                       <svg viewBox="-7 5 25 25" height="80" width="50" id="33" >
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="33"> 
+								<path id="33" stroke="black" fill="transparent" class="racine" d="M1.57,9.65c-.34,7.73,2.91,20.1,2.91,20.1C7,24.33,6,10.83,5.73,9.65"/>
+                                <path id="33" stroke="black" fill="transparent" class="dent" d="M5.73,9.65c-.25-1.19.59-3.57,1.09-5.4S6.94,1.31,6.19.58,1.48,0,.48.92c-.8.72,0,4.91,0,4.91L1.57,9.65"/>
+                                <line id="33" fill="transparent" class="line" x1="6.52" y1="11.79" x2="0.98" y2="11.79"/>
+							</g>
+                        </svg>
+                    ]]>
+                    </div>
+                </td>
+				<td>
+                    <div>34</div>
+                    <div aura:id="svg_34" class="dentBot" onclick="{!c.addTooth}">
+                    <![CDATA[
+                       <svg viewBox="-7 5 25 25" height="80" width="50" id="34" >
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="34">
+                                <path id="34" stroke="black" fill="transparent" class="dent" d="M6.8,10.37a12.51,12.51,0,0,0,1.88-5.2,4.63,4.63,0,0,0-3.57-5C2,.12,1.81,3,.56,3.38s.57,6.33,1.16,7"/>
+                                <path id="34" stroke="black" fill="transparent" class="racine" d="M1.72,10.37S4.13,26.46,4.05,27.46s1.83.75,1.83.75,2.42-7,.92-17.84"/>
+                                <line id="34" fill="transparent" class="line" x1="6.8" y1="10.37" x2="1.72" y2="10.37"/>
+                            </g>
+                        </svg>
+                    ]]>
+                    </div>
+                </td>
+				<td>
+                    <div>35</div>
+                    <div aura:id="svg_35" class="dentBot" onclick="{!c.addTooth}">
+                    <![CDATA[
+                       <svg viewBox="-7 5 25 25" height="80" width="50" id="35" >
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="35">
+                                <path id="35" stroke="black" fill="transparent" class="dent" d="M7.27,10.55c-.08-1.33,2.25-2.33,2.25-5S7.94.39,5.27.14.27,3.8.27,3.8a11.32,11.32,0,0,0,0,3.5A13.27,13.27,0,0,0,2,10.72"/>
+                                <path id="35" stroke="black" fill="transparent" class="racine" d="M2,10.72c1.5,3.92,1.84,16.17,1.84,16.17L5.27,28c2.67-2.83,2.09-16.08,2-17.42"/>
+                                <line id="35" fill="transparent" class="line" y1="10.55" x2="2.02" y2="10.72"/>
+                            </g>
+                        </svg>
+                    ]]>
+                    </div>
+                </td>
+				<td>
+                    <div>36</div>
+                    <div aura:id="svg_36" class="dentBot" onclick="{!c.addTooth}">
+                    <![CDATA[
+                       <svg viewBox="-7 5 25 25" height="80" width="50" id="36" >
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="36">
+                                <path id="36" stroke="black" fill="transparent" class="racine" d="M6.67,13C5.92,13,5.34,15.07,4.9,17.7c.95,2.39,0,5.6.49,7.15,1,.07,1.84-6.81,2.21-10.28C7.37,13.65,7.07,13.05,6.67,13Z"/>
+                                <path id="36" stroke="black" fill="transparent" class="dent" d="M10.62,9.75a7.09,7.09,0,0,0,2.59-5.9c0-4.16-2.59-3.08-2.59-3.08s-.83.92-1.58.67S8.39.07,7.42.13,7,1.94,6.62,1.94,5.71.07,3.79.13.12.85.12,2.94.79,8.57,2,9.75"/>
+                                <path id="36" stroke="black" fill="transparent" class="racine" d="M2,9.75a32.29,32.29,0,0,1,.17,5.6C2,17.19,1.21,25.77,3.88,27.6c0,0,.31-5.64,1-9.9.44-2.63,1-4.74,1.77-4.68.4,0,.7.63.93,1.55.9,3.57.73,12.12,1.19,12.12s4.5-6.54,1.83-16.94"/>
+                                <line id="36" fill="transparent" class="line" x1="10.63" y1="9.75" x2="2.04" y2="9.75"/>
+                            </g>
+                        </svg>
+                    ]]>
+                    </div>
+                </td>
+				<td>
+                    <div>37</div>
+                    <div aura:id="svg_37" class="dentBot" onclick="{!c.addTooth}">
+                    <![CDATA[
+                       <svg viewBox="-7 5 25 25" height="80" width="50" id="37" >
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="37">
+                                <path id="37" stroke="black" fill="transparent" class="racine" d="M5.39,10.94C4,13.19,3.62,17.3,3.57,20.32a6.17,6.17,0,0,0,1.65,1.43,21,21,0,0,1,1.06-8.94A4.53,4.53,0,0,0,5.39,10.94Z"/>
+                                <path id="37" stroke="black" fill="transparent" class="dent" d="M9.89,8.28a7.09,7.09,0,0,0,2.25-5.09C12,.28,9.89.44,9.89.44a1.49,1.49,0,0,1-1.42.75C7.39,1.19,7.39.52,6.85.44s-1,1.17-1.46,1.17S4.47,0,2.81.13A2.64,2.64,0,0,0,.14,3.19a28,28,0,0,0,1.58,5.5"/>
+                                <path id="37" stroke="black" fill="transparent" class="racine" d="M1.72,8.69a32,32,0,0,1,.09,5.92c-.34,1.5-1,8.17,1.83,9.42,0,0-.11-1.59-.07-3.71.05-3,.4-7.13,1.82-9.38a4.53,4.53,0,0,1,.89,1.87A51.11,51.11,0,0,1,8.06,23s4.08-4.75,1.83-14.75"/>
+                                <line id="37" fill="transparent" class="line" x1="9.89" y1="8.28" x2="1.72" y2="8.69"/>
+                            </g>
+                        </svg>
+                    ]]>
+                    </div>
+                </td>
+                <td>
+                    <div>38</div>
+                    <div aura:id="svg_38" class="dentBot" onclick="{!c.addTooth}">
+                        <![CDATA[
+                       <svg viewBox="-7 5 25 25" height="80" width="50" id="38" >
+                            <defs>
+                             <style>
+                                 .racine{
+         							stroke: black;
+                                 }
+                                 .dent{
+        							 stroke: black;
+                                 }
+        					</style>
+                            </defs>
+                            <g id="38">
+                                <path id="38" stroke="black" fill="transparent" class="racine" d="M6.72,9.75A8.44,8.44,0,0,0,6,12c.2,3.41.16,8.15.7,8.28.38.09,1.1-1.91,1.64-3.62C7.82,13.47,7.39,9.81,6.72,9.75Z"/>
+                                <path id="38" stroke="black" fill="transparent" class="dent" d="M11.3,7.67a6.17,6.17,0,0,0,1.83-4C13.21,1.25,11.71.25,11.3.17s-1.17,1-2.09,1-.94-.93-1.5-1-.66.92-1.58,1S5.46.24,4.46.16,1.24,0,.59,1.11c-1,1.66-.38,5.31,1.87,7"/>
+                                <path id="38" stroke="black" fill="transparent" class="racine" d="M2.46,8.08,2,21.33s.34.92,1.17,0C3.72,20.69,5.07,15.17,6,12a8.44,8.44,0,0,1,.77-2.24c.67.06,1.1,3.72,1.57,6.9.32,2.22.65,4.21,1.09,4.6C10.51,22,12,11.83,11.3,7.67"/>
+                                <line id="38" fill="transparent" class="line" x1="11.3" y1="7.67" x2="2.46" y2="8.08"/>
+                            </g>
+                        </svg>
+                    ]]>
+                    </div>
+                </td> 
+			</tr>  
+		</tbody>
+	</table>
+    </div>
+		</article>
+	</div>
+</div>
+</aura:if> 
+
+<!--  ARCADES -->
+<aura:if isTrue="{!(v.Ligne.LibArcades__c!=null)}"> 
+<div class="slds-tabs_card slds-tabs_default">
+	<ul class="slds-tabs_default__nav" role="tablist">
+		<li class="slds-tabs_default__item slds-is-active" title="Cocher les arcades concernées" role="presentation"><a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" id="tab-default-1__item">{!v.Ligne.LibArcades__c}</a></li>
+	</ul>
+	<div id="tab-default-1" class="slds-tabs_default__content slds-show" role="tabpanel" aria-labelledby="tab-default-1__item">
+		<article class="slds-card">
+			<div class="slds-card__body slds-card__body_inner">
+   			<tr>
+   			<td>
+    		<lightning:select aura:id="Arcades" label="Arcades">
+        		<option value=""></option>
+        		<option value="Haut">Haut</option>
+        		<option value="Bas">Bas</option>
+        		<option value="Haut et bas">Haut et bas</option>
+    		</lightning:select>
+    		</td>
+    		<td>
+ <!-- 	<div class="slds-form-element">
+    		    				<div class="slds-media__figure slds-icon forceEntityIcon" style="background-color: #FFFFFF">
+    					<span class="uiImage">
+    						  <img src="{!$Resource.Arcades}" width="150" />
+    					</span> 
+    				</div> 
+    	</div>  -->  	
+    		</td>
+    		</tr>    
+			</div>
+		</article>
+	</div>
+</div>
+</aura:if> 
+
+<!--  TRAVAUX 1 
+<aura:if isTrue="{!and(not(v.Ligne.LibTravaux1__c==null),and(not(v.Ligne.LibTravaux1__c=='Implants - Travaux'),not(v.Ligne.LibTravaux1__c=='Implants')))}"> -->
+<aura:if isTrue="{!and(not(v.Ligne.LibTravaux1__c==null),and(not(v.Ligne.LibTravaux1__c=='Implants - Travaux'),and(not(v.Ligne.LibTravaux1__c=='Implants'),not(v.Ligne.LibTravaux1__c=='Planification implantaire'))))}"> 
+<div class="slds-tabs_card slds-tabs_default">
+	<ul class="slds-tabs_default__nav" role="tablist">
+		<li class="slds-tabs_default__item slds-is-active" title="Sélectionner les produits" role="presentation"><a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" id="tab-default-1__item">{!v.Ligne.LibTravaux1__c}</a></li>
+	</ul>
+	<div id="tab-default-1" class="slds-tabs_default__content slds-show" role="tabpanel" aria-labelledby="tab-default-1__item">
+		<article class="slds-card">
+			<div class="slds-card__body slds-card__body_inner">
+			<aura:if isTrue="{!(v.Ligne.LibType1__c!=null)}">
+			    <lightning:select aura:id="Type1" label="{!v.Ligne.LibType1__c}">
+        			<option value="">---- None ---</option>
+        			<option value="Classique">Classique</option>
+        			<option value="Céramisé">Céramisé</option>
+        			<option value="Claveté">Claveté</option>
+    			</lightning:select>    
+    			</aura:if>
+			<aura:if isTrue="{!(v.Ligne.LibSsType1__c!=null)}">
+			    <lightning:select aura:id="SsType1" label="{!v.Ligne.LibSsType1__c}">
+        			<option value="">---- None ---</option>
+        			<option value="CoCr">CoCr</option>
+        			<option value="NiCr">NiCr</option>
+        			<option value="Alliage précieux">Alliage précieux</option>
+        			<option value="Alliage semi-précieux">Alliage semi-précieux</option>
+    			</lightning:select>    
+    			</aura:if>
+			</div>
+		</article>
+	</div>
+</div>
+</aura:if>
+
+<!--  IMPLANTS -->
+<aura:if isTrue="{!(v.Ligne.LibTravaux1__c=='Implants - Travaux')}"> 
+<div class="slds-tabs_card slds-tabs_default">
+	<ul class="slds-tabs_default__nav" role="tablist">
+		<li class="slds-tabs_default__item slds-is-active" title="Sélectionner les produits" role="presentation"><a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" id="tab-default-1__item">{!v.Ligne.LibTravaux1__c}</a></li>
+	</ul>
+	<div id="tab-default-1" class="slds-tabs_default__content slds-show" role="tabpanel" aria-labelledby="tab-default-1__item">
+		<article class="slds-card">
+			<div class="slds-card__body slds-card__body_inner">
+				<lightning:select aura:id="IMarque" label="Marque d'implant" value="{!v.Ligne.Marque_d_implant__c}" onchange="{!c.visibiliyImplants}">
+        			<option value="">---- None ---</option>
+        			<option value="ALPHA BIO">ALPHA BIO</option>
+        			<option value="ANKYLOS">ANKYLOS</option>
+        			<option value="ANTHOGYR">ANTHOGYR</option>
+        			<option value="ASTRA">ASTRA</option>
+        			<option value="BIOTECH">BIOTECH</option>
+        			<option value="BIOMET">BIOMET</option>
+        			<option value="DENTSPLY">DENTSPLY</option>
+        			<option value="ETK">ETK</option>
+        			<option value="STRAUMAN">STRAUMAN</option>
+        			<option value="MIS">MIS</option>
+        			<option value="NOBEL BIOCARE">NOBEL BIOCARE</option>
+        			<option value="ZIMMER">ZIMMER</option>
+        			<option value="Autre">Autre</option>
+				</lightning:select>  
+                <div id="ETK" style="display:none">
+				<lightning:select aura:id="IRefDiam" label="Référence d'implant et diamètre" value="{!v.Ligne.Ref_Diametre__c}" >
+        			<option value="">---- None ---</option>
+					<option value="Naturall+ Ø3">Naturall+ Ø3</option>
+					<option value="Naturall+ Ø3.5">Naturall+ Ø3.5</option>
+					<option value="Naturall+ Ø4">Naturall+ Ø4</option>
+					<option value="Naturall+ Ø4.5">Naturall+ Ø4.5</option>
+					<option value="Naturall+ Ø5">Naturall+ Ø5</option>
+<!--					<option value="Naturall Ø3.5">Naturall Ø3.5</option>
+					<option value="Naturall Ø4">Naturall Ø4</option>
+					<option value="Naturall Ø4,5">Naturall Ø4,5</option>
+					<option value="Naturall Ø5">Naturall Ø5</option> -->
+					<option value="Naturactis Ø3">Naturactis Ø3</option>
+					<option value="Naturactis Ø3.5">Naturactis Ø3.5</option>
+					<option value="Naturactis Ø4">Naturactis Ø4</option>
+					<option value="Naturactis Ø4.5">Naturactis Ø4.5</option>
+					<option value="Naturactis Ø5">Naturactis Ø5</option>
+<!--	<option value="Natea+ Ø3.6">Natea+ Ø3.6</option>
+					<option value="Natea+ Ø4.1">Natea+ Ø4.1</option>
+					<option value="Natea+ Ø4.8">Natea+ Ø4.8</option>
+					<option value="Natea+ Ø6">Natea+ Ø6</option> -->
+					<option value="Aesthetica+ Ø4.2">Aesthetica+ Ø4.2</option>
+					<option value="Aesthetica+  Ø4.8">Aesthetica+  Ø4.8</option>
+					<option value="Aesthetica+  Ø6.5">Aesthetica+  Ø6.5</option>
+				</lightning:select>  
+                    </div>
+                <div id="BIOTECH" style="display:none">
+				<lightning:select aura:id="IRefDiam" label="Référence d'implant et diamètre" value="{!v.Ligne.Ref_Diametre_BIOTECH__c}" >
+        			<option value="">---- None ---</option>
+					<option value="Kontact Ø3.0 x 10 ">Kontact Ø3.0 x 10 </option>
+					<option value="Kontact Ø3.0 x 12">Kontact Ø3.0 x 12</option>
+					<option value="Kontact Ø3.0 x 14 ">Kontact Ø3.0 x 14 </option>
+					<option value="Kontact Ø3.6 x 8">Kontact Ø3.6 x 8</option>
+					<option value="Kontact Ø4.2 x 10">Kontact Ø4.2 x 10</option>
+					<option value="Kontact Ø4.2 x 12">Kontact Ø4.2 x 12</option>
+					<option value="Kontact Ø4.2 x 14">Kontact Ø4.2 x 14</option>
+					<option value="Kontact Ø4.2 x 16">Kontact Ø4.2 x 16</option>
+					<option value="Kontact Ø4.2 x 6 ">Kontact Ø4.2 x 6 </option>
+					<option value="Kontact Ø4.2 x 8 ">Kontact Ø4.2 x 8 </option>
+					<option value="Kontact Ø4.2 x 10">Kontact Ø4.2 x 10</option>
+					<option value="Kontact Ø4.2 x 12">Kontact Ø4.2 x 12</option>
+					<option value="Kontact Ø4.2 x 14 ">Kontact Ø4.2 x 14 </option>
+					<option value="Kontact Ø4.2 x 16 ">Kontact Ø4.2 x 16 </option>
+					<option value="Kontact Ø4.8 x 6 ">Kontact Ø4.8 x 6 </option>
+					<option value="Kontact Ø4.8 x 8">Kontact Ø4.8 x 8</option>
+					<option value="Kontact Ø4.8 x 10">Kontact Ø4.8 x 10</option>
+					<option value="Kontact Ø4.8 x 12">Kontact Ø4.8 x 12</option>
+					<option value="Kontact Ø4.8 x 14">Kontact Ø4.8 x 14</option>
+					<option value="Kontact Ø4.8 x 16">Kontact Ø4.8 x 16</option>
+					<option value="Kontact Ø5.4 x 6 ">Kontact Ø5.4 x 6 </option>
+					<option value="Kontact Ø5.4 x 8">Kontact Ø5.4 x 8</option>
+					<option value="Kontact Ø5.4 x 10">Kontact Ø5.4 x 10</option>
+					<option value="Kontact Ø5.4 x 12">Kontact Ø5.4 x 12</option>
+					<option value="Kontact Ø5.4 x 14">Kontact Ø5.4 x 14</option>
+					<option value="Kontact Ø5.4 x 16">Kontact Ø5.4 x 16</option>
+				</lightning:select>  
+                    </div>
+                <div id="STD" style="display:none">
+				<lightning:input aura:id="IRef" label="Référence d'implant" value="{!v.Ligne.R_f_rence_d_implant__c}" type="text" />
+				<lightning:input aura:id="IDiametre" label="Diamètre" value="{!v.Ligne.Diam_tre__c}" type="text" />
+                    </div>
+			<aura:if isTrue="{!(v.Ligne.LibType1__c!=null)}">
+			    <lightning:select aura:id="Type1" label="{!v.Ligne.LibType1__c}">
+        			<option value="">---- None ---</option>
+        			<option value="Pilier standard fourni par le dentiste">Pilier standard fourni par le dentiste</option>
+        			<option value="Pilier calcinable fourni par le dentiste">Pilier calcinable fourni par le dentiste</option>
+        			<option value="Pilier à fournir par le laboratoire">Pilier à fournir par le laboratoire</option>
+        			<option value="Pilier à commander par le laboratoire">Pilier à commander par le laboratoire</option>
+    			</lightning:select>    
+    			</aura:if>
+			<aura:if isTrue="{!(v.Ligne.LibSsType1__c!=null)}">
+			    <lightning:select aura:id="SsType1" label="{!v.Ligne.LibSsType1__c}">
+        			<option value="">---- None ---</option>
+        			<option value="Scellée">Scellée</option>
+        			<option value="Transvissée">Transvissée</option>
+    			</lightning:select>    
+    			</aura:if>
+                <lightning:select aura:id="TypeEmpreinte" label="Type d’empreinte sur implant" value="{!v.Ligne.Type_d_empreinte_sur_implant__c}">
+        			<option value="">---- None ---</option>
+        			<option value="Direct implant">Direct implant</option>
+        			<option value="Piliers coniques">Piliers coniques</option>
+        			<option value="Iphisio">Iphisio</option>
+                </lightning:select>   
+            </div>
+		</article>
+	</div>
+</div>
+</aura:if>
+
+<aura:if isTrue="{!(v.Ligne.LibTravaux1__c=='Implants')}"> 
+<div class="slds-tabs_card slds-tabs_default">
+	<ul class="slds-tabs_default__nav" role="tablist">
+		<li class="slds-tabs_default__item slds-is-active" title="Sélectionner les produits" role="presentation"><a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" id="tab-default-1__item">{!v.Ligne.LibTravaux1__c}</a></li>
+	</ul>
+	<div id="tab-default-1" class="slds-tabs_default__content slds-show" role="tabpanel" aria-labelledby="tab-default-1__item">
+		<article class="slds-card">
+			<div class="slds-card__body slds-card__body_inner">
+				<lightning:select aura:id="IMarque" label="Marque d'implant" value="{!v.Ligne.Marque_d_implant__c}"  onchange="{!c.visibiliyImplants}">
+        			<option value="">---- None ---</option>
+        			<option value="ALPHA BIO">ALPHA BIO</option>
+        			<option value="ANKYLOS">ANKYLOS</option>
+        			<option value="ANTHOGYR">ANTHOGYR</option>
+        			<option value="ASTRA">ASTRA</option>
+        			<option value="BIOTECH">BIOTECH</option>
+        			<option value="BIOMET">BIOMET</option>
+        			<option value="DENTSPLY">DENTSPLY</option>
+        			<option value="ETK">ETK</option>
+        			<option value="STRAUMAN">STRAUMAN</option>
+        			<option value="MIS">MIS</option>
+        			<option value="NOBEL BIOCARE">NOBEL BIOCARE</option>
+        			<option value="ZIMMER">ZIMMER</option>
+        			<option value="Autre">Autre</option>
+				</lightning:select>  
+                <div id="ETK" style="display:none">
+				<lightning:select aura:id="IRefDiam" label="Référence d'implant et diamètre" value="{!v.Ligne.Ref_Diametre__c}" >
+        			<option value="">---- None ---</option>
+					<option value="Naturall+ Ø3">Naturall+ Ø3</option>
+					<option value="Naturall+ Ø3.5">Naturall+ Ø3.5</option>
+					<option value="Naturall+ Ø4">Naturall+ Ø4</option>
+					<option value="Naturall+ Ø4.5">Naturall+ Ø4.5</option>
+					<option value="Naturall+ Ø5">Naturall+ Ø5</option>
+<!--	<option value="Naturall Ø3.5">Naturall Ø3.5</option>
+					<option value="Naturall Ø4">Naturall Ø4</option>
+					<option value="Naturall Ø4,5">Naturall Ø4,5</option>
+					<option value="Naturall Ø5">Naturall Ø5</option> -->
+					<option value="Naturactis Ø3">Naturactis Ø3</option>
+					<option value="Naturactis Ø3.5">Naturactis Ø3.5</option>
+					<option value="Naturactis Ø4">Naturactis Ø4</option>
+					<option value="Naturactis Ø4.5">Naturactis Ø4.5</option>
+					<option value="Naturactis Ø5">Naturactis Ø5</option>
+<!-- option value="Natea+ Ø3.6">Natea+ Ø3.6</option>
+					<option value="Natea+ Ø4.1">Natea+ Ø4.1</option>
+					<option value="Natea+ Ø4.8">Natea+ Ø4.8</option>
+					<option value="Natea+ Ø6">Natea+ Ø6</option>-->
+					<option value="Aesthetica+ Ø4.2">Aesthetica+ Ø4.2</option>
+					<option value="Aesthetica+  Ø4.8">Aesthetica+  Ø4.8</option>
+					<option value="Aesthetica+  Ø6.5">Aesthetica+  Ø6.5</option>
+				</lightning:select>  
+                    </div>
+                <div id="BIOTECH" style="display:none">
+				<lightning:select aura:id="IRefDiam" label="Référence d'implant et diamètre" value="{!v.Ligne.Ref_Diametre_BIOTECH__c}" >
+        			<option value="">---- None ---</option>
+					<option value="Kontact Ø3.0 x 10 ">Kontact Ø3.0 x 10 </option>
+					<option value="Kontact Ø3.0 x 12">Kontact Ø3.0 x 12</option>
+					<option value="Kontact Ø3.0 x 14 ">Kontact Ø3.0 x 14 </option>
+					<option value="Kontact Ø3.6 x 8">Kontact Ø3.6 x 8</option>
+					<option value="Kontact Ø4.2 x 10">Kontact Ø4.2 x 10</option>
+					<option value="Kontact Ø4.2 x 12">Kontact Ø4.2 x 12</option>
+					<option value="Kontact Ø4.2 x 14">Kontact Ø4.2 x 14</option>
+					<option value="Kontact Ø4.2 x 16">Kontact Ø4.2 x 16</option>
+					<option value="Kontact Ø4.2 x 6 ">Kontact Ø4.2 x 6 </option>
+					<option value="Kontact Ø4.2 x 8 ">Kontact Ø4.2 x 8 </option>
+					<option value="Kontact Ø4.2 x 10">Kontact Ø4.2 x 10</option>
+					<option value="Kontact Ø4.2 x 12">Kontact Ø4.2 x 12</option>
+					<option value="Kontact Ø4.2 x 14 ">Kontact Ø4.2 x 14 </option>
+					<option value="Kontact Ø4.2 x 16 ">Kontact Ø4.2 x 16 </option>
+					<option value="Kontact Ø4.8 x 6 ">Kontact Ø4.8 x 6 </option>
+					<option value="Kontact Ø4.8 x 8">Kontact Ø4.8 x 8</option>
+					<option value="Kontact Ø4.8 x 10">Kontact Ø4.8 x 10</option>
+					<option value="Kontact Ø4.8 x 12">Kontact Ø4.8 x 12</option>
+					<option value="Kontact Ø4.8 x 14">Kontact Ø4.8 x 14</option>
+					<option value="Kontact Ø4.8 x 16">Kontact Ø4.8 x 16</option>
+					<option value="Kontact Ø5.4 x 6 ">Kontact Ø5.4 x 6 </option>
+					<option value="Kontact Ø5.4 x 8">Kontact Ø5.4 x 8</option>
+					<option value="Kontact Ø5.4 x 10">Kontact Ø5.4 x 10</option>
+					<option value="Kontact Ø5.4 x 12">Kontact Ø5.4 x 12</option>
+					<option value="Kontact Ø5.4 x 14">Kontact Ø5.4 x 14</option>
+					<option value="Kontact Ø5.4 x 16">Kontact Ø5.4 x 16</option>
+				</lightning:select>  
+                    </div>
+                <div id="STD" style="display:none">
+				<lightning:input aura:id="IRef" label="Référence d'implant" value="{!v.Ligne.R_f_rence_d_implant__c}" type="text" />
+				<lightning:input aura:id="IDiametre" label="Diamètre" value="{!v.Ligne.Diam_tre__c}" type="text" />
+                    </div>
+			<aura:if isTrue="{!(v.Ligne.LibType1__c!=null)}">
+			    <lightning:select aura:id="Type1" label="{!v.Ligne.LibType1__c}">
+        			<option value="">---- None ---</option>
+        			<option value="Barre titane usinée (CAD/CAM)">Barre titane usinée (CAD/CAM)</option>
+        			<!-- <option value="Barre coulée CrCo">Barre coulée CrCo</option> -->
+        			<option value="Aucun">Aucun</option>
+    			</lightning:select>    
+    			</aura:if>
+                <lightning:select aura:id="TypeEmpreinte" label="Type d’empreinte sur implant" value="{!v.Ligne.Type_d_empreinte_sur_implant__c}">
+        			<option value="">---- None ---</option>
+        			<option value="Direct implant">Direct implant</option>
+        			<option value="Piliers coniques">Piliers coniques</option>
+        			<option value="Iphisio">Iphisio</option>
+                </lightning:select>   
+			</div>
+		</article>
+	</div>
+</div>
+</aura:if>
+<aura:if isTrue="{!(v.Ligne.LibTravaux1__c=='Planification implantaire')}"> 
+<div class="slds-tabs_card slds-tabs_default">
+	<ul class="slds-tabs_default__nav" role="tablist">
+		<li class="slds-tabs_default__item slds-is-active" title="Sélectionner les produits" role="presentation"><a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" id="tab-default-1__item">{!v.Ligne.LibTravaux1__c}</a></li>
+	</ul>
+	<div id="tab-default-1" class="slds-tabs_default__content slds-show" role="tabpanel" aria-labelledby="tab-default-1__item">
+		<article class="slds-card">
+			<div class="slds-card__body slds-card__body_inner">
+		    	<aura:if isTrue="{!(v.Ligne.LibFinition__c!=null)}">
+   					<div class="slds-form-element">
+      					<label class="slds-form-element__label" for="select-01">{!v.Ligne.LibFinition__c}</label>
+      					<div class="slds-select_container">
+         					<ui:inputSelect aura:id="Finition" class="slds-select" />
+      					</div>
+   					</div>
+     			</aura:if>
+				<lightning:select aura:id="IMarque" label="Marque d'implant" value="{!v.Ligne.Marque_d_implant__c}" onchange="{!c.visibiliyImplants}">
+        			<option value="">---- None ---</option>
+        			<option value="ALPHA BIO">ALPHA BIO</option>
+        			<option value="ANKYLOS">ANKYLOS</option>
+        			<option value="ANTHOGYR">ANTHOGYR</option>
+        			<option value="ASTRA">ASTRA</option>
+        			<option value="BIOTECH">BIOTECH</option>
+        			<option value="BIOMET">BIOMET</option>
+        			<option value="DENTSPLY">DENTSPLY</option>
+        			<option value="ETK">ETK</option>
+        			<option value="STRAUMAN">STRAUMAN</option>
+        			<option value="MIS">MIS</option>
+        			<option value="NOBEL BIOCARE">NOBEL BIOCARE</option>
+        			<option value="ZIMMER">ZIMMER</option>
+        			<option value="Autre">Autre</option>
+				</lightning:select>  
+                <div id="ETK" style="display:none">
+				<lightning:select aura:id="IRefDiam" label="Référence d'implant et diamètre" value="{!v.Ligne.Ref_Diametre__c}" >
+        			<option value="">---- None ---</option>
+					<option value="Naturall+ Ø3">Naturall+ Ø3</option>
+					<option value="Naturall+ Ø3.5">Naturall+ Ø3.5</option>
+					<option value="Naturall+ Ø4">Naturall+ Ø4</option>
+					<option value="Naturall+ Ø4.5">Naturall+ Ø4.5</option>
+					<option value="Naturall+ Ø5">Naturall+ Ø5</option>
+<!--	<option value="Naturall Ø3.5">Naturall Ø3.5</option>
+					<option value="Naturall Ø4">Naturall Ø4</option>
+					<option value="Naturall Ø4,5">Naturall Ø4,5</option>
+					<option value="Naturall Ø5">Naturall Ø5</option> -->
+					<option value="Naturactis Ø3">Naturactis Ø3</option>
+					<option value="Naturactis Ø3.5">Naturactis Ø3.5</option>
+					<option value="Naturactis Ø4">Naturactis Ø4</option>
+					<option value="Naturactis Ø4.5">Naturactis Ø4.5</option>
+					<option value="Naturactis Ø5">Naturactis Ø5</option>
+<!--	<option value="Natea+ Ø3.6">Natea+ Ø3.6</option>
+					<option value="Natea+ Ø4.1">Natea+ Ø4.1</option>
+					<option value="Natea+ Ø4.8">Natea+ Ø4.8</option>
+					<option value="Natea+ Ø6">Natea+ Ø6</option> -->
+					<option value="Aesthetica+ Ø4.2">Aesthetica+ Ø4.2</option>
+					<option value="Aesthetica+  Ø4.8">Aesthetica+  Ø4.8</option>
+					<option value="Aesthetica+  Ø6.5">Aesthetica+  Ø6.5</option>
+				</lightning:select>  
+                    </div>
+                <div id="BIOTECH" style="display:none">
+				<lightning:select aura:id="IRefDiam" label="Référence d'implant et diamètre" value="{!v.Ligne.Ref_Diametre_BIOTECH__c}" >
+        			<option value="">---- None ---</option>
+					<option value="Kontact Ø3.0 x 10 ">Kontact Ø3.0 x 10 </option>
+					<option value="Kontact Ø3.0 x 12">Kontact Ø3.0 x 12</option>
+					<option value="Kontact Ø3.0 x 14 ">Kontact Ø3.0 x 14 </option>
+					<option value="Kontact Ø3.6 x 8">Kontact Ø3.6 x 8</option>
+					<option value="Kontact Ø4.2 x 10">Kontact Ø4.2 x 10</option>
+					<option value="Kontact Ø4.2 x 12">Kontact Ø4.2 x 12</option>
+					<option value="Kontact Ø4.2 x 14">Kontact Ø4.2 x 14</option>
+					<option value="Kontact Ø4.2 x 16">Kontact Ø4.2 x 16</option>
+					<option value="Kontact Ø4.2 x 6 ">Kontact Ø4.2 x 6 </option>
+					<option value="Kontact Ø4.2 x 8 ">Kontact Ø4.2 x 8 </option>
+					<option value="Kontact Ø4.2 x 10">Kontact Ø4.2 x 10</option>
+					<option value="Kontact Ø4.2 x 12">Kontact Ø4.2 x 12</option>
+					<option value="Kontact Ø4.2 x 14 ">Kontact Ø4.2 x 14 </option>
+					<option value="Kontact Ø4.2 x 16 ">Kontact Ø4.2 x 16 </option>
+					<option value="Kontact Ø4.8 x 6 ">Kontact Ø4.8 x 6 </option>
+					<option value="Kontact Ø4.8 x 8">Kontact Ø4.8 x 8</option>
+					<option value="Kontact Ø4.8 x 10">Kontact Ø4.8 x 10</option>
+					<option value="Kontact Ø4.8 x 12">Kontact Ø4.8 x 12</option>
+					<option value="Kontact Ø4.8 x 14">Kontact Ø4.8 x 14</option>
+					<option value="Kontact Ø4.8 x 16">Kontact Ø4.8 x 16</option>
+					<option value="Kontact Ø5.4 x 6 ">Kontact Ø5.4 x 6 </option>
+					<option value="Kontact Ø5.4 x 8">Kontact Ø5.4 x 8</option>
+					<option value="Kontact Ø5.4 x 10">Kontact Ø5.4 x 10</option>
+					<option value="Kontact Ø5.4 x 12">Kontact Ø5.4 x 12</option>
+					<option value="Kontact Ø5.4 x 14">Kontact Ø5.4 x 14</option>
+					<option value="Kontact Ø5.4 x 16">Kontact Ø5.4 x 16</option>
+				</lightning:select>  
+                    </div>
+                <div id="STD" style="display:none">
+				<lightning:input aura:id="IRef" label="Référence d'implant" value="{!v.Ligne.R_f_rence_d_implant__c}" type="text" />
+				<lightning:input aura:id="IDiametre" label="Diamètre" value="{!v.Ligne.Diam_tre__c}" type="text" />
+                    </div>
+			<aura:if isTrue="{!(v.Ligne.LibType1__c!=null)}">
+			    <lightning:select aura:id="Type1" label="{!v.Ligne.LibType1__c}">
+        			<option value="">---- None ---</option>
+        			<option value="Simplifié (pilot drill)">Simplifié (pilot drill)</option>
+    			</lightning:select>    
+    			</aura:if>
+<!--    <aura:if isTrue="{!(v.Ligne.LibHaut__c!=null)}">
+   		<div class="slds-form-element">
+      		<label class="slds-form-element__label" for="select-01">{!v.Ligne.LibHaut__c}</label>
+      		<div class="slds-select_container">
+         		<ui:inputSelect aura:id="Liaison" class="slds-select" /> 
+      		</div>
+   		</div>
+ </aura:if> -->
+			<aura:if isTrue="{!(v.Ligne.LibSsType1__c!=null)}">
+			    <lightning:select aura:id="SsType1" label="{!v.Ligne.LibSsType1__c}">
+        			<option value="">---- None ---</option>
+        			<option value="Avec clavette">Avec clavette</option>
+        			<option value="Sans clavette">Sans clavette</option>
+    			</lightning:select>    
+    			</aura:if>
+                <lightning:select aura:id="TypeEmpreinte" label="Type d’empreinte sur implant" value="{!v.Ligne.Type_d_empreinte_sur_implant__c}">
+        			<option value="">---- None ---</option>
+        			<option value="Direct implant">Direct implant</option>
+        			<option value="Piliers coniques">Piliers coniques</option>
+        			<option value="Iphisio">Iphisio</option>
+                </lightning:select>   
+		<!--	    <lightning:select aura:id="TypeEmpreinte" label="Type d'empreinte" value="{!v.Ligne.Type_d_empreinte__c}">
+        			<option value="">None</option>
+        			<option value="Physique">Physique</option>
+        			<option value="Numérique (3SHAPE)">Numérique (3SHAPE)</option>
+    			</lightning:select>    -->
+			</div>
+		</article>
+	</div>
+</div>
+</aura:if>
+
+
+<!--  DENTS 2 -->
+<aura:if isTrue="{!(v.Ligne.LibDents2__c!=null)}">  
+<div class="slds-tabs_card slds-tabs_default">
+	<ul class="slds-tabs_default__nav" role="tablist">
+		<li class="slds-tabs_default__item slds-is-active" title="Cocher les dents concernées" role="presentation"><a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" id="tab-default-1__item" onclick="{!c.cloneTeeth}">{!v.Ligne.LibDents2__c}</a></li>
+	</ul>
+	<div id="tab-default-1" class="slds-tabs_default__content slds-show" role="tabpanel" aria-labelledby="tab-default-1__item">
+		<article class="slds-card">
+	<div class="tableau" style="width:100%; display:block;">
+    <table class="layout" style="width: 600px; height: 300px; margin:auto;">
+		<tbody>
+			<tr class="bline">
+                <td>
+                    <div aura:id="svg_18_2" class="dentTop" onclick="{!c.addTooth2}" > 
+                    <![CDATA[
+                       <svg viewBox="-5 -10 25 25" height="80" width="50" id="18_2" >
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs> 
+                            <g id="18_2">
+                                <path id="18_2" stroke="black" fill="transparent" class="racine" d="M6.53,12.12a8,8,0,0,0,.78-2.25c-.2-3.4-.16-8.14-.7-8.28C6.23,1.5,5.51,3.51,5,5.21,5.44,8.4,5.87,12.05,6.53,12.12Z"/>
+                                <path id="18_2" stroke="black" fill="transparent" class="racine" d="M10.8,13.78,11.3.53S11-.38,10.13.53c-.59.65-1.94,6.16-2.82,9.34a8,8,0,0,1-.78,2.25C5.87,12.05,5.44,8.4,5,5.21,4.65,3,4.31,1,3.88.62,2.75-.18,1.3,10,2,14.2"/>
+                                <path id="18_2" stroke="black" fill="transparent" class="dent" d="M2,14.2a6.14,6.14,0,0,0-1.83,4C.05,20.62,1.55,21.62,2,21.7s1.17-1,2.09-1,.94.92,1.5,1,.66-.92,1.58-1,.67.92,1.67,1,3.22.14,3.87-.95c1-1.66.38-5.3-1.87-7"/>
+                                <line id="18_2" fill="transparent" class="line" x1="10.8" y1="13.78" x2="1.96" y2="14.2"/>
+							</g>
+                        </svg>
+                    ]]>
+                    </div>
+                    <div>18</div>
+                    
+                </td>
+                <td >
+                    <div aura:id="svg_17_2" class="dentTop" onclick="{!c.addTooth2}">
+                        <![CDATA[
+                         <svg viewBox="-5 -8 25 25" height="80" width="50" id="17_2" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="17_2">
+                                    <path id="17_2" stroke="black" fill="transparent" class="racine" d="M6.69,13C8.25,13,8.3,8,8.46,4.25,7.88,2.64,7.23,1.59,7,1.82c.41,3.57-1,7.82-1.54,9.32C5.77,12.27,6.15,13,6.69,13Z"/>
+                                    <path id="17_2" stroke="black" fill="transparent" class="racine" d="M10.94,15.2S11.22,1.1,9.16.13c-.48.16-.61,1.94-.7,4.12C8.3,8,8.25,13,6.69,13c-.54,0-.92-.77-1.2-1.9C4.67,7.76,4.75,1,4.09,1,3.22,1,1.47,4.57,1.5,9.17S2.62,15.1,2.62,15.1"/>
+                                    <path id="17_2" stroke="black" fill="transparent" class="dent" d="M2.62,15.1S.12,17.35.12,20a3.05,3.05,0,0,0,2,3.21s2.64-.33,3.7.51c0,0,.41-1,1.19-1s.47.81,2.59.84,2.82-.69,3.16-2.34a7.87,7.87,0,0,0-1.81-6"/>
+                                    <line id="17_2" fill="transparent" class="line" x1="2.63" y1="15.1" x2="10.94" y2="15.2"/>
+                              </g>
+                        </svg>
+                      ]]>
+                    </div>
+                    <div>17</div>
+				</td>
+				<td >
+					<div aura:id="svg_16_2" class="dentTop" onclick="{!c.addTooth2}">
+                        <![CDATA[
+                         <svg viewBox="-5 -4 25 25" height="80" width="50" id="16_2" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="16_2">
+                                    <path id="16_2" stroke="black" fill="transparent" class="racine" d="M8.32,12.56c-.49-3,.1-10-.94-9.94-.8,0-1.69,3-2.17,4.81.39,3.19.94,6.64,1.88,7.63C7.68,15.68,8.06,14.49,8.32,12.56Z"/>
+                                    <path id="16_2" stroke="black" fill="transparent" class="dent" d="M2.75,18.06A6.94,6.94,0,0,0,.13,23.75c0,2.16,1.31,3.47,2.21,3.46s.72-.62,2.1-.65,1.69,1.16,2.15,1.16.54-1.41.91-1.41.75.9.75.9,4.81,1.73,5.09-3-1.21-5.92-1.71-6.56"/>
+                                    <path id="16_2" stroke="black" fill="transparent" class="racine" d="M11.63,17.69c-.5-.65.06-5.47.21-10.13.22-4-2.18-7.81-2.65-7.4-.32.27-.31,8.15-.87,12.4-.26,1.93-.64,3.12-1.23,2.5-.94-1-1.49-4.44-1.88-7.63s-.62-6.07-.9-6.09c-.56,0-2.68,5.22-2.68,9.69a19,19,0,0,0,1.12,7"/>
+                                    <line id="16_2" fill="transparent" class="line" x1="2.75" y1="18.06" x2="11.63" y2="17.69"/>
+                              </g>
+                        </svg>
+                      ]]>
+                    </div>
+                    <div>16</div>
+				</td>
+				<td>
+					<div aura:id="svg_15_2" class="dentTop" onclick="{!c.addTooth2}">
+                        <![CDATA[
+                         <svg viewBox="-5 -4 25 25" height="80" width="50" id="15_2" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="15_2">
+                                    <path id="15_2" stroke="black" fill="transparent" class="dent" d="M2.18,18.1a8.36,8.36,0,0,0-2,6.63s2,3.33,4.84,3.29,4.41-3.46,4.5-5-2.21-4.75-2.21-4.75"/>
+                                    <path id="15_2" stroke="black" fill="transparent" class="racine" d="M7.35,18.27,7.51,6.56S7.43.85,5.35.14s-3.17,18-3.17,18"/>
+                                    <line id="15_2" fill="transparent" class="line" x1="2.18" y1="18.1" x2="7.35" y2="18.27"/>
+                              </g>
+                        </svg>
+                      ]]>
+                    </div>
+                    <div>15</div>
+				</td>
+				<td>
+					<div aura:id="svg_14_2" class="dentTop" onclick="{!c.addTooth2}">
+                        <![CDATA[
+                         <svg viewBox="-5 -3 25 25" height="80" width="50" id="14_2" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="14_2">
+                                    <path id="14_2" stroke="black" fill="transparent" class="racine" d="M7.49,18.68S5.51.4,3.69.14C.28-.36,1.53,13.22,1.82,18.51"/>
+                                    <path id="14_2" stroke="black" fill="transparent" class="dent" d="M1.82,18.51S-.39,20.43.24,24.76a1.24,1.24,0,0,1,1,.8c.34.75,2.21,2.7,3.71,2.66s4.79-2,4.75-5a5.94,5.94,0,0,0-2.16-4.54"/>
+                                    <line id="14_2" fill="transparent" class="line" x1="1.82" y1="18.51" x2="7.49" y2="18.68"/>
+                              </g>
+                        </svg>
+                      ]]>
+                    </div>
+                    <div>14</div>
+				</td>
+				<td>
+					<div aura:id="svg_13_2" class="dentTop" onclick="{!c.addTooth2}">
+                        <![CDATA[
+                         <svg viewBox="-5 2 25 25" height="80" width="50" id="13_2" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="13_2">
+                                    <path id="13_2" stroke="black" fill="transparent" class="racine" d="M8.06,23.79S7.18,8.17,6.93,5.54,5.23.17,4.68.13s-.37,1.5-.54,2.41a31.16,31.16,0,0,1-2,4.34l-.5,16.41"/>
+                                    <path id="13_2" stroke="black" fill="transparent" class="dent" d="M1.64,23.29A7.79,7.79,0,0,0,.31,29.63C.81,29.71,1.86,33.26,5,33c3.91-.38,4.66-5.58,4-6.63a8.49,8.49,0,0,1-1-2.54"/>
+                                    <line id="13_2" fill="transparent" class="line" x1="1.64" y1="23.29" x2="8.06" y2="23.79"/>
+                              </g>
+                        </svg>
+                      ]]>
+                    </div>
+                    <div>13</div>
+				</td>
+				<td>
+					<div aura:id="svg_12_2" class="dentTop" onclick="{!c.addTooth2}">
+                        <![CDATA[
+                         <svg viewBox="-5 -2 25 25" height="80" width="50" id="12_2" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="12_2">
+                                    <path id="12_2" stroke="black" fill="transparent" class="dent" d="M1.93,19.21c-.76,1-2.09,6.29-1.75,7.63A2.12,2.12,0,0,0,2.34,28.5c.92.13,5.92.13,6.34-.29s0-2.25,0-4-1.5-2.92-1.42-3.92"/>
+                                    <path id="12_2" stroke="black" fill="transparent" class="racine" d="M7.26,20.25c.08-1,.73-.59.79-1.5C8.24,16.17,5.84,7.79,5.72,6S5.34.17,4.72.13s-.79.69-.79.69V6.21c0,3.17-2.71,10.17-2.54,11.46s.91,1,.54,1.54"/>
+                                    <line id="12_2" fill="transparent" class="line" x1="1.93" y1="19.21" x2="7.26" y2="20.25"/>
+                              </g>
+                        </svg>
+                      ]]>
+                    </div>
+                    <div>12</div>
+				</td>
+				<td  class="rcol">
+					<div aura:id="svg_11_2" class="dentTop" onclick="{!c.addTooth2}">
+                        <![CDATA[
+                         <svg viewBox="-5 -1 25 25" height="80" width="50" id="11_2" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="11_2">
+                                    <path id="11_2" stroke="black" fill="transparent" class="dent" d="M2.13,19C0,20.56-.12,25.31.33,27.35a2.47,2.47,0,0,0,2.34,2s5.66.43,6.91.34,1.42-2,1.42-2c.58-7.37-.62-8.12-.62-8.12"/>
+                                    <path id="11_2" stroke="black" fill="transparent" class="racine" d="M10.38,19.64c.41-8.88-5.27-20-6.59-19.5-.71.25.38,4.33.21,7.58S2.13,19,2.13,19"/>
+                                    <line id="11_2" fill="transparent" class="line" x1="2.13" y1="19.01" x2="10.38" y2="19.64"/>
+                              </g>
+                        </svg>
+                      ]]>
+                    </div>
+                    <div>11</div>
+				</td>
+				
+				
+				<td  class="lcol">
+					<div aura:id="svg_21_2" class="dentTop" onclick="{!c.addTooth2}">
+                        <![CDATA[
+                         <svg viewBox="-5 -1 25 25" height="80" width="50" id="21_2" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="21_2">
+                                    <path id="21_2" stroke="black" fill="transparent" class="racine" d="M9.16,19A114,114,0,0,1,7.28,7.72C7.12,4.47,8.2.39,7.49.14,6.17-.33.49,10.76.91,19.64"/>
+                                    <path id="21_2" stroke="black" fill="transparent" class="dent" d="M.91,19.64s-1.21.75-.63,8.12c0,0,.17,1.88,1.42,2s6.92-.34,6.92-.34a2.46,2.46,0,0,0,2.33-2c.46-2,.29-6.79-1.79-8.34"/>
+                                    <line id="21_2" fill="transparent" class="line" x1="0.91" y1="19.64" x2="9.16" y2="19.01"/>
+                              </g>
+                        </svg>
+                      ]]>
+					</div>
+                    <div>21</div>
+                </td>
+				<td>
+					<div aura:id="svg_22_2" class="dentTop" onclick="{!c.addTooth2}">
+                        <![CDATA[
+                         <svg viewBox="-5 -2 25 25" height="80" width="50" id="22_2" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="22_2">
+                                    <path id="22_2" stroke="black" fill="transparent" class="dent" d="M1.72,20.25c.08,1-1.46,2.13-1.42,3.92s-.42,3.62,0,4,5.42.42,6.34.29A2.12,2.12,0,0,0,8.8,26.84c.34-1.34-1-6.61-1.75-7.63"/>
+                                    <path id="22_2" stroke="black" fill="transparent" class="racine" d="M7.05,19.21c-.37-.5.38-.25.54-1.54S5.05,9.38,5.05,6.21V.82S4.89.09,4.26.13,3.39,4.29,3.26,6,.74,16.17.93,18.75c.06.91.71.5.79,1.5"/>
+                                    <line id="22_2" fill="transparent" class="line" x1="1.72" y1="20.25" x2="7.05" y2="19.21"/>
+                              </g>
+                        </svg>
+                      ]]>
+					</div>
+                    <div>22</div>
+                </td>
+				<td>
+					<div aura:id="svg_23_2" class="dentTop" onclick="{!c.addTooth2}">
+                        <![CDATA[
+                         <svg viewBox="-5 2 25 25" height="80" width="50" id="23_2" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="23_2">
+                                    <path id="23_2" stroke="black" fill="transparent" class="racine" d="M7.72,23.29,7.22,6.88a31.16,31.16,0,0,1-2-4.34c-.17-.91,0-2.46-.55-2.41s-2,2.79-2.25,5.41S1.3,23.79,1.3,23.79"/>
+                                    <path id="23_2" stroke="black" fill="transparent" class="dent" d="M1.3,23.79a8.49,8.49,0,0,1-1,2.54c-.67,1.05.08,6.25,4,6.63,3.16.3,4.21-3.25,4.71-3.33a7.79,7.79,0,0,0-1.33-6.34"/>
+                                    <line id="23_2" fill="transparent" class="line" x1="1.3" y1="23.79" x2="7.72" y2="23.29"/>
+                              </g>
+                        </svg>
+                      ]]>
+					</div>
+                    <div>23</div>
+                </td>
+				<td>
+					<div aura:id="svg_24_2" class="dentTop" onclick="{!c.addTooth2}">
+                        <![CDATA[
+                         <svg viewBox="-5 -2 25 25" height="80" width="50" id="24_2" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="24_2">
+                                    <path id="24_2" stroke="black" fill="transparent" class="racine" d="M8,18.51C8.25,13.22,9.5-.36,6.08.14,4.27.4,2.29,18.68,2.29,18.68"/>
+                                    <path id="24_2" stroke="black" fill="transparent" class="dent" d="M2.29,18.68A5.94,5.94,0,0,0,.13,23.22c0,3,3.25,5,4.75,5s3.37-1.91,3.7-2.66a1.26,1.26,0,0,1,1-.8C10.17,20.43,8,18.51,8,18.51"/>
+                                    <line id="24_2" fill="transparent" class="line" x1="2.29" y1="18.68" x2="7.96" y2="18.51"/>
+                              </g>
+                        </svg>
+                      ]]>
+					</div>
+                    <div>24</div>
+                </td>
+				<td>
+					<div aura:id="svg_25_2" class="dentTop" onclick="{!c.addTooth2}">
+                        <![CDATA[
+                         <svg viewBox="-5 -2 25 25" height="80" width="50" id="25_2" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="25_2">
+                                    <path id="25_2" stroke="black" fill="transparent" class="dent" d="M2.34,18.27S0,21.48.13,23s1.71,5,4.5,5,4.83-3.29,4.83-3.29a8.32,8.32,0,0,0-2-6.63"/>
+                                    <path id="25_2" stroke="black" fill="transparent" class="racine" d="M7.5,18.1S6.42-.56,4.34.14,2.17,6.56,2.17,6.56l.17,11.71"/>
+                                    <line id="25_2" fill="transparent" class="line" x1="2.34" y1="18.27" x2="7.5" y2="18.1"/>
+                              </g>
+                        </svg>
+                      ]]>
+                    </div>
+                    <div>25</div>
+				</td>
+				<td>
+					<div aura:id="svg_26_2" class="dentTop" onclick="{!c.addTooth2}">
+                        <![CDATA[
+                         <svg viewBox="-5 -3 25 25" height="80" width="50" id="26_2" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="26_2">
+                                    <path id="26_2" stroke="black" fill="transparent" class="racine" d="M6.41,15.06c.94-1,1.5-4.44,1.89-7.63C7.81,5.58,6.92,2.65,6.13,2.62c-1,0-.46,6.91-.94,9.94C5.45,14.49,5.82,15.68,6.41,15.06Z"/>
+                                    <path id="26_2" stroke="black" fill="transparent" class="dent" d="M1.88,17.69c-.5.64-2,1.87-1.72,6.56s5.09,3,5.09,3,.38-.9.76-.9.43,1.41.9,1.41.78-1.19,2.16-1.16,1.18.64,2.09.65,2.19-1.3,2.22-3.46a7,7,0,0,0-2.63-5.69"/>
+                                    <path id="26_2" stroke="black" fill="transparent" class="racine" d="M10.75,18.06a18.88,18.88,0,0,0,1.13-7c0-4.47-2.13-9.72-2.69-9.69-.28,0-.5,2.93-.89,6.09s-1,6.64-1.89,7.63c-.59.62-1-.57-1.22-2.5C4.62,8.31,4.64.43,4.32.16c-.47-.41-2.88,3.37-2.66,7.4.16,4.66.72,9.48.22,10.13"/>
+                                    <line id="26_2" fill="transparent" class="line" x1="1.88" y1="17.69" x2="10.75" y2="18.06"/>
+                              </g>
+                        </svg>
+                      ]]>
+                        </div>
+                    <div>26</div>
+				</td>
+				<td>
+					<div aura:id="svg_27_2" class="dentTop" onclick="{!c.addTooth2}">
+                        <![CDATA[
+                         <svg viewBox="-5 -7 25 25" height="80" width="50" id="27_2" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="27_2">
+                                    <path id="27_2" stroke="black" fill="transparent" class="racine" d="M6.27,13c.54,0,.92-.77,1.19-1.9-.54-1.5-1.94-5.75-1.53-9.32-.2-.23-.85.82-1.43,2.43C4.66,8,4.71,13,6.27,13Z"/>
+                                    <path id="27_2" stroke="black" fill="transparent" class="racine" d="M10.33,15.1s1.1-1.34,1.13-5.93S9.74,1,8.86,1c-.65,0-.57,6.75-1.4,10.13C7.19,12.27,6.81,13,6.27,13,4.71,13,4.66,8,4.5,4.25c-.09-2.18-.22-4-.7-4.12C1.74,1.1,2,15.2,2,15.2"/>
+                                    <path id="27_2" stroke="black" fill="transparent" class="dent" d="M2,15.2a7.8,7.8,0,0,0-1.81,6c.34,1.65,1,2.37,3.15,2.34s1.82-.84,2.6-.84,1.19,1,1.19,1c1.06-.84,3.7-.51,3.7-.51a3,3,0,0,0,2-3.21c0-2.69-2.5-4.94-2.5-4.94"/>
+                                    <line id="27_2" fill="transparent" class="line" x1="2.02" y1="15.2" x2="10.33" y2="15.1"/>
+                              </g>
+                        </svg>
+                      ]]>
+                     </div>
+                    <div>27</div>
+				</td>
+				<td>
+					<div aura:id="svg_28_2" class="dentTop" onclick="{!c.addTooth2}">
+                        <![CDATA[
+                         <svg viewBox="-5 -9 25 25" height="80" width="50" id="28_2" >
+                             <defs>
+                              <style>
+                                 .racine{
+                					stroke: black;
+                                 }
+                                 .dent{
+                					stroke: black;
+                                 }
+                                </style>
+                              </defs>
+                              <g id="28_2">
+                                    <path id="28_2" stroke="black" fill="transparent" class="racine" d="M6.72,12.12c.67-.07,1.1-3.72,1.57-6.91C7.75,3.51,7,1.5,6.65,1.59c-.54.14-.5,4.88-.7,8.28A8.6,8.6,0,0,0,6.72,12.12Z"/>
+                                    <path id="28_2" stroke="black" fill="transparent" class="dent" d="M2.46,13.78c-2.25,1.67-2.87,5.31-1.87,7,.65,1.09,2.87,1,3.87.95s.75-1.08,1.67-1,1,1.08,1.58,1,.59-1,1.5-1,1.67,1.08,2.09,1,1.91-1.08,1.83-3.5a6.14,6.14,0,0,0-1.83-4"/>
+                                    <path id="28_2" stroke="black" fill="transparent" class="racine" d="M11.3,14.2C12,10,10.51-.18,9.38.62,8.94,1,8.61,3,8.29,5.21c-.47,3.19-.9,6.84-1.57,6.91A8.6,8.6,0,0,1,6,9.87C5.07,6.69,3.72,1.18,3.13.53,2.3-.38,2,.53,2,.53l.5,13.25"/>
+                                    <line id="28_2" fill="transparent" class="line" x1="2.46" y1="13.78" x2="11.3" y2="14.2"/>
+                              </g>
+                        </svg>
+                      ]]>
+                    </div>
+                    <div>28</div>
+				</td>
+
+			</tr>
+			
+			<tr class="tline">
+
+				<td>
+                    <div>48</div>
+                    <div aura:id="svg_48_2" class="dentBot" onclick="{!c.addTooth2}">
+                    <![CDATA[
+                       <svg viewBox="-7 -9 25 25" height="80" width="50" id="48_2" transform="rotate(180)">
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="48_2">
+                                <path id="48_2" stroke="black" fill="transparent" class="racine" d="M6.53,12.12a8,8,0,0,0,.78-2.25c-.2-3.4-.16-8.14-.7-8.28C6.23,1.5,5.51,3.51,5,5.21,5.44,8.4,5.87,12.05,6.53,12.12Z"/>
+                                <path id="48_2" stroke="black" fill="transparent" class="racine" d="M10.8,13.78,11.3.53S11-.38,10.13.53c-.59.65-1.94,6.16-2.82,9.34a8,8,0,0,1-.78,2.25C5.87,12.05,5.44,8.4,5,5.21,4.65,3,4.31,1,3.88.62,2.75-.18,1.3,10,2,14.2"/>
+                                <path id="48_2" stroke="black" fill="transparent" class="dent" d="M2,14.2a6.14,6.14,0,0,0-1.83,4C.05,20.62,1.55,21.62,2,21.7s1.17-1,2.09-1,.94.92,1.5,1,.66-.92,1.58-1,.67.92,1.67,1,3.22.14,3.87-.95c1-1.66.38-5.3-1.87-7"/>
+                                <line id="48_2" fill="transparent"class="line" x1="10.8" y1="13.78" x2="1.96" y2="14.2"/>
+							</g>
+                        </svg>
+                    ]]>
+                    </div>
+				</td>
+				<td>
+					<div>47</div>
+                    <div aura:id="svg_47_2" class="dentBot" onclick="{!c.addTooth2}">
+                    <![CDATA[
+                       <svg viewBox="-7 6 25 25" height="80" width="50" id="47_2" >
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="47_2">
+                                <path id="47_2" stroke="black" fill="transparent" class="racine" d="M6,12.81a20.82,20.82,0,0,1,1.06,8.94,6.29,6.29,0,0,0,1.66-1.43c-.05-3-.41-7.13-1.83-9.38A4.53,4.53,0,0,0,6,12.81Z"/>
+                                <path id="47_2" stroke="black" fill="transparent" class="dent" d="M10.55,8.69a27.31,27.31,0,0,0,1.58-5.5A2.64,2.64,0,0,0,9.47.13C7.8,0,7.38,1.61,6.88,1.61S6,.36,5.42.44s-.54.75-1.62.75A1.5,1.5,0,0,1,2.38.44S.3.28.13,3.19A7.14,7.14,0,0,0,2.38,8.28"/>
+                                <path id="47_2" stroke="black" fill="transparent" class="racine" d="M2.38,8.28C.13,18.28,4.22,23,4.22,23A51.37,51.37,0,0,1,6,12.81a4.53,4.53,0,0,1,.89-1.87c1.42,2.25,1.78,6.36,1.83,9.38,0,2.12-.08,3.71-.08,3.71,2.84-1.25,2.17-7.92,1.84-9.42a31.34,31.34,0,0,1,.08-5.92"/>
+                                <line id="47_2" fill="transparent"class="line" x1="2.38" y1="8.28" x2="10.55" y2="8.69"/></g>
+                        </svg>
+                    ]]>
+                    </div>
+                </td>
+				<td>
+					<div>46</div>
+                    <div aura:id="svg_46_2" class="dentBot" onclick="{!c.addTooth2}">
+                    <![CDATA[
+                       <svg viewBox="-7 6 25 25" height="80" width="50" id="46_2" >
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="46_2">                           
+                                <path id="46_2" stroke="black" fill="transparent" class="racine" d="M6.67,13c-.4,0-.7.63-.93,1.55C6.11,18,7,24.92,7.94,24.85c.54-1.55-.46-4.76.49-7.15C8,15.07,7.41,13,6.67,13Z"/>
+                                <path id="46_2" stroke="black" fill="transparent" class="dent" d="M11.29,9.75C12.54,8.57,13.21,5,13.21,2.94S11.46.19,9.54.13,7,1.94,6.71,1.94,6.88.19,5.91.13,5,1.19,4.29,1.44,2.71.77,2.71.77.12-.31.12,3.85a7.09,7.09,0,0,0,2.59,5.9"/>
+                                <path id="46_2" stroke="black" fill="transparent" class="racine" d="M2.71,9.75C0,20.15,4,26.69,4.54,26.69s.3-8.55,1.2-12.12c.23-.92.53-1.52.93-1.55C7.41,13,8,15.07,8.43,17.7c.71,4.26,1,9.9,1,9.9,2.66-1.83,1.92-10.41,1.66-12.25a33.37,33.37,0,0,1,.17-5.6"/>
+                                <line id="46_2" fill="transparent" class="line" x1="11.29" y1="9.75" x2="2.71" y2="9.75"/></g>
+                        </svg>
+                    ]]>
+                    </div>
+                </td>
+				<td>
+					<div>45</div>
+                    <div aura:id="svg_45_2" class="dentBot" onclick="{!c.addTooth2}">
+                    <![CDATA[
+                       <svg viewBox="-7 6 25 25" height="80" width="50" id="45_2" >
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="45_2">
+                                <path id="45_2" stroke="black" fill="transparent" class="dent" d="M7.62,10.72A13.18,13.18,0,0,0,9.38,7.3a11.32,11.32,0,0,0,0-3.5S7-.11,4.38.14.12,2.89.12,5.55s2.34,3.67,2.26,5"/>
+								<path id="45_2" stroke="black" fill="transparent" class="racine" d="M2.38,10.55c-.09,1.34-.67,14.59,2,17.42l1.41-1.08s.33-12.25,1.83-16.17"/>
+								<line id="45_2" fill="transparent" class="line" x1="7.63" y1="10.72" x2="2.38" y2="10.55"/></g>
+                        </svg>
+                    ]]>
+                    </div>
+                </td>
+				<td>
+                    <div>44</div>
+                    <div aura:id="svg_44_2" class="dentBot" onclick="{!c.addTooth2}">
+                    <![CDATA[
+                       <svg viewBox="-7 5 25 25" height="80" width="50" id="44_2">
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="44_2">
+                                <path id="44_2" stroke="black" fill="transparent" class="dent" d="M7.12,10.37c.59-.66,2.42-6.66,1.17-7S6.87.12,3.73.12A4.62,4.62,0,0,0,.17,5.17,12.42,12.42,0,0,0,2,10.37"/>
+                                <path id="44_2" stroke="black" fill="transparent" class="racine" d="M2,10.37C.54,21.21,3,28.21,3,28.21s1.91.25,1.83-.75S7.12,10.37,7.12,10.37"/>
+                                <line id="44_2" fill="transparent" class="line" x1="2.04" y1="10.37" x2="7.12" y2="10.37"/>
+							</g>
+                        </svg>
+                    ]]>
+                    </div>
+				</td>
+				<td>
+                    <div>43</div>
+                    <div aura:id="svg_43_2" class="dentBot" onclick="{!c.addTooth2}">
+                    <![CDATA[
+                       <svg viewBox="-7 6 25 25" height="80" width="50" id="43_2" >
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="43_2">
+                                <path id="43_2" stroke="black" fill="transparent" class="dent" d="M7.65,11.79c1.09-3.75.75-8.5.86-9.33S6.74.12,5.65.12.49,3.88.24,4.88A5.53,5.53,0,0,0,.24,7l1.88,4.75"/>
+                                <path id="43_2" stroke="black" fill="transparent" class="racine" d="M2.12,11.79s-.47,13.59,0,17A6.5,6.5,0,0,0,5,33.54c2.25-2.25,2.66-21.75,2.66-21.75"/>
+                                <line id="43_2" fill="transparent" class="line" x1="2.12" y1="11.79" x2="7.65" y2="11.79"/></g>
+                        </svg>
+                    ]]>
+                    </div>
+                </td>
+				<td>
+                    <div>42</div>
+                    <div aura:id="svg_42_2" class="dentBot" onclick="{!c.addTooth2}">
+                    <![CDATA[
+                       <svg viewBox="-7 5 25 25" height="80" width="50" id="42_2" >
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="42_2">
+                                <path id="42_2" stroke="black" fill="transparent" class="dent" d="M5.6,9.65,6.69,5.83s.8-4.19,0-4.91C5.69,0,1.73-.14,1,.58S-.15,2.42.35,4.25s1.34,4.21,1.09,5.4"/>
+                                <path id="42_2" stroke="black" fill="transparent" class="racine" d="M1.44,9.65C1.19,10.83.19,24.33,2.69,29.75c0,0,3.25-12.37,2.91-20.1"/>
+                                <line id="42_2" fill="transparent" class="line" x1="5.6" y1="9.65" x2="1.44" y2="9.65"/></g>
+                        </svg>
+                    ]]>
+                    </div>
+                </td>
+				<td class="rcol">
+                    <div>41</div>
+                    <div aura:id="svg_41_2" class="dentBot" onclick="{!c.addTooth2}">
+                    <![CDATA[
+                       <svg viewBox="-7 5 25 25" height="80" width="50" id="41_2" >
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="41_2">
+                                <path id="41_2" stroke="black" fill="transparent" class="racine" d="M1.13,7.79A11.93,11.93,0,0,1,1.17,9c-.06,2.34-.11,6.39,0,7.32S3,23.84,2.53,26.59c0,0,3.25-1.42,3.25-17.42a9.49,9.49,0,0,1,.09-1.38"/>
+                                <path id="41_2" stroke="black" fill="transparent" class="dent" d="M5.87,7.79c.17-1.28.56-2.16.82-3.62C7,2.25,7.36.92,6,.67S2.11-.08,1.45.21A3.06,3.06,0,0,0,.2,3.42a29.62,29.62,0,0,1,.93,4.37"/>
+                                <line id="41_2" fill="transparent" class="line" x1="5.87" y1="7.79" x2="1.13" y2="7.79"/></g>
+                        </svg>
+                    ]]>
+                    </div>
+				</td>
+
+				
+				
+				<td class="lcol">
+                    <div>31</div>
+                    <div aura:id="svg_31_2" class="dentBot" onclick="{!c.addTooth2}">
+                    <![CDATA[
+                       <svg viewBox="-7 5 25 25" height="80" width="50" id="31_2" >
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="31_2">
+                                <path id="31_2" stroke="black" fill="transparent" class="racine" d="M6,7.79A11.93,11.93,0,0,0,5.94,9c.06,2.34.11,6.39,0,7.32S4.16,23.84,4.58,26.59c0,0-3.25-1.42-3.25-17.42a9.49,9.49,0,0,0-.09-1.38"/>
+                                <path id="31_2" stroke="black" fill="transparent" class="dent" d="M1.24,7.79C1.07,6.51.68,5.63.42,4.17.08,2.25-.25.92,1.16.67S5-.08,5.66.21A3.06,3.06,0,0,1,6.91,3.42,29.62,29.62,0,0,0,6,7.79"/>
+                                <line id="31_2" fill="transparent" class="line" x1="5.87" y1="7.72" x2="1.24" y2="7.87"/></g>
+                        </svg>
+                    ]]>
+                    </div>
+                </td>
+				<td>
+                    <div>32</div>
+                    <div aura:id="svg_32_2" class="dentBot" onclick="{!c.addTooth2}">
+                    <![CDATA[
+                       <svg viewBox="-7 5 25 25" height="80" width="50" id="32_2" >
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="32_2">
+								<path id="32_2" stroke="black" fill="transparent" class="racine" d="M1.57,9.65c-.34,7.73,2.91,20.1,2.91,20.1C7,24.33,6,10.83,5.73,9.65"/>
+                                <path id="32_2" stroke="black" fill="transparent" class="dent" d="M5.73,9.65c-.25-1.19.59-3.57,1.09-5.4S6.94,1.31,6.19.58,1.48,0,.48.92c-.8.72,0,4.91,0,4.91L1.57,9.65"/>
+                                <line id="32_2" fill="transparent" class="line" x1="1.57" y1="9.65" x2="5.73" y2="9.65"/>
+                            </g>
+                        </svg>
+                    ]]>
+                    </div>
+                </td>
+				<td>
+                    <div>33</div>
+                    <div aura:id="svg_33_2" class="dentBot" onclick="{!c.addTooth2}">
+                    <![CDATA[
+                       <svg viewBox="-7 5 25 25" height="80" width="50" id="33_2" >
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="33_2"> 
+								<path id="33_2" stroke="black" fill="transparent" class="racine" d="M1.57,9.65c-.34,7.73,2.91,20.1,2.91,20.1C7,24.33,6,10.83,5.73,9.65"/>
+                                <path id="33_2" stroke="black" fill="transparent" class="dent" d="M5.73,9.65c-.25-1.19.59-3.57,1.09-5.4S6.94,1.31,6.19.58,1.48,0,.48.92c-.8.72,0,4.91,0,4.91L1.57,9.65"/>
+                                <line id="33_2" fill="transparent" class="line" x1="6.52" y1="11.79" x2="0.98" y2="11.79"/>
+							</g>
+                        </svg>
+                    ]]>
+                    </div>
+                </td>
+				<td>
+                    <div>34</div>
+                    <div aura:id="svg_34_2" class="dentBot" onclick="{!c.addTooth2}">
+                    <![CDATA[
+                       <svg viewBox="-7 5 25 25" height="80" width="50" id="34_2" >
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="34_2">
+                                <path id="34_2" stroke="black" fill="transparent" class="dent" d="M6.8,10.37a12.51,12.51,0,0,0,1.88-5.2,4.63,4.63,0,0,0-3.57-5C2,.12,1.81,3,.56,3.38s.57,6.33,1.16,7"/>
+                                <path id="34_2" stroke="black" fill="transparent" class="racine" d="M1.72,10.37S4.13,26.46,4.05,27.46s1.83.75,1.83.75,2.42-7,.92-17.84"/>
+                                <line id="34_2" fill="transparent" class="line" x1="6.8" y1="10.37" x2="1.72" y2="10.37"/>
+                            </g>
+                        </svg>
+                    ]]>
+                    </div>
+                </td>
+				<td>
+                    <div>35</div>
+                    <div aura:id="svg_35_2" class="dentBot" onclick="{!c.addTooth2}">
+                    <![CDATA[
+                       <svg viewBox="-7 5 25 25" height="80" width="50" id="35_2" >
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="35_2">
+                                <path id="35_2" stroke="black" fill="transparent" class="dent" d="M7.27,10.55c-.08-1.33,2.25-2.33,2.25-5S7.94.39,5.27.14.27,3.8.27,3.8a11.32,11.32,0,0,0,0,3.5A13.27,13.27,0,0,0,2,10.72"/>
+                                <path id="35_2" stroke="black" fill="transparent" class="racine" d="M2,10.72c1.5,3.92,1.84,16.17,1.84,16.17L5.27,28c2.67-2.83,2.09-16.08,2-17.42"/>
+                                <line id="35_2" fill="transparent" class="line" y1="10.55" x2="2.02" y2="10.72"/>
+                            </g>
+                        </svg>
+                    ]]>
+                    </div>
+                </td>
+				<td>
+                    <div>36</div>
+                    <div aura:id="svg_36_2" class="dentBot" onclick="{!c.addTooth2}">
+                    <![CDATA[
+                       <svg viewBox="-7 5 25 25" height="80" width="50" id="36_2" >
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="36_2">
+                                <path id="36_2" stroke="black" fill="transparent" class="racine" d="M6.67,13C5.92,13,5.34,15.07,4.9,17.7c.95,2.39,0,5.6.49,7.15,1,.07,1.84-6.81,2.21-10.28C7.37,13.65,7.07,13.05,6.67,13Z"/>
+                                <path id="36_2" stroke="black" fill="transparent" class="dent" d="M10.62,9.75a7.09,7.09,0,0,0,2.59-5.9c0-4.16-2.59-3.08-2.59-3.08s-.83.92-1.58.67S8.39.07,7.42.13,7,1.94,6.62,1.94,5.71.07,3.79.13.12.85.12,2.94.79,8.57,2,9.75"/>
+                                <path id="36_2" stroke="black" fill="transparent" class="racine" d="M2,9.75a32.29,32.29,0,0,1,.17,5.6C2,17.19,1.21,25.77,3.88,27.6c0,0,.31-5.64,1-9.9.44-2.63,1-4.74,1.77-4.68.4,0,.7.63.93,1.55.9,3.57.73,12.12,1.19,12.12s4.5-6.54,1.83-16.94"/>
+                                <line id="36_2" fill="transparent" class="line" x1="10.63" y1="9.75" x2="2.04" y2="9.75"/>
+                            </g>
+                        </svg>
+                    ]]>
+                    </div>
+                </td>
+				<td>
+                    <div>37</div>
+                    <div aura:id="svg_37_2" class="dentBot" onclick="{!c.addTooth2}">
+                    <![CDATA[
+                       <svg viewBox="-7 5 25 25" height="80" width="50" id="37_2" >
+                            <defs>
+                            	<style>
+                                 .racine{
+									stroke: black;
+                                 }
+                                 .dent{
+									stroke: black;
+                                 }
+								</style>
+                            </defs>
+                            <g id="37_2">
+                                <path id="37_2" stroke="black" fill="transparent" class="racine" d="M5.39,10.94C4,13.19,3.62,17.3,3.57,20.32a6.17,6.17,0,0,0,1.65,1.43,21,21,0,0,1,1.06-8.94A4.53,4.53,0,0,0,5.39,10.94Z"/>
+                                <path id="37_2" stroke="black" fill="transparent" class="dent" d="M9.89,8.28a7.09,7.09,0,0,0,2.25-5.09C12,.28,9.89.44,9.89.44a1.49,1.49,0,0,1-1.42.75C7.39,1.19,7.39.52,6.85.44s-1,1.17-1.46,1.17S4.47,0,2.81.13A2.64,2.64,0,0,0,.14,3.19a28,28,0,0,0,1.58,5.5"/>
+                                <path id="37_2" stroke="black" fill="transparent" class="racine" d="M1.72,8.69a32,32,0,0,1,.09,5.92c-.34,1.5-1,8.17,1.83,9.42,0,0-.11-1.59-.07-3.71.05-3,.4-7.13,1.82-9.38a4.53,4.53,0,0,1,.89,1.87A51.11,51.11,0,0,1,8.06,23s4.08-4.75,1.83-14.75"/>
+                                <line id="37_2" fill="transparent" class="line" x1="9.89" y1="8.28" x2="1.72" y2="8.69"/>
+                            </g>
+                        </svg>
+                    ]]>
+                    </div>
+                </td>
+                <td>
+                    <div>38</div>
+                    <div aura:id="svg_38_2" class="dentBot" onclick="{!c.addTooth2}">
+                        <![CDATA[
+                       <svg viewBox="-7 5 25 25" height="80" width="50" id="38_2" >
+                            <defs>
+                             <style>
+                                 .racine{
+         							stroke: black;
+                                 }
+                                 .dent{
+        							 stroke: black;
+                                 }
+        					</style>
+                            </defs>
+                            <g id="38_2">
+                                <path id="38_2" stroke="black" fill="transparent" class="racine" d="M6.72,9.75A8.44,8.44,0,0,0,6,12c.2,3.41.16,8.15.7,8.28.38.09,1.1-1.91,1.64-3.62C7.82,13.47,7.39,9.81,6.72,9.75Z"/>
+                                <path id="38_2" stroke="black" fill="transparent" class="dent" d="M11.3,7.67a6.17,6.17,0,0,0,1.83-4C13.21,1.25,11.71.25,11.3.17s-1.17,1-2.09,1-.94-.93-1.5-1-.66.92-1.58,1S5.46.24,4.46.16,1.24,0,.59,1.11c-1,1.66-.38,5.31,1.87,7"/>
+                                <path id="38_2" stroke="black" fill="transparent" class="racine" d="M2.46,8.08,2,21.33s.34.92,1.17,0C3.72,20.69,5.07,15.17,6,12a8.44,8.44,0,0,1,.77-2.24c.67.06,1.1,3.72,1.57,6.9.32,2.22.65,4.21,1.09,4.6C10.51,22,12,11.83,11.3,7.67"/>
+                                <line id="38_2" fill="transparent" class="line" x1="11.3" y1="7.67" x2="2.46" y2="8.08"/>
+                            </g>
+                        </svg>
+                    ]]>
+                    </div>
+                </td> 
+			</tr>  
+		</tbody>
+	</table>
+    </div>
+		</article>
+	</div>
+</div>
+</aura:if> 
+
+<!--  TRAVAUX 2 -->
+<aura:if isTrue="{!(v.Ligne.LibTravaux2__c!=null)}"> 
+<div class="slds-tabs_card slds-tabs_default">
+	<ul class="slds-tabs_default__nav" role="tablist">
+		<li class="slds-tabs_default__item slds-is-active" title="Sélectionner les produits" role="presentation"><a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" id="tab-default-1__item">{!v.Ligne.LibTravaux2__c}</a></li>
+	</ul>
+	<div id="tab-default-1" class="slds-tabs_default__content slds-show" role="tabpanel" aria-labelledby="tab-default-1__item">
+		<article class="slds-card">
+    <div style="padding:25px;">
+<aura:if isTrue="{!(v.Ligne.LibTravaux1__c=='Implants')}"> 
+			<aura:if isTrue="{!(v.Ligne.LibSsType1__c!=null)}">
+			    <lightning:select aura:id="SsType1" label="{!v.Ligne.LibSsType1__c}">
+        			<option value="">---- None ---</option>
+        			<option value="PROTHESE RESINE TRANSVISSEE SUR IMPLANT AVEC ARMATURE">PROTHESE RESINE TRANSVISSEE SUR IMPLANT AVEC ARMATURE</option>
+
+        			<!-- <option value="PROTHESE RESINE TRANSVISSEE SUR IMPLANT SANS ARMATURE">PROTHESE RESINE TRANSVISSEE SUR IMPLANT SANS ARMATURE</option> -->
+
+        			<!-- <option value="PROTHESE RESINE COMPLETE AMOVIBLE SUPRA-IMPLANTAIRE STABILISEE PAR ATTACHEMENTS AXIAUX">PROTHESE RESINE COMPLETE AMOVIBLE SUPRA-IMPLANTAIRE STABILISEE PAR ATTACHEMENTS AXIAUX</option> -->
+
+        			<!-- <option value="PROTHESE RESINE COMPLETE AMOVIBLE SUPRA-IMPLANTAIRE STABILISEE PAR ATTACHEMENTS CAVALIERS ET BARRE">PROTHESE RESINE COMPLETE AMOVIBLE SUPRA-IMPLANTAIRE STABILISEE PAR ATTACHEMENTS CAVALIERS ET BARRE</option> -->
+
+        			<option value="PROTHESE RESINE COMPLETE AMOVIBLE SUPRA-IMPLANTAIRE STABILISEE PAR ATTACHEMENTS CAVALIER ET BARRE EN TITANE">PROTHESE RESINE COMPLETE AMOVIBLE SUPRA-IMPLANTAIRE STABILISEE PAR ATTACHEMENTS CAVALIER ET BARRE EN TITANE</option>
+
+        			<!-- <option value="PROTHESE RESINE COMPLETE AMOVIBLE SUPRA-IMPLANTAIRE STABILISEE PAR ATTACHEMENTS AXIAUX ET BARRE">PROTHESE RESINE COMPLETE AMOVIBLE SUPRA-IMPLANTAIRE STABILISEE PAR ATTACHEMENTS AXIAUX ET BARRE</option> -->
+                    
+                    <option value="PROTHESE RESINE COMPLETE AMOVIBLE SUPRA-IMPLANTAIRE STABILISEE PAR ATTACHEMENT AXIAUX ET BARRE EN TITANE">PROTHESE RESINE COMPLETE AMOVIBLE SUPRA-IMPLANTAIRE STABILISEE PAR ATTACHEMENT AXIAUX ET BARRE EN TITANE</option>
+
+        			<!-- <option value="PROTHESE RESINE COMPLETE AMOVIBLE SUPRA-RADICULAIRE STABILISE PAR DES ATTACHEMENTS AXIAUX">PROTHESE RESINE COMPLETE AMOVIBLE SUPRA-RADICULAIRE STABILISE PAR DES ATTACHEMENTS AXIAUX</option> -->
+
+        			<option value="BRIDGE COMPLET CERAMO METALIQUE TRANSVISSE SUR IMPLANT">BRIDGE COMPLET CERAMO METALIQUE TRANSVISSE SUR IMPLANT</option>
+    			</lightning:select>    
+    			</aura:if>
+</aura:if>     
+    <aura:if isTrue="{!(v.Ligne.LibHaut__c!=null)}">
+   		<div class="slds-form-element">
+      		<label class="slds-form-element__label" for="select-01">{!v.Ligne.LibHaut__c}</label>
+      		<div class="slds-select_container">
+         		<ui:inputSelect aura:id="Liaison" class="slds-select" /> 
+      		</div>
+   		</div>
+ </aura:if>
+    <aura:if isTrue="{!(v.Ligne.LibCnt2__c!=null)}">
+        <div class="slds-form-element">
+            <label class="slds-form-element__label" for="select-01">{!v.Ligne.LibCnt2__c}</label>
+            <div class="slds-select_container">
+                <ui:inputSelect aura:id="conCountry" class="slds-select" change="{!c.onControllerFieldChange}" />
+            </div>
+        </div>
+ </aura:if>
+    <aura:if isTrue="{!(v.Ligne.LibDep2__c!=null)}">
+        <div class="slds-form-element">
+            <label class="slds-form-element__label" for="select-01">{!v.Ligne.LibDep2__c}</label>
+            <div class="slds-select_container">
+                <ui:inputSelect aura:id="conState" disabled="{!v.isDependentDisable}" class="slds-select" change="{!c.onDependentFieldChange}" />
+            </div>
+        </div>
+     </aura:if>
+    <aura:if isTrue="{!(v.Ligne.LibFinition__c!=null)}">
+   		<div class="slds-form-element">
+      		<label class="slds-form-element__label" for="select-01">{!v.Ligne.LibFinition__c}</label>
+      		<div class="slds-select_container">
+         		<ui:inputSelect aura:id="Finition" class="slds-select" />
+      		</div>
+   		</div>
+     </aura:if>
+   </div>  
+   
+      
+    <!--  <div class="slds-card__body slds-card__body_inner">This is a card inside an `.slds-tabs_card` to show how styling is removed when cards are nested inside.</div>  -->
+			<footer class="slds-card__footer"></footer>
+		</article>
+<!-- 		<article class="slds-card slds-card_boundary">
+			<div class="slds-card__header slds-grid">
+			</div>
+			<div class="slds-card__body slds-card__body_inner">This is a card inside an `.slds-tabs_card` to illustrate how `.slds-card_boundary` adds a rounded border when desired.</div>
+			<footer class="slds-card__footer">Card Footer</footer>
+		</article>  -->
+	</div>
+</div>
+</aura:if> 
+<!-- Files 
+    <aura:if isTrue="{!(v.Ligne.LibTravaux1__c=='Planification implantaire')}"> 
+        <div class="slds-tabs_card slds-tabs_default">
+	<ul class="slds-tabs_default__nav" role="tablist">
+		<li class="slds-tabs_default__item slds-is-active" title="" role="presentation"><a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" id="tab-default-1__item">Fichiers</a></li>
+	</ul>
+    <lightning:fileUpload label="Empreinte numérique"
+        name="fileUploader"
+        multiple="true"
+        accept=".pdf, .png, .stl"
+        recordId="{!v.myRecordId}"
+        onuploadfinished="{!c.handleUploadFinished}" />
+        </div>
+    </aura:if> -->
+<!--  OPTIONS -->
+<aura:if isTrue="{!(v.Ligne.ShowOptions__c)}"> 
+  <div class="slds-tabs_card slds-tabs_default">
+	<ul class="slds-tabs_default__nav" role="tablist">
+		<li class="slds-tabs_default__item slds-is-active" title="Choisir les préférences" role="presentation"><a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" id="tab-default-1__item">Préférences</a></li>
+	</ul>
+
+	<div id="tab-default-1" class="slds-tabs_default__content slds-show" role="tabpanel" aria-labelledby="tab-default-1__item">
+		<article class="slds-card">
+			<div class="slds-card__body slds-card__body_inner">
+        <aura:if isTrue="{!(v.Ligne.Occlusion__c!=null)}"> 
+   		<div class="slds-form-element">
+         		<ui:inputSelect aura:id="PrefLiaison" class="slds-select" label="Occlusion" />
+    	</div>
+    	</aura:if>
+    	<aura:if isTrue="{!(v.Ligne.Point_de_contact__c!=null)}"> 
+   			<div class="slds-form-element">
+            	<ui:inputSelect aura:id="PointContact" label="Point de contact" class="slds-select" />
+    		</div>
+    	</aura:if>
+    	<aura:if isTrue="{!(v.Ligne.Maquillage__c!=null)}"> 
+   			<div class="slds-form-element">
+            	<ui:inputSelect aura:id="Maquillage" label="Maquillage" class="slds-select" />
+    		</div>
+    	</aura:if>
+    	<aura:if isTrue="{!(v.Ligne.Bandeau_m_tallique__c!=null)}"> 
+   		<div class="slds-form-element">
+            <ui:inputSelect aura:id="Bandeau" label="Bandeau lingual" class="slds-select"/>
+    	</div>
+    	</aura:if>
+    	<aura:if isTrue="{!(v.Ligne.Embrasure__c!=null)}"> 
+   		<div class="slds-form-element">
+            <ui:inputSelect aura:id="Embrasure" label="Embrasure" class="slds-select"/>
+    	</div>
+    	</aura:if>
+
+        <aura:if isTrue="{!(v.Ligne.Profil_d_mergence__c)}"> 
+   		<div class="slds-form-element">
+            <ui:inputSelect aura:id="ProfilEmergence" label="Profil d'émergence" class="slds-select"/>
+    	</div>
+    	</aura:if>
+
+        <aura:if isTrue="{!(v.Ligne.Trac_de_stellite__c)}"> 
+   		<div class="slds-form-element">
+            <ui:inputSelect aura:id="TraceStellite" label="Tracé de stellite" class="slds-select"/>
+    	</div>
+    	</aura:if>
+
+        <aura:if isTrue="{!(v.Ligne.Perforation__c)}"> 
+   		<div class="slds-form-element">
+            <ui:inputSelect aura:id="Perforation" label="Perforation" class="slds-select"/>
+    	</div>
+    	</aura:if>
+
+   </div>
+		</article>
+	</div>
+</div> 
+
+        </aura:if>
+</aura:component>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Occlusion__c</fullName>
+    <externalId>false</externalId>
+    <label>Occlusion</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Occlusion normal</fullName>
+                <default>false</default>
+                <label>Occlusion normal</label>
+            </value>
+            <value>
+                <fullName>Occlusion légère</fullName>
+                <default>false</default>
+                <label>Occlusion légère</label>
+            </value>
+            <value>
+                <fullName>Sous-occlusion</fullName>
+                <default>false</default>
+                <label>Sous-occlusion</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

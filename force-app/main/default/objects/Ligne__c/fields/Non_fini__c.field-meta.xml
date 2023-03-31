@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Non_fini__c</fullName>
+    <externalId>false</externalId>
+    <formula>NOT(OR(ISBLANK(TEXT(Finition__c)),OR(ISPICKVAL(Finition__c,&quot;Finition&quot;)),OR(ISPICKVAL(Finition__c,&quot;Finition directe&quot;))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Non fini</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

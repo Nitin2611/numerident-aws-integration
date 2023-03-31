@@ -1,0 +1,270 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false" standardController="Ordonnance__c" renderAs="pdf"  
+ applyHtmlTag="false" applyBodyTag="false" >
+
+<html>
+<head>
+      <style type="text/css">
+                        
+       @page :first{
+            @top-left {
+            content: element(headerOne);
+            }        
+       }
+    
+    
+       @page{
+            size: 21.0cm 29.7cm;
+            margin-top: 120px;/*
+            margin-left: 0.4cm;
+            margin-right: 0.4cm;*/
+            margin-bottom: 1.8cm;
+            counter-increment:pages;
+            @bottom-center {
+            content: element(footer);
+            }
+            @top-left {
+            content: element(header);  
+            }
+            
+        }
+            
+            
+        @page :first{        
+        }
+
+        <!--@page{
+            size: 21.0cm 29.7cm;
+            margin-top: 2.8cm;
+            margin-left: 0.4cm;
+            margin-right: 0.4cm;
+            margin-bottom: 1.8cm;
+            counter-increment:pages;
+            @bottom-center {
+            content: element(footer);
+            }
+            @top-center {
+            content: element(header);
+            }
+            background: url({!URLFOR($Resource.Logo)});
+            background-size: 4px 3px;
+            background-position: 10% 3%;
+            background-repeat:no-repeat;
+        }-->
+        div.footer {
+        position:running(footer);
+        } 
+        div.headerOne{
+        position:running(headerOne);
+        text-align:left;
+        }   
+        div.header{
+        position:running(header);
+        text-align:left;
+        }     
+        #pageNum:before {
+        content: counter(page);
+        }   
+        #pageNums:before {
+        content: counter(pages);
+        }
+        body {
+        font-family:Arial,sans-serif;
+        }
+        table {
+        table-layout:fixed;
+        }
+
+    </style>
+</head>
+<div class="footer"><table><tr><td style="width:100%; font-size:65%;text-align:center">
+Fiche à conserver 5 ans, prescrit au laboratoire Numerident déclaré à l&apos;ANSM le 28/04/2017 DIRECTIVE EUROPEENNE 93/42/CEE</td></tr></table>
+</div>
+<!-- <div class="headerOne" style="display:inline-block;"> 
+    <table>
+    <col width="5%"/>
+    <col width="50%"/>
+    <col width="20%"/>
+    <col width="25%"/>
+        <tr>
+            <td></td>
+            <td style="vertical-align:top;font-family:Arial,sans-serif;font-size:8pt;color#808080"><p style="font-size:90%;"><strong style="font-size:200%;">{!Ordonnance__c.Name}</strong><br/></p></td>
+            <td style="vertical-align:bottom;"><img src="{!URLFOR($Resource.Logo)}" style="height:65px;"/></td>  
+            <td style="vertical-align:top;font-family:Arial,sans-serif;font-size:8pt;color#808080"><p style="font-size:90%;"><strong style="font-size:300%;color: red;"><apex:outputText value="R " rendered="{!Ordonnance__c.A_refaire__c}"/><apex:outputText value="URGENT" rendered="{!Ordonnance__c.Travail_URGENT__c}"/></strong></p></td>
+        </tr>
+    <tr>
+        <td><strong style="font-size:200%;">{!$User.NumeroCompte__c}&nbsp;&nbsp;</strong></td>
+        <td><apex:image value="https://www.barcodesinc.com/generator/image.php?code={!Ordonnance__c.Name}&style=68&type=C128B&width=200&height=75&xres=1&font=3" /></td>
+        <td colspan="2"><strong>BON DE COMMANDE</strong></td>
+    </tr>
+    </table>
+</div> -->
+<div class="headerOne" style="display:inline-block;"> 
+    <table>
+    <col width="20%"/>
+    <col width="40%"/>
+    <col width="40%"/>
+    <tr>
+        <td><strong style="font-size:600%;">{!$User.NumeroCompte__c}</strong></td>
+        <td><apex:image value="https://www.barcodesinc.com/generator/image.php?code={!Ordonnance__c.Name}&style=68&type=C128B&width=200&height=75&xres=1&font=3" /><BR/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong style="font-size:120%;">{!Ordonnance__c.Name}</strong></td>
+        <td><strong>BON DE COMMANDE</strong></td>
+    </tr>
+    </table>
+</div>
+
+<!--            <td><apex:image value="https://barcode.tec-it.com/barcode.ashx?data={!Ordonnance__c.Name}&code=Code128&multiplebarcodes=false&translate-esc=false&unit=Fit&dpi=96&imagetype=Gif&rotation=0&color=%23000000&bgcolor=%23ffffff&qunit=Mm&quiet=0' alt='Barcode Generator TEC-IT" /></td> -->
+
+
+  
+<br/>
+
+<table style="width:100%;">
+    <col width="55%"/>
+    <col width="45%"/>
+    <tr>
+        <td>Date de prise d'empreinte :&nbsp;<strong><apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+    <apex:param value="{!Ordonnance__c.CreatedDate}" /> 
+</apex:outputText></strong></td>
+        <td><strong>Numerident</strong></td>
+    </tr>
+    <tr>
+        <td  style="font-size:125%;"><strong>{!Ordonnance__c.CreeePar__c}</strong></td>
+        <td>23 bis rue Barthélemy Danjou</td>
+    </tr>
+    <tr>
+        <td><strong>{!$User.Compte__c}</strong></td>
+        <td>92100 Boulogne Billancourt</td>
+    </tr>
+    <tr>
+        <td>{!$User.RueCompte__c}</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>{!$User.CPVilleCompte__c}</td>
+        <td>01 58 57 96 32</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td  style="font-size:125%;">Patient :&nbsp;<strong>{!Ordonnance__c.Patient__c}</strong></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Age :&nbsp;{!Ordonnance__c.Age__c}&nbsp;&nbsp;&nbsp;&nbsp;Sexe :&nbsp;{!Ordonnance__c.Sexe__c}</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><strong></strong></td>
+        <td></td>
+    </tr>
+</table>
+
+<br/>
+
+<table style="width:100%; font-size:100%;border-style: solid;border-color:#3C3C3B;border-collapse: collapse;border-width:1px;">
+<tr style="background-color: #eb5424;text-align:center;color:white">
+<th width="25%;border-style: solid;border-color:#3C3C3B;border-width:1px;">Désignation</th>
+<th width="5%;border-style: solid;border-color:#3C3C3B;border-width:1px;">Qté</th>
+<th width="40%;border-style: solid;border-color:#3C3C3B;border-width:1px;">Description</th>
+<th width="30%;border-style: solid;border-color:#3C3C3B;border-width:1px;">Commentaires</th>
+</tr>
+<apex:repeat var="ligne" value="{!Ordonnance__c.Lignes_de_commande__r}">
+<tr>
+<td style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style:solid;border-right-color:#3C3C3B;text-align: left;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#3C3C3B;">&nbsp;{!ligne.Travail__c}&nbsp;{!ligne.Product_name__c}</td>
+<td style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style:solid;border-right-color:#3C3C3B;text-align: center;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#3C3C3B;">{!ligne.txtQuantite__c}</td>
+<td style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style:solid;border-right-color:#3C3C3B;text-align: left;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#3C3C3B;">&nbsp;{!ligne.Comp0__c}&nbsp;{!ligne.Comp1__c}&nbsp;{!ligne.Comp2__c}&nbsp;{!ligne.Comp3__c}&nbsp;{!ligne.Comp4__c}&nbsp;{!ligne.Comp5__c}</td>
+<td style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style:solid;border-right-color:#3C3C3B;text-align: left;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#3C3C3B;">&nbsp;{!ligne.Prefs__c}&nbsp;{!ligne.Prefs_EN__c}</td>
+</tr>
+</apex:repeat>
+<!--  <tr>
+<td style="text-align:center;border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#3C3C3B;"></td>
+<td style="text-align:center;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#3C3C3B;"></td>
+<td style="text-align:center;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#3C3C3B;"></td>
+<td style="text-align:center;border-right-width:1px;border-right-style:solid;border-right-color:#3C3C3B;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#3C3C3B;"></td>
+</tr>  -->
+</table>
+<br/><br/>
+COMMENTAIRES : {!Ordonnance__c.Commentaires__c}
+<br/>
+<br/>
+<!-- <table style="background-image: url({!URLFOR($Resource.TeintesDent)});background-size: contain;background-repeat: no-repeat;">
+    <tr>
+        <td>H1{!Ordonnance__c.Teinte_haut__c}&nbsp;</td>
+    </tr>
+    <tr>
+        <td>H2{!Ordonnance__c.Teinte__c}&nbsp;</td>
+    </tr>
+    <tr>
+        <td>H3{!Ordonnance__c.Teinte_bas__c}&nbsp;</td>
+    </tr>
+</table>  -->
+<table style="width:100%;background-image: url({!URLFOR($Resource.TeintesDent)});background-size: contain;background-repeat: no-repeat;">
+    <col width="8%"/>
+    <col width="12%"/>
+    <col width="80%"/>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="text-align:center;">&nbsp;{!Ordonnance__c.Teinte_haut__c}&nbsp;</td>
+        <td></td>
+        <td><strong><apex:outputText value="A REFAIRE" rendered="{!Ordonnance__c.A_refaire__c}"/><apex:outputText value="FINITION" rendered="{!Ordonnance__c.A_finir__c}"/></strong></td> 
+    </tr>
+    <tr>
+        <td style="text-align:center;"><strong>&nbsp;{!Ordonnance__c.Teinte__c}&nbsp;</strong></td>
+        <td></td>
+        <td>Ref d'origine : <apex:outputText value="{!Ordonnance__c.Ordonnance_pr_c_dente__r.Name}" rendered="{!OR(Ordonnance__c.A_refaire__c,Ordonnance__c.A_finir__c)}"/></td>
+    </tr>
+    <tr>
+        <td style="text-align:center;">&nbsp;{!Ordonnance__c.Teinte_bas__c}&nbsp;</td>
+        <td></td>
+        <td><apex:outputText value="{!Ordonnance__c.Motif_de_refection__c}" rendered="{!Ordonnance__c.A_refaire__c}"/></td>
+        <!-- <td>Motif : {!Ordonnance__c.Motif_de_refection__c}</td> -->
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td><apex:outputText value="{!Ordonnance__c.Motif_detaille__c}" rendered="{!Ordonnance__c.A_refaire__c}"/></td>
+        <!-- <td>Motif détaillé : {!Ordonnance__c.Motif_detaille__c}</td> -->
+    </tr>
+</table>    
+<br/>
+
+Date de livraison souhaitée:&nbsp; <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+    <apex:param value="{!Ordonnance__c.Date__c}" /> 
+</apex:outputText>
+
+<br/><br/>
+<table style="width:100%;page-break-inside: avoid;">
+    <col width="20%"/>
+    <col width="60%"/>
+    <col width="20%"/>
+
+    <tr>
+        <td>
+        </td>
+        <td rowspan="4" style="font-size:80%;">
+            <table cellpadding="3" style="width:100%;font-size:75%;border-style: solid;border-color:#3C3C3B; border-width:1px; border-collapse: collapse;"> 
+                <tr>
+                    <td colspan="2" style="text-align:center;border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-top-width:1px;border-top-style: solid;border-top-color:#3C3C3B;border-right-width:1px;border-right-style:solid;border-right-color:#3C3C3B;">Bon pour accord (cachet et signature)</td>     
+                </tr>
+                <tr><td colspan="2" style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style: solid;border-right-color:#3C3C3B;">&nbsp;</td></tr>
+                <tr><td colspan="2" style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style: solid;border-right-color:#3C3C3B;">&nbsp;</td></tr>
+                <tr><td colspan="2" style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style: solid;border-right-color:#3C3C3B;">&nbsp;</td></tr>
+                <tr><td colspan="2" style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style: solid;border-right-color:#3C3C3B;">&nbsp;</td></tr>
+                <tr><td colspan="2" style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style: solid;border-right-color:#3C3C3B;">&nbsp;</td></tr>
+                <tr><td colspan="2" style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style: solid;border-right-color:#3C3C3B;">&nbsp;</td></tr>
+                <tr><td colspan="2" style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style: solid;border-right-color:#3C3C3B;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#3C3C3B;"></td></tr>    
+            </table> 
+        </td>
+        <td>
+        </td>
+     </tr>
+</table>  
+
+</html>
+
+</apex:page>

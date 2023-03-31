@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>My_shipping_to_Numerident</fullName>
+    <columns>NAME</columns>
+    <columns>Statut__c</columns>
+    <columns>AWB__c</columns>
+    <columns>Date__c</columns>
+    <columns>Poids__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Direction__c</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>Date_d_arriv_e__c</columns>
+    <columns>Nombre_de_colis__c</columns>
+    <columns>Nombre_de_commandes__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Direction__c</field>
+        <operation>equals</operation>
+        <value>LAB&gt;NUMERIDENT</value>
+    </filters>
+    <label>My shippings to Numerident</label>
+    <sharedTo>
+        <role>ADL</role>
+        <role>CBD</role>
+        <role>KOFIDENTAL</role>
+        <role>NEW</role>
+        <role>SUN_STAR</role>
+    </sharedTo>
+</ListView>

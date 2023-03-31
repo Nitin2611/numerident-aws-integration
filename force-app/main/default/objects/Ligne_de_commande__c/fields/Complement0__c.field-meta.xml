@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Complement0__c</fullName>
+    <description>IF( OR(ISPICKVAL( Business_case__r.Sous_cran__c  ,&quot;Inlay core&quot;)),TEXT(Ligne__r.Type__c) + &quot; &quot; + TEXT(Ligne__r.Alliage_Inlay_core__c)   ,&quot;&quot;) +</description>
+    <externalId>false</externalId>
+    <formula>IF( OR(ISPICKVAL( Business_case__r.Sous_cran__c  ,&quot;Gouttière&quot;),ISPICKVAL( Business_case__r.Sous_cran__c  ,&quot;Ortho&quot;),ISPICKVAL( Business_case__r.Sous_cran__c  ,&quot;PEI, Cire&quot;)), SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( UPPER(Details__c) , &quot;BAS&quot;, &quot;LOW 下&quot;),&quot;HAUT&quot;,&quot;UP 上&quot;),&quot;ET&quot;,&quot;+&quot;)  ,&quot;&quot;) +
+IF( OR(ISPICKVAL( Business_case__r.Sous_cran__c  ,&quot;Couronne&quot;)),SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(UPPER(TEXT( Ligne__r.Liaison__c )),&quot;UNITAIRE&quot;,&quot;UNITARY 单冠&quot;),UPPER(&quot;Solidarisé&quot;),&quot;SOLDER 连体&quot;),UPPER(&quot;Bridge&quot;),&quot;BRIDGE 桥体&quot;),UPPER(&quot;Appui dentaire&quot;),&quot;DENTAL SUPPORT&quot;),UPPER(&quot;Appui muqueux&quot;),&quot;MUCOSAL SUPPORT&quot;)  ,&quot;&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Complement0</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

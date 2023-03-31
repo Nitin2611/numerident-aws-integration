@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Alliage_Inlay_core__c</fullName>
+    <defaultValue>Case($RecordType.DeveloperName,&quot;Inlay_core_couronne&quot;,&quot;CoCr&quot;,&quot;&quot;)</defaultValue>
+    <externalId>false</externalId>
+    <label>Alliage Inlay core</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>Alliages</valueSetName>
+    </valueSet>
+</CustomField>

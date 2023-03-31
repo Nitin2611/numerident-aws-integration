@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pr_sentation_stock_personnalis_e</fullName>
+    <fields>Name</fields>
+    <fields>Article__c</fields>
+    <fields>Marque__c</fields>
+    <label>Présentation stock personnalisée</label>
+</CompactLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BC_de_finition__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>BC de finition</label>
+    <referenceTo>Business_case__c</referenceTo>
+    <relationshipLabel>Business cases (BC de finition)</relationshipLabel>
+    <relationshipName>Business_cases1</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

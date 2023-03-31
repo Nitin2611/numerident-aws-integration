@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>En_transit_vers_Numerident</fullName>
+    <columns>Date__c</columns>
+    <columns>AWB__c</columns>
+    <columns>NAME</columns>
+    <columns>Statut__c</columns>
+    <columns>CREATEDBY_USER.ALIAS</columns>
+    <columns>Nombre_de_colis__c</columns>
+    <columns>Nombre_de_commandes__c</columns>
+    <columns>Poids__c</columns>
+    <columns>MAJ_commandes__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Expedition__c.Import</value>
+    </filters>
+    <filters>
+        <field>Statut__c</field>
+        <operation>notEqual</operation>
+        <value>Arrivée</value>
+    </filters>
+    <label>Imports</label>
+    <sharedTo>
+        <role>HQ</role>
+    </sharedTo>
+</ListView>

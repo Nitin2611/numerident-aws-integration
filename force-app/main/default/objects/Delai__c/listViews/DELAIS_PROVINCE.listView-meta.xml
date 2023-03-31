@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DELAIS_PROVINCE</fullName>
+    <columns>Complexite__c</columns>
+    <columns>Zone_de_livraison__c</columns>
+    <columns>Date_de_prise_d_empreinte__c</columns>
+    <columns>Date_de_livraison__c</columns>
+    <columns>Usine__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Zone_de_livraison__c</field>
+        <operation>equals</operation>
+        <value>Province</value>
+    </filters>
+    <filters>
+        <field>Date_de_prise_d_empreinte__c</field>
+        <operation>equals</operation>
+        <value>4/26/2019</value>
+    </filters>
+    <label>DELAIS PROVINCE</label>
+</ListView>

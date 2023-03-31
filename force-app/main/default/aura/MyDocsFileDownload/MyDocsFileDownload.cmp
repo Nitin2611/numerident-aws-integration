@@ -1,0 +1,18 @@
+<aura:component implements="force:lightningQuickAction,forceCommunity:availableForAllPageTypes,forceCommunity:themeLayout,lightning:actionOverride,force:hasRecordId,force:hasSObjectName" access="global" controller="MyDocsFileController">
+    <ltng:require scripts="/resource/awssdk" afterScriptsLoaded="{!c.initAwsSdk}"/>
+    <aura:attribute name="awsSetting" type="AWS_Setting__mdt" default=""/>
+    <aura:handler name="init" action="{!c.init}" value="{!this}" />
+	<aura:attribute name="recordId" type="String" />
+    
+    <div role="dialog" tabindex="-1" aria-labelledby="header43" class="">
+       
+        <br />
+        <div class="slds-modal__content slds-p-around--medium slds-wrap">
+            <br />
+            <p>Votre demande de téléchargement du fichier en en cours de traitement. 
+                Si cette ce dialogue reste bloquée vérifiez votre connexion et remonter l'info à votre administrateur.
+            </p>
+        </div>
+    </div>
+    <div aura:id="overlay" class="slds-backdrop--close"></div>
+</aura:component>

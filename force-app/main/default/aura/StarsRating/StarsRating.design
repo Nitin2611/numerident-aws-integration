@@ -1,0 +1,5 @@
+<design:component>
+	<design:attribute name="TexteAvantEtoiles"   />
+    <design:attribute name="PopupCommentaire"   />
+    <design:attribute name="NombreDetoiles" default ="5" />
+</design:component>

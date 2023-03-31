@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Finition__c</fullName>
+    <externalId>false</externalId>
+    <label>Finition</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Sous_cran__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>Finition</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>Réparations</controllingFieldValue>
+            <valueName>Adjonction d’une dent</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Réparations</controllingFieldValue>
+            <valueName>Adjonction de 2 ou 3 dents</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Réparations</controllingFieldValue>
+            <valueName>Adjonction de plus de 3 dents</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Réparations</controllingFieldValue>
+            <valueName>Rebasage</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Réparations</controllingFieldValue>
+            <valueName>Adjonction de crochet métal</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Réparations</controllingFieldValue>
+            <valueName>Adjonction de crochet flexible rose</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Réparations</controllingFieldValue>
+            <valueName>Adjonction de crochet transparent</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Réparations</controllingFieldValue>
+            <valueName>Adjonction de crochet acetal</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Réparations</controllingFieldValue>
+            <valueName>Réparation Cassure</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Réparations</controllingFieldValue>
+            <valueName>Adjonction de crochet coulé</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Appareil</controllingFieldValue>
+            <controllingFieldValue>Barre</controllingFieldValue>
+            <controllingFieldValue>Résine</controllingFieldValue>
+            <controllingFieldValue>Stellite</controllingFieldValue>
+            <controllingFieldValue>Inlay onlay facette</controllingFieldValue>
+            <controllingFieldValue>Inlay core</controllingFieldValue>
+            <controllingFieldValue>Couronne</controllingFieldValue>
+            <controllingFieldValue>Couronne sur implant</controllingFieldValue>
+            <valueName>Finition directe</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Appareil</controllingFieldValue>
+            <controllingFieldValue>Barre</controllingFieldValue>
+            <valueName>Essayage de la barre</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Appareil</controllingFieldValue>
+            <controllingFieldValue>Barre</controllingFieldValue>
+            <valueName>Fabrication de la barre + montage des dents</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Appareil</controllingFieldValue>
+            <controllingFieldValue>Barre</controllingFieldValue>
+            <valueName>Essayage esthétique et fonctionnel</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Planification implantaire</controllingFieldValue>
+            <valueName>Planification implantaire et impression du guide</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Planification implantaire</controllingFieldValue>
+            <valueName>Planification du guide</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Planification implantaire</controllingFieldValue>
+            <valueName>Impression du guide</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Résine</controllingFieldValue>
+            <controllingFieldValue>Stellite</controllingFieldValue>
+            <valueName>Montage dents sur cire</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Résine</controllingFieldValue>
+            <controllingFieldValue>Stellite</controllingFieldValue>
+            <controllingFieldValue>Inlay onlay facette</controllingFieldValue>
+            <controllingFieldValue>Couronne</controllingFieldValue>
+            <valueName>Finition</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Résine</controllingFieldValue>
+            <valueName>Finition (Montage des dents déjà réalisé)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Stellite</controllingFieldValue>
+            <valueName>Essayage plaque nue</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Stellite</controllingFieldValue>
+            <valueName>Plaque + Cire d&apos;occlusion</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Stellite</controllingFieldValue>
+            <valueName>Plaque + Montage des dents</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Stellite</controllingFieldValue>
+            <valueName>Montage et finition</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Stellite</controllingFieldValue>
+            <valueName>Montage des dents (Plaque déjà réalisée)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Stellite</controllingFieldValue>
+            <valueName>Montage des dents + finition (Plaque déjà réalisée)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Stellite</controllingFieldValue>
+            <valueName>Finition (Plaque + montage des dents déjà réalisé)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Inlay onlay facette</controllingFieldValue>
+            <controllingFieldValue>Couronne</controllingFieldValue>
+            <valueName>Essayage biscuit</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Inlay onlay facette</controllingFieldValue>
+            <controllingFieldValue>Couronne</controllingFieldValue>
+            <valueName>Montage céramique (biscuit)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Couronne</controllingFieldValue>
+            <controllingFieldValue>Couronne sur implant</controllingFieldValue>
+            <valueName>Essayage armature</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Couronne</controllingFieldValue>
+            <controllingFieldValue>Couronne sur implant</controllingFieldValue>
+            <valueName>Essayage armature + montage céramique (biscuit)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Couronne</controllingFieldValue>
+            <valueName>Montage céramique et finition</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

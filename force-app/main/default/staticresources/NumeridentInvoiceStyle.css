@@ -1,0 +1,182 @@
+/*
+	Standard Stylesheet for SoFacto
+	Author: Cyril Caton
+	Date: 16/06/2017
+	Version: 3.49
+*/
+
+@page {
+    size: A4 portrait;
+            margin-top: 0.5cm;
+            margin-left: 0.5cm;
+            margin-right: 0.5cm;
+            margin-bottom: 1.8cm;
+
+	@bottom-center {
+		content: element(footer_center);
+	}
+}
+
+.footer_center {
+	text-align: center;
+	position: running(footer_center);
+}
+
+.pagenumber:before {
+	content: counter(page);
+}
+
+.pagecount:before {
+	content: counter(pages);
+}
+
+#wrap {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size:12px;
+	line-height:20px
+	color: #333333;
+}
+
+#templates {
+	border-style: none dashed none none;
+	border-width: 0 1px 0 0;
+	height: 100%;
+	padding: 0;
+	margin:0;
+	overflow:auto;
+}
+
+/********************
+	Alignements 
+********************/
+.alignleft {
+	text-align:left !important;
+	padding: 0 5px 0 10px !important;
+}
+	.alignright {
+	text-align:right !important;
+	padding: 0 10px 0 5px !important;
+	white-space: nowrap;
+}
+.aligncenter {
+	text-align:center !important;
+}
+.vtop {
+	vertical-align: top;
+	width:200px;
+}
+
+/********************
+	Images 
+********************/
+.logo {
+	height: 100px;
+	float:right;
+	margin: 10px;
+}
+
+.templateThumbnail {
+	width: 200px;
+	margin: 15px 10px;
+}
+
+.check {
+	width:50px;
+	float:right;
+}
+
+/********************
+	Tables 
+********************/
+#wrap table {
+	width: 100%;
+}
+
+#wrap td {
+	text-align:left;
+	padding: 0 5px 0 10px;
+}
+
+.borderOn, .borderOn th, .borderOn td {
+	border: 1px solid #E6E6E6;
+	border-collapse:collapse;
+	padding: 5px 5px 5px 10px;
+}
+
+table.borderOn {
+	border-left: 0;
+	border-right: 0;
+	border-bottom: 0;
+}
+
+.borderOff, .borderOff th, .borderOff td {
+	border: 0 none !important;
+}
+
+.col33 {
+	width: 33%;
+}
+.col67 {
+	width: 67%;
+} 
+
+.borderOn td, .borderOn th {
+	padding: 5px 5px 5px 10px !important;
+} 
+
+td.sidebar {
+	vertical-align:top;
+	width:200px;
+}
+
+/********************
+	Fonts 
+********************/
+.small {
+	font-size: 10px !important;
+}
+.medium {
+	font-size: 12px;
+}
+.large {
+	font-size: 14px;
+} 	
+#wrap h2 {
+	font-size: 2.2em;
+	font-weight: lighter;
+}  
+#wrap h3 {
+	font-size: 1.1em;
+}  
+#wrap p {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size:12px;
+	line-height:20px
+	color: #333333;
+}
+#wrap p.destinataire {
+	text-align: left;
+	max-width: 95mm;
+	margin-right: 10mm;
+	float: right;
+}
+
+/********************
+	Lists 
+********************/
+ul.templateList {
+	list-style-type:none;
+	padding: 0;
+	margin: 0;
+	text-align: center;
+}
+
+ul.templateList li {
+	text-align: center;
+	padding: 0;
+	margin: 0;
+}
+
+#selected {
+	background-color: gray;
+}

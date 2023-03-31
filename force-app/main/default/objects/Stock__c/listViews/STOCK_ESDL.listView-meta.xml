@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>STOCK_ESDL</fullName>
+    <columns>Marque__c</columns>
+    <columns>Article__c</columns>
+    <columns>Seuil__c</columns>
+    <columns>Quantit_restant__c</columns>
+    <columns>Type_of_article__c</columns>
+    <columns>Description_of_article__c</columns>
+    <columns>NAME</columns>
+    <columns>OWNER.LAST_NAME</columns>
+    <columns>LAST_UPDATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>OWNER.LAST_NAME</field>
+        <operation>equals</operation>
+        <value>ESDL</value>
+    </filters>
+    <label>STOCK ESDL</label>
+    <sharedTo>
+        <role>HQ</role>
+    </sharedTo>
+</ListView>

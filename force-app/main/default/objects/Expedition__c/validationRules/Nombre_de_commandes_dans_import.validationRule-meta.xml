@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Nombre_de_commandes_dans_import</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(RecordType.Id =&quot;0121v000000BWjn&quot;,  ISBLANK( Nombre_de_commandes__c ) )</errorConditionFormula>
+    <errorDisplayField>Nombre_de_commandes__c</errorDisplayField>
+    <errorMessage>You must fill the Total number of jobs</errorMessage>
+</ValidationRule>

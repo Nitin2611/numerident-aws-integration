@@ -1,0 +1,24 @@
+.root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} 
+.close-icon {
+    --sds-c-icon-color-foreground: #1C5297;
+    transition: all 1s ease-out;
+}
+
+.close-icon:hover {
+    opacity: 0.7;
+    transition: all 1s ease-out;
+}
+
+.btn {
+    --sds-c-button-neutral-color-background: #ffe600;
+    --sds-c-button-neutral-color-background-hover:#ffe159;
+    transition: all 0.5s ease-out;
+    --sds-c-button-color-text: rgb(0, 0, 0);
+    --sds-c-button-color-text-hover:  rgb(0, 0, 0);
+    --sds-c-button-text-color:  rgb(0, 0, 0);
+    --sds-c-button-text-color-hover:  rgb(0, 0, 0);
+}

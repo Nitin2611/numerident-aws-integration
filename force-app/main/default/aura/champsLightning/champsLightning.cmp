@@ -1,0 +1,26 @@
+<aura:component access="global" implements="flexipage:availableForAllPageTypes,force:hasRecordId" controller="champsLightning">
+    <!--<aura:attribute name="sObj" type="string" />-->
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="field" type="string" />
+    <aura:attribute name="fieldvalue" type="string" />
+    <aura:attribute name="fieldvalues" type="string[]" />
+    <aura:attribute name="ligne" type="Ligne__c" />
+    <aura:attribute name="Title" type="string" />
+    <aura:attribute name="TempValues" Type="String"/>
+    <!--   <aura:handler name="change" value="{!v.fieldvalue}" action="{!c.clientsavefield}"/> -->
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> 
+    
+    <h1>{!v.Title}</h1>
+    <lightning:select name="mySelect" label=""  aura:id="mySelect" value="{!v.fieldvalue}">
+        <option value="none">-- NonePot --</option>
+        
+        <aura:iteration items="{!v.fieldvalues}" var="valuefield">
+            <option text="{!valuefield}" value="{!valuefield}" selected="{!v.none}"/>
+        </aura:iteration>
+    </lightning:select>
+    
+    <!-- 
+    -->
+    
+</aura:component>

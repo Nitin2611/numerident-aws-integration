@@ -1,0 +1,35 @@
+<apex:page standardController="Ligne__c">
+    <apex:includeLightning />
+    <div id="lightning">
+        
+    </div>
+        <script>
+        $Lightning.use("c:App_champsLightning", function() {
+          $Lightning.createComponent("c:champsLightning",
+          { field : "Arcade__c",
+            sObj: "{!Ligne__c.Id}"
+          },
+          "lightning",
+          function(cmp) {
+            
+              
+              $A.eventService.addHandler({
+                                       event: 'force:navigateToSObject',
+                                       handler: function(event) {
+                                           if (myUserContext == 'Theme4t' || myUserContext == 'Theme4d') {
+                                               // The Visualforce page is in S1 or Lightning Experience
+                                               sforce.one.navigateToSObject(event.getParams().recordId);
+                                           } else if (myUserContext == 'Theme3') {
+                                               // The Visualforce page is  running in Classic
+                                               window.parent.location = '/' + event.getParams().recordId;
+                                           } else {
+                                               console.log("Unsupported theme");   
+                                           }
+                                       }
+                                   });
+              
+            
+          });
+        });
+    </script>
+</apex:page>

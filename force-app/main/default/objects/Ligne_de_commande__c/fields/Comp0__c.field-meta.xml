@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Comp0__c</fullName>
+    <description>IF( OR(ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Inlay core&quot;)),TEXT(Ligne__r.Type__c) + &quot; &quot; + TEXT(Ligne__r.Alliage_Inlay_core__c) ,&quot;&quot;) +</description>
+    <externalId>false</externalId>
+    <formula>IF( OR(ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Gouttière&quot;),ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Ortho&quot;),ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;PEI, Cire&quot;)), UPPER(Details__c),&quot;&quot;) + 
+IF( OR(ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Couronne&quot;),ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Planification implantaire&quot;)),TEXT( Ligne__r.Liaison__c ),&quot;&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Comp0</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

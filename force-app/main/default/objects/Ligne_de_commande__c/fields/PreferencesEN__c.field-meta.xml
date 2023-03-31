@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PreferencesEN__c</fullName>
+    <externalId>false</externalId>
+    <formula>SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE(  SUBSTITUTE( PreferencesFR__c,&quot;Occlusion&quot;,&quot;Occlusion&quot;),&quot;Maquillage&quot;,&quot;Stain&quot;),&quot;Bandeau&quot;,&quot;Lingual metal collar&quot;),&quot;Embrasure&quot;,&quot;Embrassure&quot;),&quot;Point de contact&quot;,&quot;interproximal contact&quot;),&quot;Profil d&apos;emergence&quot;,&quot;Emergence profil&quot;),&quot;Tracé de stellite&quot;,&quot;Design Framework on work model with pencil&quot;),&quot;Perforation&quot;,&quot;Holes&quot;),&quot;Sous occlusion&quot;,&quot;Out of occlusion&quot;),&quot;Sans&quot;,&quot;None&quot;),&quot;Sans&quot;,&quot;With&quot;),&quot;Fermée&quot;,&quot;Close&quot;),&quot;Leger&quot;,&quot;Light interproximal contact&quot;),&quot;Juxta gingival&quot;,&quot;Juxta gigiva&quot;),&quot;Oui&quot;,&quot;with&quot;),&quot;Avec&quot;,&quot;with&quot;),&quot;Normale&quot;,&quot;Light occlusion&quot;),&quot;Léger&quot;,&quot;Light&quot;),&quot;Avec&quot;,&quot;Without&quot;),&quot;Ouverte&quot;,&quot;Open&quot;),&quot;Surface de contact&quot;,&quot;Medium interproximal contact&quot;),&quot;Sous gingival de 1 mm&quot;,&quot;Under the Gum 1 mm&quot;),&quot;Sans&quot;,&quot;Without&quot;),&quot;Forte&quot;,&quot;Heavy occlusion&quot;),&quot;Foncé&quot;,&quot;Strong/dark&quot;),&quot;Fort&quot;,&quot;Heavy interproximal contact&quot;),&quot;Supra gingival&quot;,&quot;Supra gingiva&quot;),&quot;Non&quot;,&quot;Without&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>PreferencesEN</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

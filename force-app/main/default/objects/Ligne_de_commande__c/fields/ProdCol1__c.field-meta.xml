@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProdCol1__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( OR(ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Couronne&quot;),ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Couronne sur implant&quot;),ISPICKVAL( Business_case__r.Sous_cran__c ,&quot;Appareil&quot;)), SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(UPPER(TEXT( Ligne__r.Liaison__c )),&quot;UNITAIRE&quot;,&quot;UNITARY 单冠&quot;),UPPER(&quot;Solidarisé&quot;),&quot;SOLDER 连体&quot;),UPPER(&quot;Bridge&quot;),&quot;BRIDGE 桥体&quot;) ,&quot;&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,189 @@
+<apex:page standardController="Ligne__c" lightningStylesheets="true" showHeader="false" extensions="PRG_LigneControllerExtension" >
+	<apex:stylesheet value="{!URLFOR($Resource.LightningResources, 'styles/salesforce-lightning-design-system.css')}"/>
+    <apex:includeLightning />
+    <apex:outputField value="{!Ligne__c.Ordonnance__c}" rendered="false"/>
+    <apex:outputField value="{!Ligne__c.Validee__c}" rendered="false"/>
+    <apex:outputField value="{!Ligne__c.IsGouttiere__c}" rendered="false"/>
+    <apex:outputField value="{!Ligne__c.IsICC__c}" rendered="false"/>
+    <apex:outputField value="{!Ligne__c.En_cours_de_creation__c}" rendered="false"/>
+    <script>
+    if({!Ligne__c.IsICC__c}) {
+        $Lightning.use("c:App_SelectTooth", function() {
+          $Lightning.createComponent("c:SelectTooth",
+          { field : "Inlay_core__c",
+            sObj: "{!Ligne__c.Id}",
+            actif: "{!NOT(Ligne__c.Validee__c)}"
+          },
+          "InlayCore",
+          function(cmp) {
+            
+              
+              $A.eventService.addHandler({
+                                       event: 'force:navigateToSObject',
+                                       handler: function(event) {
+                                           if (myUserContext == 'Theme4t' || myUserContext == 'Theme4d') {
+                                               // The Visualforce page is in S1 or Lightning Experience
+                                               sforce.one.navigateToSObject(event.getParams().recordId);
+                                           } else if (myUserContext == 'Theme3') {
+                                               // The Visualforce page is  running in Classic
+                                               window.parent.location = '/' + event.getParams().recordId;
+                                           } else {
+                                               console.log("Unsupported theme");   
+                                           }
+                                       }
+                                   });
+              
+            
+          });
+        });
+     }
+     if({!Ligne__c.IsICC__c}) {
+        $Lightning.use("c:App_SelectTooth", function() {
+          $Lightning.createComponent("c:SelectTooth",
+          { field : "Dents_a_restorer__c",
+            sObj: "{!Ligne__c.Id}",
+            actif: "{!NOT(Ligne__c.Validee__c)}"
+          },
+          "Dents",
+          function(cmp) {
+            
+              
+              $A.eventService.addHandler({
+                                       event: 'force:navigateToSObject',
+                                       handler: function(event) {
+                                           if (myUserContext == 'Theme4t' || myUserContext == 'Theme4d') {
+                                               // The Visualforce page is in S1 or Lightning Experience
+                                               sforce.one.navigateToSObject(event.getParams().recordId);
+                                           } else if (myUserContext == 'Theme3') {
+                                               // The Visualforce page is  running in Classic
+                                               window.parent.location = '/' + event.getParams().recordId;
+                                           } else {
+                                               console.log("Unsupported theme");   
+                                           }
+                                       }
+                                   });
+              
+            
+          });
+        });
+    }    
+    </script>
+
+    <apex:form >
+    
+    <div class="slds-page-header forceHighlightsStencilDesktop" style="height: 140px;">
+    	<div class="slds-grid primaryFieldRow">
+    		<div class="slds-grid slds-col slds-has-flexi-truncate slds-media--center">
+    			<div class="profilePicWrapper slds-media slds-no-space">
+    				<div class="slds-media__figure slds-icon forceEntityIcon" style="background-color: #F28411">
+    					<span class="uiImage">
+    						<apex:image id="Caducee" value="{!$Resource.Caducee}" width="32" height="34"/>
+    					</span> 
+    				</div>
+    			</div>
+    		<div class="slds-media__body">
+    			<p class="entityNameTitle slds-breadcrumb__item slds-line-height--reset">Ligne</p>
+<!--     			<h1 class="slds-page-header__title slds-m-right--small slds-truncate slds-align-middle" title="0123E0000009ylDQAQ">
+    				<div class="outputRecordType slds-grid forceOutputRecordType">
+    					<div class="recordTypeName slds-grow">
+    						<span >Gouttière</span>
+    					</div>
+    				</div>
+    			</h1>  -->
+    			<h1 class="slds-page-header__title slds-m-right--small slds-truncate slds-align-middle" >
+    						<span >{!Ligne__c.recordType.Name}</span>
+    			</h1>
+    		</div>
+    	</div>
+    	<div class="slds-col slds-no-flex slds-grid slds-align-middle actionsContainer" >
+    		<!-- workaround for W-2413659, remove once that bug is fixed --><!--render facet: 84:187;a-->
+    		<!-- workaround for W-2413659, remove once that bug is fixed -->
+<!--   		<ul class="branding-actions slds-button-group slds-m-left--xx-small oneActionsRibbon forceActionsContainer" >
+    			<li class="slds-button slds-button--neutral slds-truncate">
+    					<div class="slds-truncate" title="Supprimer">Supprimer</div>
+    			</li>
+    			<li class="slds-button slds-button--neutral slds-truncate">
+    					<div class="slds-truncate" title="Cloner">Cloner</div>
+    			</li> -->
+    			<!-- workaround for W-2413659, remove once that bug is fixed --><!--render facet: 96:187;a-->
+<!--   		</ul>    -->
+    	</div>
+    	<apex:outputPanel rendered="{!NOT(readOnly)}">
+    		<div class="slds-button-group" role="group">
+				<button class="slds-button slds-button_neutral" style="font-family: Lato;font-size: 0.8125rem;color:#eb5424;"><apex:commandLink action="{!SaveLigne}" value="Enregistrer"/></button>
+				<button class="slds-button slds-button_neutral" style="font-family: Lato;font-size: 0.8125rem;color:#eb5424;"><apex:commandLink action="{!CancelLigne}" value="Annuler les modifications"/></button>
+				<button class="slds-button slds-button_neutral" style="font-family: Lato;font-size: 0.8125rem;color:#eb5424;"><apex:commandLink action="{!DeleteLigne}" value="Supprimer la ligne"/></button>
+			</div>
+		</apex:outputPanel>
+    	<apex:outputPanel rendered="{!readOnly}">
+    		<div class="slds-button-group" role="group">
+				<button class="slds-button slds-button_neutral" style="font-family: Lato;font-size: 0.8125rem;color:#eb5424;"><apex:commandLink action="{!CancelLigne}" value="Retour à l'ordonnance"/></button>
+			</div>
+		</apex:outputPanel>
+    	
+    </div>
+    <ul class="slds-grid slds-page-header__detail-row" role="list" style="">
+    	<li class="slds-page-header__detail-block forceHighlightsDesktopListRecordItem" role="listitem" style="max-width: 138px;">
+    		<p class="slds-text-heading--label-normal slds-m-bottom--xx-small slds-truncate" title="Ordonnance" >
+    			<!--render facet: 40:187;a-->Ordonnance<!--render facet: 42:187;a-->
+    		</p>
+    		<p class="slds-text-body--regular  slds-truncate" >
+    			<div class="outputLookupContainer forceOutputLookupWithPreview">
+    			<!--render facet: 17:187;a--><!--render facet: 19:187;a-->
+    				{!Ligne__c.Ordonnance__r.Name}
+    				<!--render facet: 27:187;a--><!--render facet: 36:187;a-->
+    			</div>
+    		</p>
+    	</li>
+    	<li class="slds-page-header__detail-block forceHighlightsDesktopListRecordItem" role="listitem" style="max-width: 128px;">
+    		<p class="slds-text-heading--label-normal slds-m-bottom--xx-small slds-truncate" title="N°" >
+    		<!--render facet: 52:187;a-->N°<!--render facet: 54:187;a-->
+    		</p>
+    		<p class="slds-text-body--regular  slds-truncate" >
+    			<span class="uiOutputText">{!Ligne__c.Name}</span>
+    		</p>
+    	</li>
+  	</ul>
+  </div>
+    
+<br/>
+<apex:pageBlock title="Inlay core" rendered="{!Ligne__c.IsICC__c}">
+   	<apex:PageMessages />
+    <div id="InlayCore" />
+    <apex:pageBlockSection title="" collapsible="false" columns="1" rendered="{!NOT(readOnly)}">
+            <apex:inputField value="{!Ligne__c.Type__c}"/>
+        <apex:inputField value="{!Ligne__c.Alliage_Inlay_core__c}"/>
+    </apex:pageBlockSection>
+    <apex:pageBlockSection title="" collapsible="false" columns="1" rendered="{!readOnly}">
+            <apex:outputField value="{!Ligne__c.Type__c}"/>
+        <apex:outputField value="{!Ligne__c.Alliage_Inlay_core__c}"/>
+    </apex:pageBlockSection>
+</apex:pageBlock>
+
+ <apex:pageBlock title="Dents à restaurer" rendered="{!Ligne__c.IsICC__c}">
+    <div id="Dents" />
+<apex:pageBlockSection title="" collapsible="false" columns="1" rendered="{!NOT(readOnly)}">
+            <apex:inputField value="{!Ligne__c.Liaison__c}"/>
+            <apex:inputField value="{!Ligne__c.Couronne__c}"/>
+            <apex:inputField value="{!Ligne__c.Alliage__c}"/>
+            </apex:pageBlockSection>
+<apex:pageBlockSection title="" collapsible="false" columns="1" rendered="{!readOnly}">
+            <apex:inputField value="{!Ligne__c.Finition__c}"/>
+            </apex:pageBlockSection>
+            </apex:pageBlock> 
+
+    <apex:pageBlock title="Gouttière" rendered="{!Ligne__c.IsGouttiere__c}">
+    	<apex:PageMessages />
+        <apex:pageBlockSection title="" collapsible="false" columns="1" rendered="{!NOT(readOnly)}">
+            <apex:inputField value="{!Ligne__c.Arcade__c}"/>
+            <apex:inputField value="{!Ligne__c.Type__c}"/>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="" collapsible="false" columns="1" rendered="{!readOnly}">
+            <apex:outputField value="{!Ligne__c.Arcade__c}"/>
+            <apex:outputField value="{!Ligne__c.Type__c}"/>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+
+     </apex:form>
+
+</apex:page>

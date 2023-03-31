@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Quantit_entr_e__c</fullName>
+    <description>Somme des quantités entrées</description>
+    <externalId>false</externalId>
+    <label>Quantité entrée</label>
+    <summarizedField>Mouvement__c.Quantit__c</summarizedField>
+    <summaryFilterItems>
+        <field>Mouvement__c.Sens__c</field>
+        <operation>equals</operation>
+        <value>Entrée</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Mouvement__c.Stock__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Finition_suivante__c</fullName>
+    <externalId>false</externalId>
+    <label>Finition suivante</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Finition__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>Finition</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>Essayage armature / pilier + armature</controllingFieldValue>
+            <controllingFieldValue>Essayage armature</controllingFieldValue>
+            <valueName>Montage céramique (biscuit)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Essayage armature / pilier + armature</controllingFieldValue>
+            <controllingFieldValue>Essayage armature</controllingFieldValue>
+            <valueName>Montage céramique et finition</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Essayage armature / pilier + armature + biscuit</controllingFieldValue>
+            <controllingFieldValue>Montage dents sur cire</controllingFieldValue>
+            <controllingFieldValue>Plaque + Montage des dents</controllingFieldValue>
+            <controllingFieldValue>Essayage biscuit</controllingFieldValue>
+            <controllingFieldValue>Montage céramique (biscuit)</controllingFieldValue>
+            <controllingFieldValue>Essayage armature + montage céramique (biscuit)</controllingFieldValue>
+            <valueName>Finition</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cire d&apos;occlusion</controllingFieldValue>
+            <controllingFieldValue>Plaque + Cire d&apos;occlusion</controllingFieldValue>
+            <controllingFieldValue>Plaque nue</controllingFieldValue>
+            <valueName>Montage dents sur cire</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cire d&apos;occlusion</controllingFieldValue>
+            <controllingFieldValue>Plaque + Cire d&apos;occlusion</controllingFieldValue>
+            <controllingFieldValue>Plaque nue</controllingFieldValue>
+            <valueName>Montage et finition</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plaque nue</controllingFieldValue>
+            <valueName>Cire d&apos;occlusion</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

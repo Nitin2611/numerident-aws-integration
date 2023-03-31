@@ -1,0 +1,124 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,forceCommunity:themeLayout,lightning:actionOverride,force:hasRecordId,force:hasSObjectName" access="global" controller="MyDocsFileController">
+    <ltng:require scripts="/resource/awssdk" afterScriptsLoaded="{!c.initAwsSdk}"/>
+    <aura:attribute name="awsSetting" type="AWS_Setting__mdt" default=""/>
+    <aura:handler name="init" action="{!c.init}" value="{!this}" />
+
+    <aura:attribute name="isEditable" type="Boolean" default="true" />
+    <aura:attribute name="isExtranet" type="Boolean" default="false" />
+	<aura:attribute name="recordId" type="String" />
+    <aura:attribute name="isRecordRelationshipPage" type="Boolean" default="false" />
+    
+    <aura:attribute name="success" type="String" default="" />
+    <aura:attribute name="error" type="String" default="" />
+    <aura:attribute name="info" type="String" default="" />
+    <aura:attribute name="showProgressBar" type="Boolean"  default="false" />
+    <aura:attribute name="progressBar" type="Integer" default="0" />
+   
+    <aura:html tag="style"> 
+    .closeIcon {
+        display:none
+    }
+    </aura:html>
+    
+    <aura:if isTrue="{!v.isExtranet}">
+            <div aura:id="inputFile" role="dialog" tabindex="-1" aria-labelledby="header43" class="">
+                <div class="slds-modal__header">
+                    <h2 class="slds-text-heading--medium">Chargement du fichier</h2>
+                </div>
+                <div class="slds-modal__content slds-p-around--medium slds-wrap">
+                	<aura:if isTrue="{!v.isEditable}">
+                    <aura:if isTrue="{!v.showProgressBar}">
+                        <aura:if isTrue="{!v.error}">
+                            <p class="slds-text-heading_small slds-truncate" style="color: red;">{!v.error}</p>
+                        </aura:if>
+                        <aura:if isTrue="{!v.success}">
+                            <p class="slds-text-heading_medium slds-truncate">{!v.success}</p>
+                        </aura:if>
+                        <aura:if isTrue="{!v.info}">
+                            <p class="slds-text-heading_small slds-truncate">{!v.info} ({!v.progressBar}%)</p>
+                        </aura:if>
+                        <br/>
+                        <lightning:progressBar value="{!v.progressBar}" size="small" />
+                        <br /><br />
+                        <aura:set attribute="else">
+                            <input
+                                   aura:id="fileInput"
+                                   class="fileInput"
+                                   type="file"
+                                   accept=".3oxz,.stl,.dcm"
+                                   onclick="{!c.handleFileClick}"
+                                   onchange="{!c.handleSelectedFiles}"
+                                   />
+                        </aura:set>
+                    </aura:if>
+                    <aura:set attribute="else">
+                        <p class="slds-text-heading_medium slds-truncate">Commande non modifiable</p>
+                        <p>La commande étant en statut validée, il n'est plus possible d'ajouter une empreinte numérique.
+                            Merci de recréer votre commande en y glissant votre empreinte avant la validation
+                        </p>
+                    </aura:set>
+                </aura:if>
+                	<div class="slds-text-align_right">  
+                    	<lightning:button label="Fermer"
+                                      variant="brand"
+                                      class="slds-m-top--large"
+                                      onclick="{!c.handleClose}" />
+                </div>  
+            </div>
+            </div>
+            <div aura:id="overlay" class="slds-backdrop--close"></div>
+            <aura:set attribute="else">
+               <div aura:id="inputFile" role="dialog" tabindex="-1" aria-labelledby="header43" class="slds-modal slds-fade-in-open">
+                 <div class="slds-modal__container">
+                    <div class="slds-modal__header">
+                        <h2 class="slds-text-heading--medium">Chargement du fichier</h2>
+                    </div>
+                    <div class="slds-modal__content slds-p-around--medium slds-wrap ">
+                        <aura:if isTrue="{!v.isEditable}">
+                            <aura:if isTrue="{!v.showProgressBar}">
+                                <br />
+                                <aura:if isTrue="{!v.error}">
+                                    <p class="slds-text-heading_small slds-truncate" style="color: red;">{!v.error}</p>
+                                </aura:if>
+                                <aura:if isTrue="{!v.success}">
+                                    <p class="slds-text-heading_medium slds-truncate">{!v.success}</p>
+                                </aura:if>
+                                <aura:if isTrue="{!v.info}">
+                                    <p class="slds-text-heading_small slds-truncate">{!v.info} ({!v.progressBar}%)</p>
+                                </aura:if>
+                                <br/>
+                                <lightning:progressBar value="{!v.progressBar}" size="small" />
+                                <br /><br />
+                                <aura:set attribute="else">
+                                    <input
+                                           aura:id="fileInput"
+                                           class="fileInput"
+                                           type="file"
+                                           accept=".3oxz,.stl,.dcm"
+                                           onclick="{!c.handleFileClick}"
+                                           onchange="{!c.handleSelectedFiles}"
+                                           />
+                                </aura:set>
+                            </aura:if>
+                            <aura:set attribute="else">
+                                <p class="slds-text-heading_medium slds-truncate">Commande non modifiable</p>
+                                <p>La commande étant en statut validée, il n'est plus possible d'ajouter une empreinte numérique.
+                                    Merci de recréer votre commande en y glissant votre empreinte avant la validation
+                                </p>
+                            </aura:set>
+                        </aura:if>
+                     </div>
+                     <div class="slds-modal__footer">                
+                            <lightning:button
+                                label="Fermer"
+                                variant="brand"
+                                class="slds-m-top--medium"
+                                onclick="{!c.handleClose}"    
+                            />
+                        </div>
+                   </div>
+                </div>
+               <div aura:id="overlay" class="slds-backdrop slds-backdrop--open"></div>
+            </aura:set>
+        </aura:if>
+</aura:component>

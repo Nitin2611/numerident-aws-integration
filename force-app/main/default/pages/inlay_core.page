@@ -1,0 +1,41 @@
+<apex:page standardController="Ligne__c">
+    <apex:includeLightning />
+    <style type="text/css">
+        h1 { font-size: 18px; }
+    </style>
+    <h1>
+        Inlay core
+    </h1>
+    <div id="lightning" />
+
+    <script>
+        $Lightning.use("c:App_SelectTooth", function() {
+          $Lightning.createComponent("c:SelectTooth",
+          { field : "Inlay_core__c",
+          	sObj: "{!Ligne__c.Id}"
+          },
+          "lightning",
+          function(cmp) {
+            
+              
+              $A.eventService.addHandler({
+                                       event: 'force:navigateToSObject',
+                                       handler: function(event) {
+                                           if (myUserContext == 'Theme4t' || myUserContext == 'Theme4d') {
+                                               // The Visualforce page is in S1 or Lightning Experience
+                                               sforce.one.navigateToSObject(event.getParams().recordId);
+                                           } else if (myUserContext == 'Theme3') {
+                                               // The Visualforce page is  running in Classic
+                                               window.parent.location = '/' + event.getParams().recordId;
+                                           } else {
+                                               console.log("Unsupported theme");   
+                                           }
+                                       }
+                                   });
+              
+            
+          });
+        });
+    </script>
+  	
+</apex:page>

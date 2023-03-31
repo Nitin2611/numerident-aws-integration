@@ -1,0 +1,145 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false" standardController="Panier__c" renderAs="pdf"  
+ applyHtmlTag="false" applyBodyTag="false" extensions="PRG_PanierExtension">
+
+<html>
+<head>
+      <style type="text/css">
+                        
+      @page :first{
+            @top-left {
+            content: element(headerOne);
+            }        
+       }
+    
+    
+       @page{
+            size: 21.0cm 29.7cm;
+            margin-top: 120px;/*
+            margin-left: 0.4cm;
+            margin-right: 0.4cm;*/
+            margin-bottom: 1.8cm;
+            counter-increment:pages;
+            @bottom-center {
+            content: element(footer);
+            }
+            @top-left {
+            content: element(header);  
+            }
+            
+        }
+            
+       div.footer {
+        position:running(footer);
+        } 
+        div.headerOne{
+        position:running(headerOne);
+        text-align:left;
+        }   
+        div.header{
+        position:running(header);
+        text-align:left;
+        }     
+        #pageNum:before {
+        content: counter(page);
+        }   
+        #pageNums:before {
+        content: counter(pages);
+        }
+        body {
+        font-family:Arial,sans-serif;
+        }
+        table {
+        table-layout:fixed;
+        }
+
+    </style>
+</head>
+
+<apex:repeat value="{!Paniers}" var="Panier">
+<div style="page-break-before:always">
+<div class="footer"><table><tr><td style="width:100%; font-size:65%;text-align:center">
+<!-- Footer content -->
+</td></tr></table>
+</div>
+<div class="headerOne" style="display:inline-block;"> 
+    <apex:outputText rendered="false">{!Panier__c.Date__c}</apex:outputText>
+    <br/>
+    {!Panier.Compte__r.Name}
+</div>
+<div class="header" style="display:inline-block;"> 
+    <table>
+    <col width="5%"/>
+    <col width="50%"/>
+    <col width="45%"/>
+        <tr>
+            <td><apex:outputText rendered="false">{!Panier__c.Date__c}</apex:outputText></td>
+            <td style="vertical-align:top;font-family:Arial,sans-serif;font-size:8pt;color#808080"><p style="font-size:90%;"><strong style="font-size:200%;">{!Panier.Name}</strong><br/></p></td>
+            <td style="vertical-align:bottom;"><img src="{!URLFOR($Resource.Logo)}" style="height:65px;"/></td>  
+        </tr>
+    <tr>
+        <td><strong style="font-size:200%;">{!Panier.Compte__r.AccountNumber}</strong></td>
+        <td><apex:image value="https://www.barcodesinc.com/generator/image.php?code={!Panier.Name}&style=68&type=C128B&width=200&height=75&xres=1&font=3" /></td>
+        <td><strong>LIVRAISON</strong></td>
+    </tr>
+    </table>
+</div>
+
+<!--            <td><apex:image value="https://barcode.tec-it.com/barcode.ashx?data={!Ordonnance__c.Name}&code=Code128&multiplebarcodes=false&translate-esc=false&unit=Fit&dpi=96&imagetype=Gif&rotation=0&color=%23000000&bgcolor=%23ffffff&qunit=Mm&quiet=0' alt='Barcode Generator TEC-IT" /></td> -->
+
+
+  
+<br/>
+<br/>
+
+<table style="width:100%;">
+    <col width="55%"/>
+    <col width="45%"/>
+    <tr>
+        <td><strong>{!Panier.Compte__r.Name}</strong></td>
+        <td><strong>Numerident</strong></td>
+    </tr>
+    <tr> 
+        <td><strong>{!Panier.Compte__r.BillingStreet}</strong></td>
+        <td>23 bis rue Barthélemy Danjou</td>
+    </tr>
+    <tr>
+        <td><strong>{!Panier.Compte__r.BillingPostalCode} {!Panier.Compte__r.BillingCity}</strong></td>
+        <td>92100 Boulogne-Billancourt</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>01 58 57 96 32</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+
+
+<br/>
+
+<table style="width:100%; font-size:100%;border-style: solid;border-color:#3C3C3B;border-collapse: collapse;border-width:1px;">
+<tr style="background-color: #eb5424;text-align:center;color:white">
+<th width="20%;border-style: solid;border-color:#3C3C3B;border-width:1px;">Dossier</th>
+<th width="40%;border-style: solid;border-color:#3C3C3B;border-width:1px;">Patient</th>
+<th width="40%;border-style: solid;border-color:#3C3C3B;border-width:1px;">Praticien</th>
+</tr>
+<apex:repeat var="ligne" value="{!Panier.Opportunit_s__r}">
+<tr>
+<td style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style:solid;border-right-color:#3C3C3B;text-align: left;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#3C3C3B;">&nbsp;{!ligne.Name}</td>
+<td style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style:solid;border-right-color:#3C3C3B;text-align: center;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#3C3C3B;">{!ligne.Patient__c}</td>
+<td style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style:solid;border-right-color:#3C3C3B;text-align: left;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#3C3C3B;">&nbsp;{!ligne.Praticien__r.FirstName}&nbsp;{!ligne.Praticien__r.LastName}</td>
+</tr>
+</apex:repeat>
+</table>
+<br/><br/>
+ </div>
+ </apex:repeat>
+</html>
+
+</apex:page>

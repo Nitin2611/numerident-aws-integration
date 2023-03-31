@@ -1,0 +1,75 @@
+<!--
+ - Created by Sonal_Chaudhary on 1/5/2018.
+styles="{!$Resource.fivestar + '/rating2.css'}"
+ -->
+
+<aura:component controller ='CtrlStarRating' description="StarRating" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <ltng:require 
+                  scripts="{!$Resource.fivestar + '/rating.js'}"
+                  afterScriptsLoaded="{!c.afterScriptsLoaded}" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name='change' value="{!v.value}" action="{!c.onValueChange}" />
+    
+    <aura:attribute name='TexteAvantEtoiles' type='string' default='Votre avis nous intéresse, notez ce travail !' />
+    <aura:attribute name='NombreDetoiles' type='integer'  />
+    <aura:attribute name='PopupCommentaire' type='boolean' default='false' />
+    <aura:attribute name='value' type='Integer' default='0' />
+    <aura:attribute name='readonly' type='boolean' default='false' />
+    <aura:attribute name='Lanote' type='Notation__c' />
+    <aura:attribute name='param1' type='string'  /> 
+    <aura:attribute name="edit" type="Boolean" default="false"/>
+    <aura:attribute name="ShowModale" type="Boolean" default="false"/>
+    
+    
+    <div class="slds-grid slds-gutters">
+        <div class="slds-col">
+            <span> {!v.TexteAvantEtoiles}</span>
+        </div>
+        <div class="slds-col">
+            <span> <ul aura:id='ratingArea' class="{!v.readonly ? 'readonly c-rating' : 'c-rating' }" /> </span>
+        </div>
+        <div class="slds-col">
+            <span><lightning:button  label="Dites en plus..." title="Dites en plus..." onclick="{! c.ShowModale }"/></span>   
+        </div>
+        <div class="slds-col">
+        </div>
+        <div class="slds-col">
+        </div>
+    </div>
+    
+    
+    <aura:if isTrue="{!v.ShowModale}">
+        <aura:if isTrue="{!v.Lanote}">
+        <div class="mod" style="height: 640px;">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Vos commentaires</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                       <lightning:recordEditForm objectApiName="Notation__c" recordId="{!v.Lanote.Id}" onsubmit="{!c.handleCancel}">     
+                        <!-- the messages component is for error messages -->
+                        <lightning:messages />
+                        <!-- <lightning:inputField fieldName="Name"  disabled="true"   />
+                        <lightning:inputField fieldName="Objet_lie__c"  disabled="true"  value ="{!v.recordId}" /> -->
+                        <lightning:inputField fieldName="Commentaire__c" />   
+                        {!v.Lanote.id}
+                        <div class="slds-m-top_medium">
+                            <lightning:button disabled="{!v.disabled}" variant="brand" type="submit" name="save" label="Enregistrer" />
+                            <lightning:button variant="neutral" label="Cancel" title="Cancel" type="text" onclick="{!c.handleCancel}"/>
+                        </div>
+                    </lightning:recordEditForm>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </aura:if>
+    </aura:if>
+  
+</aura:component>

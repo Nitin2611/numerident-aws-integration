@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Categorie__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(NbLignes__c &gt;0,CASE( NbLignes__c ,NbESTHETIQUES__c,&quot;ESTHETIQUES&quot;,NbGOUTTIERES__c,&quot;GOUTTIERES&quot;,NbIC_COURONNES__c,&quot;IC COURONNES&quot;,NbIMPLANTS__c,&quot;IMPLANTS&quot;,NbORTHO__c,&quot;ORTHO&quot;,NbPEI_CIRE__c,&quot;PEI_CIRE&quot;,NbREPARATIONS__c,&quot;REPARATIONS&quot;,NbRESINES__c,&quot;RESINES&quot;,NbSTELLITES__c,&quot;STELLITES&quot;,&quot;MIXTE&quot;),&quot;&quot;)</formula>
+    <label>Catégorie</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

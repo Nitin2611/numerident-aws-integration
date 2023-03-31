@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProdCol4__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( Ligne__r.RecordType.DeveloperName = &quot;Resine&quot;,&quot; REMOVE &quot; + Ligne__r.Liste_des_dents__c,&quot;&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Teeth to be removed</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

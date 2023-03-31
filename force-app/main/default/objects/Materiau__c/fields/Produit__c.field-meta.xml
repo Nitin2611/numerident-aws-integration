@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Produit__c</fullName>
+    <externalId>false</externalId>
+    <label>Produit</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>ACRYLIC DENTURE</fullName>
+                <default>false</default>
+                <label>ACRYLIC DENTURE</label>
+            </value>
+            <value>
+                <fullName>CAST METAL COCR FRAMEWORK</fullName>
+                <default>false</default>
+                <label>CAST METAL COCR FRAMEWORK</label>
+            </value>
+            <value>
+                <fullName>COMPOSITE</fullName>
+                <default>false</default>
+                <label>COMPOSITE</label>
+            </value>
+            <value>
+                <fullName>EMAX</fullName>
+                <default>false</default>
+                <label>EMAX</label>
+            </value>
+            <value>
+                <fullName>EMAX CAD</fullName>
+                <default>false</default>
+                <label>EMAX CAD</label>
+            </value>
+            <value>
+                <fullName>FLEXIBLE DENTURE</fullName>
+                <default>false</default>
+                <label>FLEXIBLE DENTURE</label>
+            </value>
+            <value>
+                <fullName>FMC</fullName>
+                <default>false</default>
+                <label>FMC</label>
+            </value>
+            <value>
+                <fullName>IMPLANT BAR</fullName>
+                <default>false</default>
+                <label>IMPLANT BAR</label>
+            </value>
+            <value>
+                <fullName>PFM</fullName>
+                <default>false</default>
+                <label>PFM</label>
+            </value>
+            <value>
+                <fullName>POST&amp;CORE</fullName>
+                <default>false</default>
+                <label>POST&amp;CORE</label>
+            </value>
+            <value>
+                <fullName>ZIRCONIA</fullName>
+                <default>false</default>
+                <label>ZIRCONIA</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

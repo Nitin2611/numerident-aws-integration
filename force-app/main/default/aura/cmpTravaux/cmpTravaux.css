@@ -1,0 +1,68 @@
+/* Structure */
+.THIS body, .THIS table, .THIS tr, .THIS td{
+
+}
+
+.THIS .tableau{
+    width:100%;
+    display:block;
+}
+.THIS .layout{
+	border-collapse:separate;
+}
+.THIS .layout td{
+	padding: 0px;
+	color:rgba(0,0,0,0.7);
+}
+.THIS .bline td{
+	border-bottom:1px solid rgba(0,0,0,0.8);
+    height: 0px;
+}
+.THIS .tline td{
+	border-top:1px solid rgba(0,0,0,0.8);
+}
+.THIS .dentTop{
+}
+.THIS .dentBot{
+}
+.THIS .lcol{
+	border-left:2px solid rgba(0,0,0,0.8);
+	
+}
+.THIS .rlcol{
+	border-right:2px solid rgba(0,0,0,0.8);
+	
+}
+
+/* Graphique */
+
+.THIS td{
+	background-color:rgba(255,255,255,1);
+	cursor:pointer;
+    text-align: center;
+    border-spacing: 30px;
+}
+
+.THIS  td:hover{
+	cursor:pointer;
+    
+    }
+
+.THIS .radius{
+    width: 30px;
+    height: 30px;
+    line-height: 30px;    
+}
+.THIS .radius:hover{
+	background-color:rgba(0, 161, 223,0.7);
+    border-radius: 50%;
+}
+
+.THIS .Selected{
+	background-color:rgba(0, 161, 223,1);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    
+}

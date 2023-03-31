@@ -1,0 +1,47 @@
+<apex:page standardController="Ligne__c" extensions="hideArray">
+    <apex:includeLightning />
+	<style type="text/css">
+        h1 { font-size: 18px; }
+    </style>
+    <h1>
+        Crochet transparent
+    </h1>
+    <apex:form >
+        <apex:inputCheckbox value="{!SelectedVal}"  onclick="RenderSection();" label="check"/><b>Ne pas extraire</b>
+        <br/>
+        <apex:outputPanel id="lightning" rendered="{!showComponent}">
+    <div id="lightning" />
+
+    <script>
+        $Lightning.use("c:App_SelectTooth", function() {
+          $Lightning.createComponent("c:SelectTooth",
+          { field : "Crochet_transparent__c",
+          	sObj: "{!Ligne__c.Id}"
+          },
+          "lightning",
+          function(cmp) {
+            
+              
+              $A.eventService.addHandler({
+                                       event: 'force:navigateToSObject',
+                                       handler: function(event) {
+                                           if (myUserContext == 'Theme4t' || myUserContext == 'Theme4d') {
+                                               // The Visualforce page is in S1 or Lightning Experience
+                                               sforce.one.navigateToSObject(event.getParams().recordId);
+                                           } else if (myUserContext == 'Theme3') {
+                                               // The Visualforce page is  running in Classic
+                                               window.parent.location = '/' + event.getParams().recordId;
+                                           } else {
+                                               console.log("Unsupported theme");   
+                                           }
+                                       }
+                                   });
+              
+            
+          });
+        });
+    </script>
+            </apex:outputPanel>
+            <apex:actionFunction name="RenderSection" action="{!RenderSec}"/>
+    </apex:form>
+</apex:page>

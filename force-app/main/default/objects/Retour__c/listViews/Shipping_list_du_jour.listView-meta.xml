@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Shipping_list_du_jour</fullName>
+    <columns>CASE__c</columns>
+    <columns>Ligne__c</columns>
+    <columns>NAME</columns>
+    <columns>Dossier__c</columns>
+    <columns>Manually_checked__c</columns>
+    <columns>Code__c</columns>
+    <columns>Quantite__c</columns>
+    <columns>Full_match__c</columns>
+    <columns>Match__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>LAST_UPDATE</columns>
+    <columns>Statut_de_r_conciliation_dossier__c</columns>
+    <columns>TEETH__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Dossier__c</field>
+        <operation>equals</operation>
+        <value>A2159210-A</value>
+    </filters>
+    <label>Shipping list du jour</label>
+</ListView>

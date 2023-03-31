@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Sous_cran__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>Type</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>Ortho</controllingFieldValue>
+            <valueName>Modèle d&apos;étude</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Ortho</controllingFieldValue>
+            <valueName>Fil de contention</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Réparations</controllingFieldValue>
+            <valueName>Résine</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Réparations</controllingFieldValue>
+            <valueName>Stellite</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Planification implantaire</controllingFieldValue>
+            <valueName>Simplifié (pilot drill)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Gouttière</controllingFieldValue>
+            <valueName>Gouttière thermoformée souple</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Gouttière</controllingFieldValue>
+            <valueName>Gouttière de contention</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Gouttière</controllingFieldValue>
+            <valueName>Gouttière de bruxisme dure</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Gouttière</controllingFieldValue>
+            <valueName>Gouttière semi-rigide</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Gouttière</controllingFieldValue>
+            <valueName>Gouttière de blanchiment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Gouttière</controllingFieldValue>
+            <valueName>Gouttière de fluoration</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Gouttière</controllingFieldValue>
+            <valueName>Gouttière hémostatique</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Gouttière</controllingFieldValue>
+            <valueName>Gouttière de sport</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Gouttière</controllingFieldValue>
+            <valueName>Gouttière extra fine dure</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Gouttière</controllingFieldValue>
+            <valueName>Gouttière de bruxisme dure (SUR EMPREINTE NUMÉRIQUE)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Gouttière</controllingFieldValue>
+            <valueName>Gouttière semi-rigide (SUR EMPREINTE NUMÉRIQUE)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Gouttière</controllingFieldValue>
+            <valueName>Gouttière thermoformée transparente (pour la fabrication d&apos;un provisoire fauteuil)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PEI, Cire</controllingFieldValue>
+            <valueName>Porte Empreinte Individuel (PEI)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PEI, Cire</controllingFieldValue>
+            <valueName>Cire d&apos;occlusion</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PEI, Cire</controllingFieldValue>
+            <valueName>Cire d&apos;occlusion (base dure)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PEI, Cire</controllingFieldValue>
+            <valueName>Cire d&apos;occlusion base résine</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PEI, Cire</controllingFieldValue>
+            <valueName>PEI + Cire d&apos;occlusion</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PEI, Cire</controllingFieldValue>
+            <valueName>PEI + Cire d&apos;occlusion base résine</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PEI, Cire</controllingFieldValue>
+            <valueName>Cire d’occlusion transvissée sur implant</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PEI, Cire</controllingFieldValue>
+            <valueName>Guide radiologique</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PEI, Cire</controllingFieldValue>
+            <valueName>Guide chirurgical (sur empreinte physique)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PEI, Cire</controllingFieldValue>
+            <valueName>Clé en plâtre</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PEI, Cire</controllingFieldValue>
+            <valueName>Cire d’occlusion vissée sur 2 piliers provisoires</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PEI, Cire</controllingFieldValue>
+            <valueName>Coulée des empreintes + choix des piliers coniques</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PEI, Cire</controllingFieldValue>
+            <valueName>Modèles en plâtre</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Résine</controllingFieldValue>
+            <valueName>Résine standard</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Résine</controllingFieldValue>
+            <valueName>Valplast</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Inlay onlay facette</controllingFieldValue>
+            <valueName>Inlay/Onlay</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Inlay onlay facette</controllingFieldValue>
+            <valueName>Facette</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Inlay onlay facette</controllingFieldValue>
+            <valueName>Projet esthétique</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Inlay onlay facette</controllingFieldValue>
+            <valueName>Wax Up</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Inlay onlay facette</controllingFieldValue>
+            <valueName>Composite</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Inlay onlay facette</controllingFieldValue>
+            <valueName>Metal</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Inlay core</controllingFieldValue>
+            <valueName>Classique</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Inlay core</controllingFieldValue>
+            <valueName>Céramisé</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Inlay core</controllingFieldValue>
+            <valueName>Claveté</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Inlay core</controllingFieldValue>
+            <valueName>Céramisé claveté</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Couronne</controllingFieldValue>
+            <valueName>Richmond CCM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Couronne</controllingFieldValue>
+            <controllingFieldValue>Pilier</controllingFieldValue>
+            <controllingFieldValue>Couronne sur implant</controllingFieldValue>
+            <valueName>Couronne metallique</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Couronne</controllingFieldValue>
+            <valueName>Richmond metallique</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Couronne</controllingFieldValue>
+            <valueName>Plateau Richmond</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Couronne</controllingFieldValue>
+            <valueName>Armature de recouvrement</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Couronne</controllingFieldValue>
+            <controllingFieldValue>Pilier</controllingFieldValue>
+            <controllingFieldValue>Couronne sur implant</controllingFieldValue>
+            <valueName>Provisoire</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Couronne</controllingFieldValue>
+            <valueName>ENAMIC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Couronne</controllingFieldValue>
+            <valueName>CCM : Céramo-métallique</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Couronne</controllingFieldValue>
+            <valueName>EMAX : Céramique monolithique (hors zircone)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Couronne</controllingFieldValue>
+            <valueName>CCZ : Céramo-céramique</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Couronne</controllingFieldValue>
+            <valueName>Full Zr Multilayer : Céramique monolithique Zircone</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Projet esthétique</controllingFieldValue>
+            <valueName>Wax-up</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

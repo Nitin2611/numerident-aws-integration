@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FJL</fullName>
+    <columns>NAME</columns>
+    <columns>Ecran__c</columns>
+    <columns>Sous_cran__c</columns>
+    <columns>Accastillage__c</columns>
+    <columns>Type__c</columns>
+    <columns>Options__c</columns>
+    <columns>Type_d_implant__c</columns>
+    <columns>Materiau__c</columns>
+    <columns>Finition__c</columns>
+    <columns>Minimum__c</columns>
+    <columns>Maximum__c</columns>
+    <columns>Nombre_de_produits__c</columns>
+    <columns>BC_Etape_suivante__c</columns>
+    <columns>BC_de_finition__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>FJL</label>
+</ListView>

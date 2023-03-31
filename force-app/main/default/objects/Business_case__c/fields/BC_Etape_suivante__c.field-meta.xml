@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BC_Etape_suivante__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>BC d&apos;étape suivante</label>
+    <referenceTo>Business_case__c</referenceTo>
+    <relationshipLabel>Business cases</relationshipLabel>
+    <relationshipName>Business_cases</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Scans_du_jour</fullName>
+    <columns>CAB__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Opportunite__c</columns>
+    <columns>Sens__c</columns>
+    <columns>LAST_UPDATE</columns>
+    <columns>UPDATEDBY_USER</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>LAST_UPDATE</field>
+        <operation>greaterOrEqual</operation>
+        <value>2/3/2023 12:00 AM</value>
+    </filters>
+    <filters>
+        <field>CAB__c</field>
+        <operation>notContain</operation>
+        <value>4003042NUM091D</value>
+    </filters>
+    <filters>
+        <field>CAB__c</field>
+        <operation>notContain</operation>
+        <value>4003042NUM091CMT</value>
+    </filters>
+    <label>Scans du jour</label>
+</ListView>

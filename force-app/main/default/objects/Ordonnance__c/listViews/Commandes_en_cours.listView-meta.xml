@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Commandes_en_cours</fullName>
+    <columns>NAME</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>Statut__c</columns>
+    <columns>Patient__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Date__c</columns>
+    <columns>Date_pr_visionnelle_de_livraison__c</columns>
+    <columns>Categorie__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Statut__c</field>
+        <operation>equals</operation>
+        <value>Validée,Envoyée au labo,En cours de traitement,En cours de fabrication,En cours de vérification</value>
+    </filters>
+    <label>Commandes en cours</label>
+    <language>fr</language>
+</ListView>

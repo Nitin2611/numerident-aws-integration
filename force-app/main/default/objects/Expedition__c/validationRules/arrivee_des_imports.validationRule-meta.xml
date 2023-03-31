@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>arrivee_des_imports</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( RecordTypeId = &quot;0121v000000BWjn&quot;,  $User.ProfileId =&quot;00e0Y000000EwbZ&quot;, ISPICKVAL(Statut__c, &quot;Arrivée&quot;) )</errorConditionFormula>
+    <errorMessage>You are not allowed to update the status of this parcel to &quot;Arrived&quot;.</errorMessage>
+</ValidationRule>

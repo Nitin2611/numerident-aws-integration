@@ -1,0 +1,26 @@
+<apex:page showheader="true">
+  <!-- Example implmentation -->
+  <apex:includeScript value="{!$Resource.BarCodeJS}"/>
+  
+  <svg id="barcode"></svg>
+  
+  
+ <script type ="text/javascript">
+ 
+ JsBarcode("#barcode", "TEST",{
+ fontOptions: "both",
+ font :  "OCRB",
+ textAlign : "center",
+ Textmargin : 5,
+ fontSize : 12,
+ width: 1,
+ height: 50
+ 
+ });
+ 
+
+  
+  </script>
+  <!-- formats may be an issue  JS can be found at https://github.com/lindell/JsBarcode  -->
+  
+</apex:page>

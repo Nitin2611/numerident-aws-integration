@@ -1,0 +1,33 @@
+.THIS .c-rating {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.THIS .c-rating__item {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 24px;
+      -ms-flex: 0 0 24px;
+          flex: 0 0 24px;
+  height: 24px;
+  background: url("https://uat-extranet-prothese.cs107.force.com/labo/resource/fivestar/stars.svg");
+  background-position: 0 0;
+  cursor: pointer;
+}
+
+.THIS .c-rating__item:hover,
+.THIS .c-rating__item.is-active {
+  background-position: -24px 0;
+}
+
+.THIS .readonly .c-rating__item:hover {
+  background-position: inherit !important;
+}
+
+.THIS.readonly .c-rating__item.is-active:hover {
+  background-position: -24px 0 !important;
+}

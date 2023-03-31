@@ -1,0 +1,19 @@
+<aura:component controller="PRG_OrdonnacesFilles" implements="flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes,force:hasRecordId" access="global" >
+	<aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="filles" type="Ordonnance__c[]" /> 
+    
+    <div  style="background-color : white">
+        <table>
+    <aura:iteration items="{!v.filles}" var="fille">
+        <tr>
+            <td><lightning:icon iconName="utility:macro" size="x-small" /></td>
+            <td>Ordonnance associée : </td>
+            <td>{!fille.Name}</td>
+            <td><a href="{!fille.URL__c}">Cliquer sur ce lien pour y accéder</a></td>
+    	
+          </tr>
+    </aura:iteration>
+            </table>
+        </div>
+</aura:component>

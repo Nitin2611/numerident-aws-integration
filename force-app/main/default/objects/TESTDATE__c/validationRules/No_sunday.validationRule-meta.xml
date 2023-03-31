@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_sunday</fullName>
+    <active>true</active>
+    <errorConditionFormula>MOD(DATE_NON_DIMANCHE__c  - DATE(1900, 1, 7), 7)= 0</errorConditionFormula>
+    <errorMessage>La commande ne peut pas être livrée le dimanche.
+Merci de votre compréhension.</errorMessage>
+</ValidationRule>

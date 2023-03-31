@@ -1,0 +1,11 @@
+<aura:component controller="PRG_ScanPanier" access="global"
+                implements="flexipage:availableForAllPageTypes,force:hasRecordId" >
+    
+    <div style="background-color : white">
+    	<img alt="Barcode" src="{!$Resource.Barcode}" title="Barcode" style="width:100px;height:50px;"/>
+    	<div onkeyup="{!c.gotoOpportunityName}" style="display:inline-block">
+        	<lightning:input aura:id="searchOpportunity" type="search" label=" " name="Scan" placeholder="Scan here" maxlength="18"/>
+    	</div>    
+	</div>
+    
+</aura:component>

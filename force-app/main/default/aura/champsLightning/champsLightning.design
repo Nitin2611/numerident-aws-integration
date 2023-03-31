@@ -1,0 +1,5 @@
+<design:component >
+    <design:attribute name="field" label="Field To Update" description="The field you want you update" />	
+    <design:attribute name="Title" label="Title" description="The title to display" />	
+    <design:attribute name="TempValues" label="field values" description="The field values to display, comma separated" />	
+</design:component>

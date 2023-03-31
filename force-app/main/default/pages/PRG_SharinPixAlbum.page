@@ -1,0 +1,59 @@
+<apex:page controller="PRG_SharinPixAlbum_Ext" showheader="false" sidebar="false">
+<!--    <iframe src="{!url }" height="400px" width="100%" style="border: 0"/> -->
+<style>
+.content-top {
+    background-color: #D4D4D4;
+    display: block;
+    border:none;
+    padding: 0;
+    margin:0;
+    height: 30px;
+}
+p 
+{ 
+text-align:center; 
+} 
+</style>
+<div class="content-top ">
+</div>
+
+<p><strong>Problem case {!Cs.CaseNumber} - {!Cs.status}</strong></p>
+
+<apex:outputPanel rendered="{!or(Cs.status=='Fixed',Cs.status=='Fermée')}"><p>Le problème est résolu.</p></apex:outputPanel>
+<apex:outputPanel rendered="{!!or(Cs.status=='Fixed',Cs.status=='Fermée')}"><p>La fabrication de votre commande est en attente d'intervention.</p></apex:outputPanel>
+
+
+
+<p>{!Cs.Dossier__r.Account.Name}</p>
+<p>Dr {!Cs.Dossier__r.Praticien__r.FirstName} {!Cs.Dossier__r.Praticien__r.LastName}</p>
+<p>Patient {!Cs.Dossier__r.Patient__c}</p>
+<p>{!Cs.CATEGORY_EN_FRANCAIS__c }</p>
+
+    <iframe id="iframeId" class="sharinpix-iframe" src="https://app.sharinpix.com/post_message" width="100%" height="400px"/>
+ <apex:outputPanel rendered="{!or(Cs.status=='Fixed',Cs.status=='Fermée')}"><p>Pour toute information,</p></apex:outputPanel>
+<apex:outputPanel rendered="{!!or(Cs.status=='Fixed',Cs.status=='Fermée')}"><p>Merci de nous contacter afin de pouvoir reprendre la fabrication.</p></apex:outputPanel>
+
+
+
+<p>01 58 57 96 32</p>
+
+<p><a href="https://extranet-prothese.force.com/labo/s/case/{!Cs.Id}">Cliquer ce lien pour accéder directement au problem case</a>.</p>   
+    <script>
+    var iframe = document.getElementById('iframeId')
+        iframe.onload = function() {
+            Visualforce.remoting.Manager.invokeAction(
+            "{! $RemoteAction.PRG_SharinPixAlbum_Ext.generateToken }",
+            "{!currentRecordId}",
+             function(result, event) {
+                if (event.status) {
+                    iframe.contentWindow.postMessage({ token: result}, 'https://app.sharinpix.com');
+                } else {
+                    //alert('Error. See console log.');
+                    console.log('Result: ', result);
+                    console.log('Event: ', event);
+                }
+             }
+            );    
+        }      
+    </script>    
+</apex:page>

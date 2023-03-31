@@ -1,0 +1,269 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false" standardController="Opportunity" renderAs="pdf"  
+ applyHtmlTag="false" applyBodyTag="false" >
+
+<html>
+<head>
+      <style type="text/css">
+                        
+       @page :first{
+            @top-left {
+            content: element(headerOne);
+            }        
+       }
+    
+    
+       @page{
+            size: 21.0cm 29.7cm;
+            margin-top: 120px;/*
+            margin-left: 0.4cm;
+            margin-right: 0.4cm;*/
+            margin-bottom: 1.8cm;
+            counter-increment:pages;
+            @bottom-center {
+            content: element(footer);
+            }
+            @top-left {
+            content: element(header);  
+            }
+            
+        }
+            
+            
+        @page :first{        
+        }
+
+        <!--@page{
+            size: 21.0cm 29.7cm;
+            margin-top: 2.8cm;
+            margin-left: 0.4cm;
+            margin-right: 0.4cm;
+            margin-bottom: 1.8cm;
+            counter-increment:pages;
+            @bottom-center {
+            content: element(footer);
+            }
+            @top-center {
+            content: element(header);
+            }
+            background: url({!URLFOR($Resource.Logo)});
+            background-size: 4px 3px;
+            background-position: 10% 3%;
+            background-repeat:no-repeat;
+        }-->
+        div.footer {
+        position:running(footer);
+        } 
+        div.headerOne{
+        position:running(headerOne);
+        text-align:left;
+        }   
+        div.header{
+        position:running(header);
+        text-align:left;
+        }     
+        #pageNum:before {
+        content: counter(page);
+        }   
+        #pageNums:before {
+        content: counter(pages);
+        }
+        body {
+        font-family:Arial, sans serif;
+        }
+        table {
+        table-layout:fixed;
+        }
+
+    </style>
+</head>
+<div class="footer"><table><tr><td style="width:100%; font-size:65%;text-align:center">
+<!-- Footer content -->
+</td></tr></table>
+</div>
+<div class="headerOne" style="display:inline-block;"> 
+    <table>
+    <col width="20%"/>
+    <col width="40%"/>
+    <col width="40%"/>
+<!--        <tr>
+            <td></td>
+            <td style="vertical-align:top;font-family:Arial,sans-serif;font-size:8pt;color#808080"><p style="font-size:90%;"><strong style="font-size:200%;">{!Opportunity.Name}</strong></p></td>
+            <td></td>
+             <td style="vertical-align:bottom;"><img src="{!URLFOR($Resource.Logo)}" style="height:65px;"/></td>  
+        </tr>-->
+    <tr>
+        <td><strong style="font-size:600%;">{!Opportunity.Praticien__r.Account.AccountNumber}</strong></td>
+<!--        <td><apex:image value="https://www.barcodesinc.com/generator/image.php?code={!Opportunity.Name}&style=68&type=C128B&width=200&height=75&xres=1&font=3" /><BR/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong style="font-size:120%;">{!Opportunity.Name}</strong></td>
+        <td><apex:image value="http://barcodes4.me/barcode/c128b/{!Opportunity.Name}.png?height=75&resolution=1&IsTextDrawn=0" rendered="{!!Opportunity.Urgence_Paris__c}"/><BR/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong style="font-size:120%;">{!Opportunity.Name}</strong></td>
+-->        <td><apex:image value="http://generator.barcodetools.com/barcode.png?gen=0&data={!Opportunity.Name}&bcolor=FFFFFF&fcolor=000000&tcolor=000000&fh=14&bred=0&w2n=2.5&xdim=1&w=&h=75&debug=1&btype=7&angle=0&quiet=1&balign=2&talign=0&guarg=1&text=0&tdown=0&stst=1&schk=0&cchk=1&ntxt=1&c128=0" rendered="{!!Opportunity.Urgence_Paris__c}"/><BR/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong style="font-size:120%;">{!Opportunity.Name}</strong></td>
+        <td><strong>ORDER FORM</strong><BR/><strong style="font-size:300%;"><apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+    <apex:param value="{!Opportunity.DateOrderForm__c}" /> 
+</apex:outputText></strong></td>
+    </tr>
+    </table>
+</div>
+
+<!--            <td><apex:image value="https://barcode.tec-it.com/barcode.ashx?data={!Ordonnance__c.Name}&code=Code128&multiplebarcodes=false&translate-esc=false&unit=Fit&dpi=96&imagetype=Gif&rotation=0&color=%23000000&bgcolor=%23ffffff&qunit=Mm&quiet=0' alt='Barcode Generator TEC-IT" /></td> -->
+
+
+<!--  
+<br/>-->
+<br/> 
+
+<table style="width:100%;">
+    <col width="55%"/>
+    <col width="45%"/>
+    <tr>
+        <!--<td>   Date de prise d'empreinte :&nbsp;<strong><apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+    <apex:param value="{!Ordonnance__c.CreatedDate}" /> 
+</apex:outputText></strong></td>-->
+        <td  style="font-size:125%;"><strong>Dr. {!Opportunity.Praticien__r.FirstName} {!Opportunity.Praticien__r.LastName}</strong></td>
+        <td><strong>Numerident</strong></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>23 bis rue Barthélemy Danjou</td>
+    </tr>
+    <tr>
+        <td><strong>{!Opportunity.Praticien__r.Account.Name}</strong></td>
+        <td>92100 Boulogne-Billancourt</td>
+    </tr>
+    <tr>
+        <td>{!Opportunity.Praticien__r.Account.BillingStreet}</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>{!Opportunity.Praticien__r.Account.BillingPostalCode} {!Opportunity.Praticien__r.Account.BillingCity}</td>
+        <td>01 58 57 96 32</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="font-size:125%;" colspan="2">Patient :&nbsp;<strong>{!Opportunity.Patient__c}</strong></td>
+    </tr>
+    <tr>
+        <td style="font-family: Arial Unicode MS;">Age :&nbsp;{!Opportunity.Ordonnance__r.Age__c}&nbsp;&nbsp;&nbsp;&nbsp;Sex :&nbsp;{!Opportunity.Ordonnance__r.Sexe__c}&nbsp;<apex:outputText rendered="{!Opportunity.Ordonnance__r.Sexe__c=='M'}" value="男性"/><apex:outputText rendered="{!Opportunity.Ordonnance__r.Sexe__c=='F'}" value="女性"/></td>
+        <td style="font-size:150%;"><strong><apex:outputText value="*** VIP ***" rendered="{!Opportunity.Travail_suivre__c}"/></strong></td>
+        <td></td>
+    </tr>   
+    <tr>
+        <td><strong></strong></td>
+        <td></td>
+    </tr>
+</table>
+
+
+<br/>
+
+<!-- <table style="background-image: url({!URLFOR($Resource.TeintesDent)});background-size: contain;background-repeat: no-repeat;">
+    <tr>
+        <td>H1{!Ordonnance__c.Teinte_haut__c}&nbsp;</td>
+    </tr>
+    <tr>
+        <td>H2{!Ordonnance__c.Teinte__c}&nbsp;</td>
+    </tr>
+    <tr>
+        <td>H3{!Ordonnance__c.Teinte_bas__c}&nbsp;</td>
+    </tr>
+</table>  -->
+<table style="width:100%; font-size:100%;border-style: solid;border-color:#3C3C3B;border-collapse: collapse;border-width:1px;">
+<tr style="background-color: #eb5424;text-align:center;color:white;font-family: Arial Unicode MS;">
+<th width="25%;border-style: solid;border-color:#3C3C3B;border-width:1px;">Product 产品</th>
+<th width="15%;border-style: solid;border-color:#3C3C3B;border-width:1px;">Qty 数量</th>
+<th width="20%;border-style: solid;border-color:#3C3C3B;border-width:1px;">Description 描述</th>
+<th width="40%;border-style: solid;border-color:#3C3C3B;border-width:1px;">Comments 备注</th>
+</tr>
+<apex:repeat var="ligne" value="{!Opportunity.OpportunityLineItems}">
+<tr style="font-family: Arial Unicode MS">
+<td style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style:solid;border-right-color:#3C3C3B;text-align: left;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#3C3C3B;font-family:Arial Unicode MS">{!ligne.Product2.Product_name__c}<BR/><BR/>{!ligne.Product2.Product_name_CN__c}{!ligne.Product2.Product_name_FR__c}</td>
+<td style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style:solid;border-right-color:#3C3C3B;text-align: center;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#3C3C3B;">{!ligne.Quantity}</td>
+<td style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style:solid;border-right-color:#3C3C3B;text-align: left;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#3C3C3B;font-family:Arial Unicode MS">{!ligne.Ligne_de_commande__r.Complement0__c}&nbsp;{!ligne.Ligne_de_commande__r.Complement6__c}&nbsp;{!ligne.Ligne_de_commande__r.Complement2__c}&nbsp;{!ligne.Ligne_de_commande__r.Complement3__c}&nbsp;{!ligne.Ligne_de_commande__r.Complement4__c}&nbsp;{!ligne.Ligne_de_commande__r.Complement5__c}  {!ligne.Ligne_de_commande__r.Complement0_FR__c}&nbsp;{!ligne.Ligne_de_commande__r.Complement1_FR__c}&nbsp;{!ligne.Ligne_de_commande__r.Complement2_FR__c}&nbsp;{!ligne.Ligne_de_commande__r.Complement3_FR__c}&nbsp;{!ligne.Ligne_de_commande__r.Complement4_FR__c}&nbsp;{!ligne.Ligne_de_commande__r.Complement5_FR__c} </td>
+<td style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style:solid;border-right-color:#3C3C3B;text-align: left;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#3C3C3B;">{!ligne.Description}<apex:outputText escape="false" value="{!SUBSTITUTE(ligne.Ligne_de_commande__r.PreferencesFR__c,'- ','<BR/>')}"/><apex:outputText escape="false" value="{!SUBSTITUTE(ligne.Ligne_de_commande__r.PreferencesEN__c,'- ','<BR/>')}"/><apex:outputText escape="false" value="{!SUBSTITUTE(ligne.Ligne_de_commande__r.PreferencesCN__c,'- ','<BR/>')}"/></td>
+</tr>
+</apex:repeat>
+<!--  <tr>
+<td style="text-align:center;border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#3C3C3B;"></td>
+<td style="text-align:center;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#3C3C3B;"></td>
+<td style="text-align:center;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#3C3C3B;"></td>
+<td style="text-align:center;border-right-width:1px;border-right-style:solid;border-right-color:#3C3C3B;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#3C3C3B;"></td>
+</tr>  -->
+</table>
+<br/><br/>
+<apex:outputtext value="{!Opportunity.Praticien__r.Dentist_Preferences__c}" escape="false"/>
+<br/><br/>
+COMMENTS : <br/><apex:outputText value="{!SUBSTITUTE(JSENCODE(Opportunity.Demande_sp_ciale__c),'\r\n','<br/>')}" escape="false"/>
+<br/><br/>
+<table style="width:100%;background-image: url({!URLFOR($Resource.TeintesDent)});background-size: contain;background-repeat: no-repeat;">
+    <col width="8%"/>
+    <col width="12%"/>
+    <col width="80%"/>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="text-align:center;">&nbsp;{!Opportunity.Teinte_haut__c}</td>
+        <td></td>
+        <td><strong><!--  A REFAIRE  --></strong></td>
+    </tr>
+    <tr>
+        <td style="text-align:center;">&nbsp;<strong>{!Opportunity.Teinte__c}</strong></td>
+        <td></td>
+        <td><!--  Ref d'origine : {!Ordonnance__c.Ordonnance_pr_c_dente__r.Name}  --></td>
+    </tr>
+    <tr>
+        <td style="text-align:center;">&nbsp;{!Opportunity.Teinte_bas__c}</td>
+        <td></td>
+        <td><!-- Motif : {!Ordonnance__c.Motif_de_refection__c}--></td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td></td>
+        <td><!-- Motif détaillé : {!Ordonnance__c.Motif_detaille__c}  --></td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td></td>
+        <td><!-- Motif détaillé : {!Ordonnance__c.Motif_detaille__c}  --></td>
+    </tr>
+</table>    
+<!-- <br/>
+Date:&nbsp; <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+    <apex:param value="{!Opportunity.DateOrderForm__c}" /> 
+</apex:outputText> -->
+
+<br/><br/>
+<!-- 
+<table style="width:100%;page-break-inside: avoid;">
+    <col width="20%"/>
+    <col width="60%"/>
+    <col width="20%"/>
+
+    <tr>
+        <td>
+        </td>
+        <td rowspan="4" style="font-size:80%;">
+            <table cellpadding="3" style="width:100%;font-size:75%;border-style: solid;border-color:#3C3C3B; border-width:1px; border-collapse: collapse;"> 
+                <tr>
+                    <td colspan="2" style="text-align:center;border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-top-width:1px;border-top-style: solid;border-top-color:#3C3C3B;border-right-width:1px;border-right-style:solid;border-right-color:#3C3C3B;">Bon pour accord (cachet et signature)</td>     
+                </tr>
+                <tr><td colspan="2" style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style: solid;border-right-color:#3C3C3B;">&nbsp;</td></tr>
+                <tr><td colspan="2" style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style: solid;border-right-color:#3C3C3B;">&nbsp;</td></tr>
+                <tr><td colspan="2" style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style: solid;border-right-color:#3C3C3B;">&nbsp;</td></tr>
+                <tr><td colspan="2" style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style: solid;border-right-color:#3C3C3B;">&nbsp;</td></tr>
+                <tr><td colspan="2" style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style: solid;border-right-color:#3C3C3B;">&nbsp;</td></tr>
+                <tr><td colspan="2" style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style: solid;border-right-color:#3C3C3B;">&nbsp;</td></tr>
+                <tr><td colspan="2" style="border-left-width:1px;border-left-style:solid;border-left-color:#3C3C3B;border-right-width:1px;border-right-style: solid;border-right-color:#3C3C3B;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#3C3C3B;"></td></tr>    
+            </table> 
+        </td>
+        <td>
+        </td>
+     </tr>
+</table>  
+ -->
+</html>
+
+</apex:page>

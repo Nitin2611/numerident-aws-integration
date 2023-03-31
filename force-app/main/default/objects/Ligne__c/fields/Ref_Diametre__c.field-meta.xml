@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ref_Diametre__c</fullName>
+    <externalId>false</externalId>
+    <label>Ref - Diametre</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Naturall+ Ø3</fullName>
+                <default>false</default>
+                <label>Naturall+ Ø3</label>
+            </value>
+            <value>
+                <fullName>Naturall+ Ø4</fullName>
+                <default>false</default>
+                <label>Naturall+ Ø4</label>
+            </value>
+            <value>
+                <fullName>Naturall+ Ø5</fullName>
+                <default>false</default>
+                <label>Naturall+ Ø5</label>
+            </value>
+            <value>
+                <fullName>Naturall Ø3.5</fullName>
+                <default>false</default>
+                <label>Naturall Ø3.5</label>
+            </value>
+            <value>
+                <fullName>Naturall Ø4</fullName>
+                <default>false</default>
+                <label>Naturall Ø4</label>
+            </value>
+            <value>
+                <fullName>Naturall Ø4,5</fullName>
+                <default>false</default>
+                <label>Naturall Ø4,5</label>
+            </value>
+            <value>
+                <fullName>Naturall Ø5</fullName>
+                <default>false</default>
+                <label>Naturall Ø5</label>
+            </value>
+            <value>
+                <fullName>Naturactis Ø3</fullName>
+                <default>false</default>
+                <label>Naturactis Ø3</label>
+            </value>
+            <value>
+                <fullName>Naturactis Ø3.5</fullName>
+                <default>false</default>
+                <label>Naturactis Ø3.5</label>
+            </value>
+            <value>
+                <fullName>Naturactis Ø4</fullName>
+                <default>false</default>
+                <label>Naturactis Ø4</label>
+            </value>
+            <value>
+                <fullName>Naturactis Ø4.5</fullName>
+                <default>false</default>
+                <label>Naturactis Ø4.5</label>
+            </value>
+            <value>
+                <fullName>Naturactis Ø5</fullName>
+                <default>false</default>
+                <label>Naturactis Ø5</label>
+            </value>
+            <value>
+                <fullName>Natea+ Ø3.6</fullName>
+                <default>false</default>
+                <label>Natea+ Ø3.6</label>
+            </value>
+            <value>
+                <fullName>Natea+ Ø4.1</fullName>
+                <default>false</default>
+                <label>Natea+ Ø4.1</label>
+            </value>
+            <value>
+                <fullName>Natea+ Ø4.8</fullName>
+                <default>false</default>
+                <label>Natea+ Ø4.8</label>
+            </value>
+            <value>
+                <fullName>Natea+ Ø6</fullName>
+                <default>false</default>
+                <label>Natea+ Ø6</label>
+            </value>
+            <value>
+                <fullName>Aesthetica+ Ø4.2</fullName>
+                <default>false</default>
+                <label>Aesthetica+ Ø4.2</label>
+            </value>
+            <value>
+                <fullName>Aesthetica+  Ø4.8</fullName>
+                <default>false</default>
+                <label>Aesthetica+  Ø4.8</label>
+            </value>
+            <value>
+                <fullName>Aesthetica+  Ø6.5</fullName>
+                <default>false</default>
+                <label>Aesthetica+  Ø6.5</label>
+            </value>
+            <value>
+                <fullName>Naturall+ Ø3.5</fullName>
+                <default>false</default>
+                <label>Naturall+ Ø3.5</label>
+            </value>
+            <value>
+                <fullName>Naturall+ Ø4.5</fullName>
+                <default>false</default>
+                <label>Naturall+ Ø4.5</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

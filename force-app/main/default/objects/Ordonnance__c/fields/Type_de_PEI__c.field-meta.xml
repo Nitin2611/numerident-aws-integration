@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type_de_PEI__c</fullName>
+    <externalId>false</externalId>
+    <label>Type de PEI</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Avec trous</fullName>
+                <default>false</default>
+                <label>Avec trous</label>
+            </value>
+            <value>
+                <fullName>Sans trous</fullName>
+                <default>false</default>
+                <label>Sans trous</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

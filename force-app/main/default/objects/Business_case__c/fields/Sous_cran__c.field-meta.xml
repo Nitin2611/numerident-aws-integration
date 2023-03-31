@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sous_cran__c</fullName>
+    <externalId>false</externalId>
+    <label>Sous-écran</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Ecran__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Gouttière</fullName>
+                <default>false</default>
+                <label>Gouttière</label>
+            </value>
+            <value>
+                <fullName>PEI, Cire</fullName>
+                <default>false</default>
+                <label>PEI, Cire</label>
+            </value>
+            <value>
+                <fullName>Résine</fullName>
+                <default>false</default>
+                <label>Résine</label>
+            </value>
+            <value>
+                <fullName>Stellite</fullName>
+                <default>false</default>
+                <label>Stellite</label>
+            </value>
+            <value>
+                <fullName>Inlay onlay facette</fullName>
+                <default>false</default>
+                <label>Inlay onlay facette</label>
+            </value>
+            <value>
+                <fullName>Projet esthétique</fullName>
+                <default>false</default>
+                <label>Projet esthétique</label>
+            </value>
+            <value>
+                <fullName>Inlay core</fullName>
+                <default>false</default>
+                <label>Inlay core</label>
+            </value>
+            <value>
+                <fullName>Couronne</fullName>
+                <default>false</default>
+                <label>Couronne</label>
+            </value>
+            <value>
+                <fullName>Couronne sur implant</fullName>
+                <default>false</default>
+                <label>Couronne sur implant</label>
+            </value>
+            <value>
+                <fullName>Pilier</fullName>
+                <default>false</default>
+                <label>Pilier</label>
+            </value>
+            <value>
+                <fullName>Ortho</fullName>
+                <default>false</default>
+                <label>Ortho</label>
+            </value>
+            <value>
+                <fullName>Réparations</fullName>
+                <default>false</default>
+                <label>Réparations</label>
+            </value>
+            <value>
+                <fullName>Appareil</fullName>
+                <default>false</default>
+                <label>Appareil</label>
+            </value>
+            <value>
+                <fullName>Barre</fullName>
+                <default>false</default>
+                <label>Barre</label>
+            </value>
+            <value>
+                <fullName>Planification implantaire</fullName>
+                <default>false</default>
+                <label>Planification implantaire</label>
+            </value>
+            <value>
+                <fullName>Implant</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Implant</label>
+            </value>
+            <value>
+                <fullName>Inlay onlay</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Inlay onlay</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Services</controllingFieldValue>
+            <valueName>Réparations</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Gouttiere</controllingFieldValue>
+            <valueName>Gouttière</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Suprastructure</controllingFieldValue>
+            <valueName>Appareil</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Suprastructure</controllingFieldValue>
+            <valueName>Barre</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Inlay core couronne</controllingFieldValue>
+            <valueName>Inlay core</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Inlay core couronne</controllingFieldValue>
+            <valueName>Couronne</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Planification implantaire</controllingFieldValue>
+            <valueName>Planification implantaire</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Inlay onlay facette wax-up</controllingFieldValue>
+            <valueName>Inlay onlay facette</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Inlay onlay facette wax-up</controllingFieldValue>
+            <valueName>Projet esthétique</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PEI, Cire</controllingFieldValue>
+            <valueName>PEI, Cire</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Résine</controllingFieldValue>
+            <valueName>Résine</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Stellite</controllingFieldValue>
+            <valueName>Stellite</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Implantologie</controllingFieldValue>
+            <valueName>Couronne sur implant</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Implantologie</controllingFieldValue>
+            <valueName>Pilier</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Ortho</controllingFieldValue>
+            <valueName>Ortho</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

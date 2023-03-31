@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ecran__c</fullName>
+    <externalId>false</externalId>
+    <label>Ecran</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Gouttiere</fullName>
+                <default>false</default>
+                <label>Gouttiere</label>
+            </value>
+            <value>
+                <fullName>Inlay core couronne</fullName>
+                <default>false</default>
+                <label>Inlay core couronne</label>
+            </value>
+            <value>
+                <fullName>Inlay onlay facette wax-up</fullName>
+                <default>false</default>
+                <label>Inlay onlay facette wax-up</label>
+            </value>
+            <value>
+                <fullName>PEI, Cire</fullName>
+                <default>false</default>
+                <label>PEI, Cire</label>
+            </value>
+            <value>
+                <fullName>Résine</fullName>
+                <default>false</default>
+                <label>Résine</label>
+            </value>
+            <value>
+                <fullName>Stellite</fullName>
+                <default>false</default>
+                <label>Stellite</label>
+            </value>
+            <value>
+                <fullName>Implantologie</fullName>
+                <default>false</default>
+                <label>Implantologie</label>
+            </value>
+            <value>
+                <fullName>Ortho</fullName>
+                <default>false</default>
+                <label>Ortho</label>
+            </value>
+            <value>
+                <fullName>Services</fullName>
+                <default>false</default>
+                <label>Services</label>
+            </value>
+            <value>
+                <fullName>Suprastructure</fullName>
+                <default>false</default>
+                <label>Suprastructure</label>
+            </value>
+            <value>
+                <fullName>Planification implantaire</fullName>
+                <default>false</default>
+                <label>Planification implantaire</label>
+            </value>
+            <value>
+                <fullName>Couronne sur implant</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Couronne sur implant</label>
+            </value>
+            <value>
+                <fullName>Inlay onlay</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Inlay onlay</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

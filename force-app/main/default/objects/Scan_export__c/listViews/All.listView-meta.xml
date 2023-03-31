@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>CAB__c</columns>
+    <columns>HEURE__c</columns>
+    <columns>DESTINATAIRE__c</columns>
+    <columns>EXPEDITEUR__c</columns>
+    <columns>Opportunite__c</columns>
+    <columns>Erreur_d_tect_e__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>equals</operation>
+        <value>6/2/2021 12:00 AM</value>
+    </filters>
+    <label>Tout</label>
+</ListView>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Maquillage__c</fullName>
+    <externalId>false</externalId>
+    <label>Maquillage</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Pas de maquillage</fullName>
+                <default>false</default>
+                <label>Pas de maquillage</label>
+            </value>
+            <value>
+                <fullName>Maquillage saturé</fullName>
+                <default>false</default>
+                <label>Maquillage saturé</label>
+            </value>
+            <value>
+                <fullName>Maquillage Doux</fullName>
+                <default>false</default>
+                <label>Maquillage Doux</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,8 @@
+.THIS{
+ 	max-width: 2000px;
+}
+.THIS.slds-modal__footer{
+    width: 100px;
+    height: 1000px;
+    background-color: #ff0000;
+}

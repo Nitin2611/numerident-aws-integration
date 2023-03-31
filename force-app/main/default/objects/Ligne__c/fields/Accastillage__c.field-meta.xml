@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Accastillage__c</fullName>
+    <externalId>false</externalId>
+    <label>Accastillage</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Pilier standard fourni par le dentiste</fullName>
+                <default>false</default>
+                <label>Pilier standard fourni par le dentiste</label>
+            </value>
+            <value>
+                <fullName>Pilier calcinable fourni par le dentiste</fullName>
+                <default>false</default>
+                <label>Pilier calcinable fourni par le dentiste</label>
+            </value>
+            <value>
+                <fullName>Pilier à fournir par le laboratoire</fullName>
+                <default>false</default>
+                <label>Pilier à fournir par le laboratoire</label>
+            </value>
+            <value>
+                <fullName>Pilier à commander par le laboratoire</fullName>
+                <default>false</default>
+                <label>Pilier à commander par le laboratoire</label>
+            </value>
+            <value>
+                <fullName>Barre titane usinée</fullName>
+                <default>false</default>
+                <label>Barre titane usinée</label>
+            </value>
+            <value>
+                <fullName>Barre titane usinée (CAD/CAM)</fullName>
+                <default>false</default>
+                <label>Barre titane usinée (CAD/CAM)</label>
+            </value>
+            <value>
+                <fullName>Barre coulée CrCo</fullName>
+                <default>false</default>
+                <label>Barre coulée CrCo</label>
+            </value>
+            <value>
+                <fullName>Aucun</fullName>
+                <default>false</default>
+                <label>Aucun</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

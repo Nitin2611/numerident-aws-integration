@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Date_previsionnelle__c</fullName>
+    <description>Sur les lignes uniquement</description>
+    <externalId>false</externalId>
+    <label>Date prévisionnelle</label>
+    <summarizedField>Ligne_de_commande__c.Date_previsionnelle__c</summarizedField>
+    <summaryForeignKey>Ligne_de_commande__c.Ordonnance__c</summaryForeignKey>
+    <summaryOperation>max</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

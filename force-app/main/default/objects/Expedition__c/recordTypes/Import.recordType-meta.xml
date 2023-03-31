@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Import</fullName>
+    <active>true</active>
+    <compactLayoutAssignment>Import</compactLayoutAssignment>
+    <label>Import</label>
+    <picklistValues>
+        <picklist>Direction__c</picklist>
+        <values>
+            <fullName>LAB%3ENUMERIDENT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NUMERIDENT%3ELAB</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Statut__c</picklist>
+        <values>
+            <fullName>Arrivée</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Arrivée partielle</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BAE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>En transit</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+</RecordType>
